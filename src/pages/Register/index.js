@@ -1,9 +1,12 @@
 import React from 'react'
+import { Navbar, RegisterComponent,Footer  } from '../../components'
 
 const Register = () => {
   return (
     <div>
-        <h1>Register</h1>
+      <Navbar />
+      <RegisterComponent />
+      <Footer />
     </div>
   )
 }
