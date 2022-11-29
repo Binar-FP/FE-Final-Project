@@ -1,0 +1,10 @@
+.containerku {
+    background:linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(https://www.undp.org/sites/g/files/zskgke326/files/migration/cn/UNDP-CH-Why-Humanity-Must-Save-Nature-To-Save-Itself.jpeg);
+    background-size:cover;
+    height: 50vh;
+    width: 100%;
+}
+
+.logo{
+    height: 110px;
+}
