@@ -4,7 +4,7 @@ import './index.css'
 const Footer = () => {
   return (
     <>
-      <footer className="text-center text-lg-start text-muted justify-content-between pt-2">
+      <footer className="text-center text-lg-start justify-content-between pt-2">
       <section className="">
         <div className="container text-center mt-5">
 
