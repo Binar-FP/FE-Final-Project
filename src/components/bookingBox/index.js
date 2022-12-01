@@ -4,6 +4,7 @@ import './index.css'
 const BookingBox = () => {
   return (
     <div className='container'>
+            <h1 className='text-header text-end'>We are here for you <br></br> worldwide</h1>
             <div className='content-booking p-4 px-5'>
                 <div className='row'>
                     <div className='col-sm-12 col-lg-6'>
