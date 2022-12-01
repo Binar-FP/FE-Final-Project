@@ -4,5 +4,14 @@
     width: 70vw;
     position: relative;
     margin: auto;
-    margin-top:-18vh;
+    margin-top:-12vh;
+}
+
+.text-header{
+    height: 36vh;
+    width: 70vw;
+    position: relative;
+    margin: auto;
+    color: #F5F8FF;
+    margin-top:-30vh;
 }
