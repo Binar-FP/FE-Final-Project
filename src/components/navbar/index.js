@@ -6,7 +6,7 @@ const Navbar = () => {
   return (
     <>
       {/* <!-- navbar  --> */}
-        <div className="containerku">
+        <div className="containerku mb-2">
             <nav className="navbar navbar-expand-lg navbar-dark">
                 <div className="container-fluid">
                 <a className="navbar-brand ps-5" href="#/"><img className="logo" src={Logo} alt=""/></a>
