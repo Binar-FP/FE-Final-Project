@@ -1,26 +1,41 @@
-import React, {useState} from 'react'
 import './index.css'
 import { LoginBg } from '../../assets'
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+import { useNavigate } from 'react-router-dom';
+
+
 
 const LoginComponent = () => {
+    const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const [formLogin, setFormLogin] = useState();
-    const onSubmit = (data) => {
-        setFormLogin(data);
-        console.log(data);
-        postLogin()
-    }
 
-    const postLogin = () => {
-        axios.post('https://flywithme-be.up.railway.app/login', formLogin)
+    const onSubmit = (data) => {
+        axios.post('https://flywithme-be.up.railway.app/login', data)
         .then((response) => {
-            console.log(response);
+            console.log(response.data);
+            SweatAlert('Login Berhasil', 'success');
+            navigate('/');
+        }).catch(function (error) {
+            console.log(error);
+            if(error){
+                SweatAlert(String(error.response.data.message), 'warning')
+            }
         });
     }
 
-    console.log(errors);
+    const SweatAlert = (title,icon) => {
+        const MySwal = withReactContent(Swal)
+        MySwal.fire({
+            title: title,
+            icon: icon,
+            confirmButtonText: 'Oke'
+            })
+    }
+    
+    // console.log(errors);
   return (
     <>
       <div className="d-flex justify-content-center content-login mx-auto">
