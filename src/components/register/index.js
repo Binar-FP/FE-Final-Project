@@ -1,32 +1,44 @@
-import React, {useState} from 'react'
 import './index.css'
 import { RegisterBg } from '../../assets'
 import axios from 'axios'
 import { useForm } from 'react-hook-form';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+import { useNavigate } from 'react-router-dom';
 
 const RegisterComponent = () => {
+    const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const [formRegister, setFormRegister] = useState();
-    const onSubmit = (data) => {
-        setFormRegister(data);
-        // console.log(data);
-        postRegister()
-    }
 
-    const postRegister = () => {
-        axios.post('https://flywithme-be.up.railway.app/api/register', formRegister)
+    const onSubmit = (data) => {
+        axios.post('https://flywithme-be.up.railway.app/api/register', data)
         .then((response) => {
-            console.log(response);
+            console.log(response.data);
+            SweatAlert('Register Berhasil', 'success');
+            navigate('/login');
+        }).catch(function (error) {
+            console.log(error);
+            if(error){
+                SweatAlert(String(error.response.data.message), 'warning')
+            }
         });
     }
 
+    const SweatAlert = (title,icon) => {
+        const MySwal = withReactContent(Swal)
+        MySwal.fire({
+            title: title,
+            icon: icon,
+            confirmButtonText: 'Oke'
+            })
+    }
+
     console.log(errors);
-//  
+
   return (
     <>
     <div className="d-flex justify-content-center content mx-auto">
         <div className="left ps-5 pt-5">
-            <pre>{JSON.stringify(formRegister)}</pre>
             <form className="" onSubmit={handleSubmit(onSubmit)}>
             <h3 className="mb-5 text-center">Create Account</h3>
             <div className="row">
