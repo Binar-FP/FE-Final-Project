@@ -1,0 +1,37 @@
+.content-login{
+    background-color: #F5F8FF;
+    height: 80vh;
+    width: 80%;
+    margin-top:-190px;
+}
+
+.left-login{
+    height: auto;
+    width: 35vw;
+}
+
+.right-login{
+    height: auto;
+    width: 65vw;
+}
+
+.plane{
+    height: 100%;
+    width: 100%;
+}
+
+.plane-img{
+    width: 90%;
+}
+
+.button{
+    background-color: #59C1BD !important;
+}
+
+input{
+    border-radius: 12px !important;
+    font-weight: 200;
+}
+.border-red{
+    border: 1px solid red !important;
+}
