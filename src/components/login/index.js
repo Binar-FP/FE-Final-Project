@@ -14,7 +14,7 @@ const LoginComponent = () => {
     }
 
     const postLogin = () => {
-        axios.post('https://testing-fp-production.up.railway.app/login', formLogin)
+        axios.post('https://flywithme-be.up.railway.app/login', formLogin)
         .then((response) => {
             console.log(response);
         });
