@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 const RegisterComponent = () => {
     const navigate = useNavigate();
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors } ,getValues} = useForm();
 
     const onSubmit = (data) => {
         axios.post('https://flywithme-be.up.railway.app/api/register', data)
@@ -95,7 +95,7 @@ const RegisterComponent = () => {
                         <input className={errors.password?"form-control ps-4 border-danger":"form-control ps-4"}
                         type="password" 
                         placeholder="**************" 
-                        aria-label="" 
+                        aria-label=""
                         name='password'
                         {...register('password',{
                             required: "Password is Required",
@@ -107,6 +107,8 @@ const RegisterComponent = () => {
                                 value: 18,
                                 message: "Password Too Long",
                             },
+                            validate: (value) => value === getValues('confirmPassword') || "Password doesn't match",
+                            
                         })}/>
                         {errors.password && <p className="text-danger">{errors.password.message}</p>}
                     </div>
@@ -173,6 +175,7 @@ const RegisterComponent = () => {
                                 value: 18,
                                 message: "Password Too Long",
                             },
+                            validate: (value) => value === getValues('password') || "Password doesn't match",
                         })}/>
                         {errors.confirmPassword && <p className="text-danger">{errors.confirmPassword.message}</p>}
                     </div>
