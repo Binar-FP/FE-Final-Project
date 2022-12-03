@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 
 const LoginComponent = () => {
     const navigate = useNavigate();
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors, isDirty, isValid } } = useForm();
 
     const onSubmit = (data) => {
         axios.post('https://flywithme-be.up.railway.app/login', data)
@@ -89,7 +89,7 @@ const LoginComponent = () => {
                         </div>
                     </div>
                     <div className="form-group mb-3">
-                        <button className="button form-control" placeholder="Default input" aria-label="default input example">Login</button>   
+                        <button  className={isDirty && isValid?'button form-control':'button form-control opacity-50'} placeholder="Default input" aria-label="default input example" disabled={!isDirty || !isValid}>Login</button>   
                     </div>
                     <div className="form-group mb-3">
                         <button className="form-control" type="submit" placeholder="Default input" aria-label="default input example">Login with Google</button>   
