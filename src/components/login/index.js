@@ -1,3 +1,4 @@
+import React from 'react';
 import './index.css'
 import { LoginBg } from '../../assets'
 import axios from 'axios';

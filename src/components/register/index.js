@@ -1,3 +1,4 @@
+import React from 'react';
 import './index.css'
 import { RegisterBg } from '../../assets'
 import axios from 'axios'
