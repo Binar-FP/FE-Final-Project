@@ -119,6 +119,7 @@ const LoginComponent = () => {
                             onFailure={responseGoogle}
                             cookiePolicy={'single_host_origin'}
                             isSignedIn={true}
+                            accessType="offline"
                         />
                     </div>
                     <p className="text-center">Don't Have account? <a href="/register" className="text-danger"> Sign Up</a></p>
