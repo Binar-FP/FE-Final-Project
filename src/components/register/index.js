@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 const RegisterComponent = () => {
     const navigate = useNavigate();
-    const { register, handleSubmit, formState: { errors } ,getValues} = useForm();
+    const { register, handleSubmit, formState: { errors, dirtyFields, isValid} ,getValues} = useForm();
 
     const onSubmit = (data) => {
         axios.post('https://flywithme-be.up.railway.app/api/register', data)
@@ -195,29 +195,8 @@ const RegisterComponent = () => {
                     })}></textarea>
                     {errors.address && <p className="text-danger">{errors.address.message}</p>}
                 </div>
-                <div className="form-group mb-2">
-                    <div className="form-check">
-                        <input className="form-check-input" 
-                        type="checkbox" value="" id="rememberMe"/>
-                        <label className="form-check-label" htmlFor="rememberMe">
-                        Remember Me
-                        </label>
-                    </div>
-                </div>
-                <div className="form-group mb-3">
-                    <div className="form-check">
-                        <input className="form-check-input" 
-                        type="checkbox" value="" id="privatePolicy"/>
-                        <label className="form-check-label" htmlFor="privatePolicy">
-                        I agree to all the Terms and Privacy policy
-                        </label>
-                    </div>
-                    </div>
                     <div className="form-group mb-3">
-                    <button className="form-control button" placeholder="Default input" aria-label="default input example" onClick={handleSubmit}>Register</button>   
-                    </div>
-                    <div className="form-group mb-3">
-                    <button className="form-control" type="submit" placeholder="Default input" aria-label="default input example">Login with Google</button>   
+                    <button className={dirtyFields && isValid?'button form-control':'button form-control opacity-50'}  disabled={!dirtyFields}  onClick={handleSubmit}>Register</button>   
                     </div>
                     <p className="text-center">Have account? <a href="/login" className="text-danger"> Sign In</a></p>
                 </div>
