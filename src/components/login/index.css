@@ -1,6 +1,5 @@
 .content-login{
     background-color: #F5F8FF;
-    height: 80vh;
     width: 80%;
     margin-top:-190px;
 }
@@ -34,4 +33,12 @@ input{
 }
 .border-red{
     border: 1px solid red !important;
+}
+
+.btn-google{
+    border-radius: 8px !important;
+    border: none !important;
+    text-align: center !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
