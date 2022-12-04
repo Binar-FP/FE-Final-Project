@@ -5,6 +5,9 @@ import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { useNavigate } from 'react-router-dom';
+import { GoogleLogin } from 'react-google-login';
+import { useEffect } from 'react';
+import { gapi } from 'gapi-script';
 
 
 
@@ -35,6 +38,22 @@ const LoginComponent = () => {
             })
     }
     
+    const responseGoogle = (response) => {
+        console.log(response);
+        // console.log(localStorage.removeItem('token'));
+    }
+
+    useEffect(() => {
+        function start(){
+            gapi.load('client:auth2', () => {
+                gapi.auth2.init({
+                    clientId: '310809761322-ci5u1ija6vd0auki4ppqjqghqp1tum18.apps.googleusercontent.com',
+                    // plugin_name: "chat"
+                })
+            })};
+        gapi.load('client:auth2', start);
+    })
+
     // console.log(errors);
   return (
     <>
@@ -92,7 +111,15 @@ const LoginComponent = () => {
                         <button  className={isDirty && isValid?'button form-control':'button form-control opacity-50'} placeholder="Default input" aria-label="default input example" disabled={!isDirty || !isValid}>Login</button>   
                     </div>
                     <div className="form-group mb-3">
-                        <button className="form-control" type="submit" placeholder="Default input" aria-label="default input example">Login with Google</button>   
+                        <GoogleLogin
+                            className="form-control btn-google"
+                            clientId="905402319799-571q1pqb6tmlmbjubq70eb88tr4308ao.apps.googleusercontent.com"
+                            buttonText="Login With Google"
+                            onSuccess={responseGoogle}
+                            onFailure={responseGoogle}
+                            cookiePolicy={'single_host_origin'}
+                            isSignedIn={true}
+                        />
                     </div>
                     <p className="text-center">Don't Have account? <a href="/register" className="text-danger"> Sign Up</a></p>
             </div>
