@@ -6,7 +6,7 @@ const Navbar = () => {
   return (
     <>
       {/* <!-- navbar  --> */}
-        <div className="containerku">
+        <div className="containerku mb-2">
             <nav className="navbar navbar-expand-lg navbar-dark">
                 <div className="container-fluid">
                 <a className="navbar-brand ps-5" href="#/"><img className="logo" src={Logo} alt=""/></a>
@@ -14,9 +14,9 @@ const Navbar = () => {
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNav">
-                    <ul className="navbar-nav ms-auto p-4 pe-5">
+                    <ul className="navbar-nav ms-auto pt-0 p-4 pe-5">
                     <li className="nav-item">
-                        <a className="nav-link active" aria-current="page" href="/home">Home</a>
+                        <a className="nav-link active" aria-current="page" href="/">Home</a>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" href="/help">Help</a>
