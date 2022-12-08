@@ -15,3 +15,9 @@
     color: #F5F8FF;
     margin-top:-30vh;
 }
+
+.focus{
+    border-bottom: 3px solid #59C1BD !important;
+    border-radius: 0px !important;
+    color: #59C1BD !important;
+}
