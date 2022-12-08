@@ -8,8 +8,8 @@ const Navbar = () => {
       {/* <!-- navbar  --> */}
         <div className="containerku">
             <nav className="navbar navbar-expand-lg navbar-dark">
-                <div className="container-fluid">
-                <a className="navbar-brand ps-5" href="#/"><img className="logo" src={Logo} alt=""/></a>
+                <div className="container-fluid mt-4">
+                <a className="navbar-brand ps-5 ms-5 " href="#/"><img className="logo" src={Logo} alt=""/></a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
