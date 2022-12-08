@@ -1,0 +1,11 @@
+.outline-color{
+    /* border: 2px #59C1BD !important; */
+    color: #0052B5 !important;
+    border-color: #59C1BD !important;
+}
+
+.outline-color:hover{
+    background-color: #59C1BD !important;
+    border-color: white !important;
+    color: white !important;
+}
