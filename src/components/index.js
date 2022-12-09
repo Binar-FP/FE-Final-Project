@@ -10,5 +10,6 @@ import SearchHelp from "./SearchHelp";
 import CommonQuestion from "./CommonQuestion";
 import AllTopics from "./AllTopics";
 import SendQuestion from "./SendQuestion";
+import SettingBox from "./SettingBox";
 
-export { Navbar, RegisterComponent, LoginComponent, Footer, BookingBox, Carousel, Hero, Reviews, SearchHelp, CommonQuestion, AllTopics, SendQuestion };
+export { Navbar, RegisterComponent, LoginComponent, Footer, BookingBox, Carousel, Hero, Reviews, SearchHelp, CommonQuestion, AllTopics, SendQuestion, SettingBox };
