@@ -3,7 +3,8 @@ import API from "./api"
 export const AuthService = {
     login : async (data) => {
         const response = await API.post('/login', data);
-        setHeadersAndStorage(response.data, data.rememberMe);
+        const Name = response.data.data.firstName;
+        setHeadersAndStorage(response.data, Name);
         if (data.rememberMe === true) {
             setTimeout(() => {
                 localStorage.removeItem('token');
@@ -17,6 +18,8 @@ export const AuthService = {
             }
             , 86400000);
         }
+        console.log(response.data);
+        
         return response;
     },
 
@@ -26,9 +29,9 @@ export const AuthService = {
     }
 }
 
-const setHeadersAndStorage = ({ user, token}, rememberMe) => {
+const setHeadersAndStorage = ({ user, token}, Name) => {
     API.defaults.headers['Authorization'] = `Bearer ${token}`;
-    // localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('user', JSON.stringify(Name));
     localStorage.setItem('token', token);
     localStorage.setItem('isLogged',true);
     
