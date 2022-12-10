@@ -18,6 +18,11 @@ export const AuthService = {
             , 86400000);
         }
         return response;
+    },
+
+    register : async (data) => {
+        const response = await API.post('/register', data);
+        return response;
     }
 }
 
