@@ -1,0 +1,15 @@
+.searchHelp{
+    margin-top:-20vh;
+}
+
+.search-input{
+    background-color: transparent !important;
+    color: #59C1BD !important;
+    border: 2px solid #59C1BD !important;
+    border-radius: 0px !important;
+}
+
+.search:hover{
+    background-color: #59C1BD !important;
+    color: #F5F8FF !important;
+}
