@@ -1,0 +1,99 @@
+.containerku {
+    background:linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(https://www.undp.org/sites/g/files/zskgke326/files/migration/cn/UNDP-CH-Why-Humanity-Must-Save-Nature-To-Save-Itself.jpeg);
+    background-size:cover;
+    height: 50vh;
+    width: 100%;
+}
+
+.logo{
+    height: 30px;
+}
+
+.icon{
+    display: none;
+}
+
+.navbar-collapse{
+    /* padding-right: 80px !important; */
+}
+
+.container-fluid {
+    padding-left: 70px !important;
+    padding-right: 140px !important;
+}
+
+.mobile-item{
+    display: none;
+}
+
+@media screen and (max-width: 994px) {
+    .container-fluid{
+        /* width: auto !important; */
+        justify-content: center !important;
+        padding: 0px !important;
+        /* margin: auto !important; */
+    }
+
+    .containerku {
+        height: 50vh;
+    }
+
+    .navbar-nav{
+        display: flex;
+        flex-direction: row !important;
+        justify-content: space-around !important;
+    }
+
+    .mobile-item{
+        display: block;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container-fluid{
+        /* width: auto !important; */
+    }
+
+    .mobile-item{
+        display: block;
+    }
+
+    .destop-item{
+        display: none !important;
+    }
+
+    .icon{
+        display: block;
+    }
+    .containerku {
+        min-height: 40vh;
+    }
+
+    .navbar-nav{
+        border-radius: 1em 1em 0 0 !important;
+        /* padding: 0px !important; */
+        display: flex;
+        flex-direction: row !important;
+        position: fixed !important;
+        bottom: 0 !important;
+        left: 0;
+        justify-content: space-around !important;
+        width: 100vw !important;
+        background-color: rgb(0, 63, 63);
+        z-index: 3;
+        color: black !important;
+    }
+
+    .nav-link{
+        padding: 0px !important;
+    }
+
+    .nav-item{
+        padding: 0px !important;
+        margin: 0px !important;
+        display: flex !important;
+        flex-direction: column;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+}

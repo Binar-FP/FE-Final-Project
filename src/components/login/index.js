@@ -1,47 +1,26 @@
-import React from 'react';
-import './index.css'
+import './login.css'
+import React, { useEffect} from 'react';
 import { LoginBg } from '../../assets'
-import axios from 'axios';
 import { useForm } from 'react-hook-form';
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
 import { useNavigate } from 'react-router-dom';
 import { GoogleLogin } from 'react-google-login';
-import { useEffect } from 'react';
 import { gapi } from 'gapi-script';
+import { useDispatch} from 'react-redux';
+import { loginActions } from '../../config/redux/actions/authActions';
 
 
 
 const LoginComponent = () => {
-    const navigate = useNavigate();
+    const history = useNavigate();
     const { register, handleSubmit, formState: { errors, isDirty, isValid } } = useForm();
 
+    const dispatch = useDispatch();
     const onSubmit = (data) => {
-        axios.post('https://flywithme-be.up.railway.app/login', data)
-        .then((response) => {
-            console.log(response.data);
-            SweatAlert('Login Berhasil', 'success');
-            navigate('/');
-        }).catch(function (error) {
-            console.log(error);
-            if(error){
-                SweatAlert(String(error.response.data.message), 'warning')
-            }
-        });
-    }
-
-    const SweatAlert = (title,icon) => {
-        const MySwal = withReactContent(Swal)
-        MySwal.fire({
-            title: title,
-            icon: icon,
-            confirmButtonText: 'Oke'
-            })
+        dispatch(loginActions(data, history));
     }
     
     const responseGoogle = (response) => {
         console.log(response);
-        // console.log(localStorage.removeItem('token'));
     }
 
     useEffect(() => {
@@ -49,18 +28,17 @@ const LoginComponent = () => {
             gapi.load('client:auth2', () => {
                 gapi.auth2.init({
                     clientId: '310809761322-ci5u1ija6vd0auki4ppqjqghqp1tum18.apps.googleusercontent.com',
-                    // plugin_name: "chat"
                 })
             })};
         gapi.load('client:auth2', start);
     })
 
-    // console.log(errors);
   return (
     <>
       <div className="d-flex justify-content-center content-login mx-auto">
         <form className="form-login" onSubmit={handleSubmit(onSubmit)}>
             <div className="left-login ps-5 pt-5">
+                    {/* {sessionStorage.getItem('isLogged') && <h1>TEST SESSIon</h1>} */}
                     <h3 className="mb-5 text-center">Welcome to FlyWithMe</h3>
                     
                     <div className="form-group mb-3">
@@ -102,7 +80,8 @@ const LoginComponent = () => {
                     </div>
                     <div className="form-group mb-3">
                         <div className="form-check">
-                            <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+                            <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" {...register('rememberMe',{}
+                        )}/>
                             <label className="form-check-label" htmlFor="flexCheckDefault">
                             Remember Me
                             </label>
@@ -119,8 +98,7 @@ const LoginComponent = () => {
                             onSuccess={responseGoogle}
                             onFailure={responseGoogle}
                             cookiePolicy={'single_host_origin'}
-                            isSignedIn={true}
-                            accessType="offline"
+                            // isSignedIn={true}
                         />
                     </div>
                     <p className="text-center">Don't Have account? <a href="/register" className="text-danger"> Sign Up</a></p>

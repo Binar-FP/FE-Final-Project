@@ -1,18 +1,18 @@
 .content{
     background-color: #F5F8FF;
     /* height: 120vh; */
-    width: 80%;
+    width: 70vw;
     margin-top:-190px;
 }
 
 .left{
     height: auto;
-    width: 50vw;
+    width: 60vw;
 }
 
 .right{
     height: auto;
-    width: 50vw;
+    width: 40vw;
 }
 
 .plane{
@@ -20,8 +20,8 @@
     width: 100%;
 }
 
-.plane-img{
-    width: 90%;
+.registerBg{
+    width: 70vh;
 }
 
 .button{
@@ -31,4 +31,18 @@
 input{
     border-radius: 12px !important;
     font-weight: 200;
+}
+
+@media screen and (max-width: 768px) {
+    .content{
+        width: 80vw;
+    }
+    .left{
+        width: 100vw;
+    }
+    .right{
+        display: none;
+    }
+
+  
 }
