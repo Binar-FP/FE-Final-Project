@@ -1,5 +1,5 @@
 import React from 'react'
-import { Navbar, Footer, LoginComponent  } from '../../components'
+import { Navbar, LoginComponent, Footer } from '../../components'
 
 const Login = () => {
   return (

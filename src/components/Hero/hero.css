@@ -1,6 +1,6 @@
 .content-hero{
     /* background-color: #F5F8FF; */
-    height: 60vh;
+    /* height: 50vh; */
     width: 70vw;
     position: relative;
     margin: auto;
@@ -10,3 +10,11 @@
 .img-user{
     height: 60vh;
 }
+
+@media screen and (max-width: 768px) {
+    .content-hero{
+        width: 80vw !important;
+    }
+
+}
+   

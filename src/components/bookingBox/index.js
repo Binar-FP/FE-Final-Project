@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './index.css'
+import './bookingbox.css'
 import BuyTiket from '../BuyTiket'
 import SearchTiket from '../SearchTiket'
 
@@ -8,7 +8,7 @@ const BookingBox = () => {
   return (
     <div className='container'>
             <h1 className='text-header text-end'>We are here for you <br></br> worldwide</h1>
-            <div className='content-booking p-4 px-5'>
+            <div className='content-booking p-4 px-5' id='bookingbox'>
                 <div className='row'>
                     <div className='col-sm-12 col-lg-6'>
                     {action==="BuyTiket"?
