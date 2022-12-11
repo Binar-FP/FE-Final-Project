@@ -3,14 +3,28 @@ import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 import { NatureBg, NatureBg1, NatureBg2 } from '../../assets';
-import './index.css'
+import './carousel.css'
 
 const Carousel = () => {
+    const options = {
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 3
+            },
+            1000: {
+                items: 3
+            }
+        }
+    }
+
   return (
     <div>
       <div className='container mt-5'>
         <div className='d-flex justify-content-center text-center align-items-center '>
-        <OwlCarousel className='content-carousel' loop={true} items={3} margin={8} autoplay ={true} center={true} >  
+        <OwlCarousel className='content-carousel' loop={true} items={3} margin={8} autoplay ={true} center={true} responsive={options.responsive} >  
             <div class='item'>
                 <div class="card">
                     <img src={NatureBg} class="card-img-top" alt="..."/>
