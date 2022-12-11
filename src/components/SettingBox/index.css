@@ -1,0 +1,12 @@
+.profile{
+    width: 200px;
+    height: 200px;
+}
+
+.content-profile{
+    margin-top: -200px;
+}
+
+.bg-color{
+    background-color: #59C1BD !important;
+}

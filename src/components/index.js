@@ -12,6 +12,7 @@ import SearchHelp from "./SearchHelp";
 import CommonQuestion from "./CommonQuestion";
 import AllTopics from "./AllTopics";
 import SendQuestion from "./SendQuestion";
+import SettingBox from "./SettingBox";
 import LoginAdminComponent from "./LoginAdmin";
 
-export { Navbar, RegisterComponent, LoginComponent, Footer, BookingBox, Carousel, Hero, Reviews, ERROR_HANDLER_404, ERROR_HANDLER_500, SearchHelp, CommonQuestion, AllTopics, SendQuestion, LoginAdminComponent };
+export { Navbar, RegisterComponent, LoginComponent, Footer, BookingBox, Carousel, Hero, Reviews, ERROR_HANDLER_404, ERROR_HANDLER_500, SearchHelp, CommonQuestion, AllTopics, SendQuestion, LoginAdminComponent, SettingBox };
