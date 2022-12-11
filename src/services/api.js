@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'http://www.flywithme-api.me/api',
+  baseURL: 'https://www.flywithme-api.me/api',
   headers: {
     'Accept': 'application/json',
     'Authorization': `Bearer ${localStorage.getItem('token') || ''}`
