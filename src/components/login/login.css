@@ -1,17 +1,18 @@
 .content-login{
     background-color: #F5F8FF;
-    width: 80%;
+    width: 70vw;
     margin-top:-190px;
 }
 
 .left-login{
     height: auto;
-    width: 35vw;
+    width: 25vw;
+    padding: 40px 0 0 50px;
 }
 
 .right-login{
     height: auto;
-    width: 65vw;
+    width: 75vw;
 }
 
 .plane{
@@ -41,4 +42,19 @@ input{
     text-align: center !important;
     align-items: center !important;
     justify-content: center !important;
+}
+
+@media screen and (max-width: 768px) {
+    .content-login{
+        width: 80vw;
+    }
+    .left-login{
+        padding: 20px;
+        width: auto;
+    }
+    .right-login{
+        display: none;
+    }
+
+  
 }

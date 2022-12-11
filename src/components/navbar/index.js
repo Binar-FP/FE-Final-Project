@@ -13,12 +13,9 @@ const Navbar = () => {
         <div className="containerku mb-2">
             <nav className="navbar navbar-expand-lg navbar-dark">
                 <div className="container-fluid mt-4">
-                <a className="navbar-brand ps-5 ms-5 pt-4" href="/"><img className="logo" src={Logo} alt=""/></a>
-                {/* <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button> */}
+                <a className="navbar-brand" href="/"><img className="logo" src={Logo} alt=""/></a>
                 <div className="navbar-collapse" id="navbarNav">
-                    <ul className="navbar-nav ms-auto pt-4 ps-4 pe-4 pt-2">
+                    <ul className="navbar-nav ms-auto ps-4 pe-4">
                     {/* jika tidak Login  */}
                     {cekLogin === true ?
                     <li className="nav-item mobile-item">
@@ -55,7 +52,7 @@ const Navbar = () => {
                     </li>
                     <li className="nav-item mobile-item">
                         <Gear className='icon' color="white" size={30} />
-                        <a className="nav-link" href="/login">Setting</a>
+                        <a className="nav-link" href="/profile">Setting</a>
                     </li>
                     <li className="nav-item mobile-item">
                         <BoxArrowRight className='icon' color="white" size={30}/>
