@@ -1,0 +1,10 @@
+.content-carousel{
+    width: 70vw !important;
+}
+
+@media screen and (max-width: 768px) {
+    .content-carousel{
+        width: 80vw !important;
+    }
+
+}
