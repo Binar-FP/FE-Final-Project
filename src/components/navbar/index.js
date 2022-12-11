@@ -2,11 +2,19 @@ import React from 'react'
 import './navbar.css'
 import { Logo } from '../../assets'
 import { House, PencilSquare, QuestionCircle, ArrowRightCircle, Bell, Gear, BoxArrowRight } from 'react-bootstrap-icons';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { logoutActions } from '../../config/redux/actions/authActions';
+import { useNavigate } from 'react-router';
 
 const Navbar = () => {
 
+    const history = useNavigate();
     const cekLogin = useSelector(state => state.auth.isLoggedIn);
+    const dispatch = useDispatch();
+
+    const logoutHandle = () => {
+        dispatch(logoutActions(history));
+    }
   return (
     <>
       {/* <!-- navbar  --> */}
@@ -56,7 +64,7 @@ const Navbar = () => {
                     </li>
                     <li className="nav-item mobile-item">
                         <BoxArrowRight className='icon' color="white" size={30}/>
-                        <a className="nav-link" href="/register">Logout</a>
+                        <a className="nav-link" href="/register" onClick={logoutHandle}>Logout</a>
                     </li>
 
                     <li className="dropdown destop-item">
@@ -67,7 +75,7 @@ const Navbar = () => {
                             <li><a className="dropdown-item" href="#/">Setting</a></li>
                             {/* <li><a className="dropdown-item" href="#/">Another action</a></li> */}
                             <li><hr className="dropdown-divider"/></li>
-                            <li><a className="dropdown-item" href="#/">Logout</a></li>
+                            <li><a className="dropdown-item" href="#/" onClick={logoutHandle}>Logout</a></li>
                         </ul>
                     </li>
                     </>
