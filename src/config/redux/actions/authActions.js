@@ -23,3 +23,14 @@ export const registerActions = (data, history) => async (dispatch) => {
     }   
 }
 
+export const logoutActions = (history) => async (dispatch) => {
+    try {
+        const response = await AuthService.logout();
+        dispatch({type: 'LOGOUT', payload: response});
+        SweatAlert('Berhasil Logout', 'success');
+        history('/');
+    } catch (error) {
+        SweatAlert(String(error.response.data.message), 'warning')
+    }   
+}
+
