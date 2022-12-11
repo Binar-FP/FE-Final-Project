@@ -6,5 +6,6 @@ import NatureBg1 from './images/nature2.jpg';
 import NatureBg2 from './images/nature3.jpg';
 import UserBg from './images/user.png';
 import Star from './images/star.png'
+import Robot404 from './images/halaman_404.png';
 
-export {Logo, RegisterBg, LoginBg, NatureBg, NatureBg1, NatureBg2, UserBg, Star};
+export {Logo, RegisterBg, LoginBg, NatureBg, NatureBg1, NatureBg2, UserBg, Star, Robot404};
