@@ -37,7 +37,7 @@ const LoginComponent = () => {
     <>
       <div className="d-flex justify-content-center content-login mx-auto">
         <form className="form-login" onSubmit={handleSubmit(onSubmit)}>
-            <div className="left-login ps-5 pt-5">
+            <div className="left-login">
                     {/* {sessionStorage.getItem('isLogged') && <h1>TEST SESSIon</h1>} */}
                     <h3 className="mb-5 text-center">Welcome to FlyWithMe</h3>
                     
