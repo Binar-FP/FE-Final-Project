@@ -1,5 +1,5 @@
 import React from 'react'
-import { Navbar, Footer, BookingBox, Carousel, Hero, Reviews } from '../../components'
+import { Navbar, BookingBox, Carousel, Hero, Reviews, Footer } from '../../components'
 
 const Home = () => {
   return (
