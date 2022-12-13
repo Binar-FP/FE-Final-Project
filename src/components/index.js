@@ -17,6 +17,7 @@ import LoginAdminComponent from "./LoginAdmin";
 import Sidebar from "./sidebar";
 import NavbarAdmin from "./NavbarAdmin";
 import AirportAdmin from "./airportAdmin";
+import DestinationsAdmin from "./destinationsAdmin";
 
 export { 
     Navbar,
@@ -38,4 +39,5 @@ export {
     Sidebar,
     NavbarAdmin,
     AirportAdmin,
+    DestinationsAdmin,
  };

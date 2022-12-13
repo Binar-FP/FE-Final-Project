@@ -1,5 +1,5 @@
 import React from 'react'
-import { Sidebar, NavbarAdmin, AirportAdmin } from '../../components'
+import { Sidebar, NavbarAdmin, AirportAdmin, DestinationsAdmin } from '../../components'
 
 const Admin = () => {
   return (
@@ -8,7 +8,8 @@ const Admin = () => {
     <div className="container-fluid">
         <div className="row">
             <Sidebar />
-            <AirportAdmin />
+            {/* <AirportAdmin /> */}
+            <DestinationsAdmin />
         </div>
     </div>
     </>

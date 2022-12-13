@@ -1,0 +1,41 @@
+import { DestinationsService } from "../../../services/destinationsService.js";
+import SweatAlert from "../../SweatAlert";
+
+export const getDestinationsActions = () => async (dispatch) => {
+    try {
+        const response = await DestinationsService.getDestinations();
+        return response;
+    } catch (error) {
+        SweatAlert(String(error.response.data.message), 'warning')
+    }       
+}
+
+export const PutDestinationsActions = (id, data) => async (dispatch) => {
+    try {
+        const response = await DestinationsService.postDestinations(id, data);
+        SweatAlert('Update Berhasil', 'success');
+        return response;
+    } catch (error) {
+        SweatAlert(String(error.response.data.message), 'warning')
+    }       
+}
+
+export const DeleteDestinationsActions = (id) => async (dispatch) => {
+    try {
+        const response = await DestinationsService.deleteDestinations(id);
+        SweatAlert('Delete Berhasil', 'success');
+        return response;
+    } catch (error) {
+        SweatAlert(String(error.response.data.message), 'warning')
+    }       
+}
+
+export const CreateDestinationsActions = (data) => async (dispatch) => {
+    try {
+        const response = await DestinationsService.createDestinations(data);
+        SweatAlert('Create Berhasil', 'success');
+        return response;
+    } catch (error) {
+        SweatAlert(String(error.response.data.message), 'warning')
+    }       
+}
