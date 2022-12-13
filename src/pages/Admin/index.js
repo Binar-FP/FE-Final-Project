@@ -8,7 +8,7 @@ const Admin = () => {
     <div className="container-fluid">
         <div className="row">
             <Sidebar />
-            {/* <AirportAdmin /> */}
+            <AirportAdmin />
             <DestinationsAdmin />
         </div>
     </div>

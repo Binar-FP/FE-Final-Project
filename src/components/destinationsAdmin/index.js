@@ -1,28 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import './destinationsAdmin.css'
 import { PencilSquare, PlusCircle, Trash, } from 'react-bootstrap-icons'
-import { getDestinationsActions, PutDestinationsActions, DeleteDestinationsActions, CreateDestinationsActions } from '../../config/redux/actions/destinationsActions';
+import { PutDestinationsActions, DeleteDestinationsActions, CreateDestinationsActions } from '../../config/redux/actions/destinationsActions';
+import { DestinationsService } from '../../services/destinationsService';
 import { useDispatch } from 'react-redux';
+
 
 const DestinationsAdmin = () => {
     const [destinations, setDestinations] = useState([])
     const [formValues, setFormValues] = useState({userId: 1})
     const dispatch = useDispatch();
     
-
-    const getDestinations = async () => {
-        const data = await dispatch(getDestinationsActions());
-        setDestinations(data.data.data)
-    }
-    
     useEffect(() => {
-        getDestinations()
+        DestinationsService.getDestinations().then((res) => {
+          setDestinations(res.data.data)
+        })
     }, [])
     
     console.log(formValues)
     const updatehandler = async () => {
         await dispatch(PutDestinationsActions(formValues.id,formValues));
-        // window.location.reload(true);
+        window.location.reload(true);
     }
 
     const deleteHandler = async (id) => {
@@ -32,7 +30,7 @@ const DestinationsAdmin = () => {
 
     const createHandler = async () => {
         await dispatch(CreateDestinationsActions(formValues));
-        // window.location.reload(true);
+        window.location.reload(true);
     }
 
   return (
@@ -73,7 +71,7 @@ const DestinationsAdmin = () => {
                     </tr>
 
                     {/* <!-- Modal --> */}
-                    <div className="modal fade" id={`example${destinations.id}`} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className="modal fade" id={`example${destinations.id}`} aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog modal-dialog-centered">
                         <div className="modal-content">
                         <div className="modal-header">
@@ -102,14 +100,14 @@ const DestinationsAdmin = () => {
               </tbody>
             </table>
             {/* <!-- Modal Create --> */}
-              <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Create destinations</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <div className="modal fade" id="createModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog modal-dialog-centered">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title" id="exampleModalLabel">Create destinations</h5>
+                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
+                    <div className="modal-body">
                     <form className="">
                       <label htmlFor="" className="mb-2">Name</label>
                       <input placeholder='Name destinations' onChange={(e)=> setFormValues({...formValues,nameDestination: e.target.value, id :destinations.id})} className="form-control" name='name' type="text"/>
@@ -117,9 +115,9 @@ const DestinationsAdmin = () => {
                       <input placeholder='Image destinations'onChange={(e)=> setFormValues({...formValues,imageDestination: e.target.files[0], id :destinations.id})} className="form-control" name='code' type="file"/>
                       </form>
                     </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={createHandler}>Create</button>
+                    <div className="modal-footer">
+                      <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={createHandler}>Create</button>
                     </div>
                   </div>
                 </div>
