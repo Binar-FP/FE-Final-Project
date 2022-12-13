@@ -1,39 +1,37 @@
 import React, { useEffect, useState } from 'react'
 import './airportAdmin.css'
-import { AirportService } from '../../services/airportService'
 import { PencilSquare, PlusCircle, Trash, } from 'react-bootstrap-icons'
+import { getAirportActions, PutAirportActions, DeleteAirportActions, CreateAirportActions } from '../../config/redux/actions/airportActions';
+import { useDispatch } from 'react-redux';
 
 const AirportAdmin = () => {
     const [airport, setAirport] = useState([])
     const [formValues, setFormValues] = useState([])
+    const dispatch = useDispatch();
+    
 
     const getAirport = async () => {
-        const response = await AirportService.getAirport();
-        setAirport(response.data.data)
+        const data = await dispatch(getAirportActions());
+        setAirport(data.data.data)
     }
-
+    
     useEffect(() => {
         getAirport()
-    }, [formValues])
+    }, [])
     
     console.log(formValues)
     const updatehandler = async () => {
-        const response = await AirportService.postAirport(formValues.id,formValues);
-        console.log(response)
-        console.log('update')
+        await dispatch(PutAirportActions(formValues.id,formValues));
         window.location.reload(true);
     }
 
     const deleteHandler = async (id) => {
-        const response = await AirportService.deleteAirport(id);
-        console.log(response)
-        console.log(id)
+        await dispatch(DeleteAirportActions(id));
         window.location.reload(false);
     }
 
     const createHandler = async () => {
-        const response = await AirportService.createAirport(formValues);
-        console.log(response)
+        await dispatch(CreateAirportActions(formValues));
         window.location.reload(true);
     }
 
