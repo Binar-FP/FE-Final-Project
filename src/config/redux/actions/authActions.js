@@ -12,6 +12,17 @@ export const loginActions = (data, history) => async (dispatch) => {
     }   
 }
 
+export const loginGoogleActions = (data, history) => async (dispatch) => {
+    try {
+        const response = await AuthService.loginGoogle(data);
+        dispatch({type: 'LOGIN', payload: response.data});
+        SweatAlert('Login Berhasil', 'success');
+        history('/');
+    } catch (error) {
+        SweatAlert(String(error.response.data.message), 'warning')
+    }   
+}
+
 export const registerActions = (data, history) => async (dispatch) => {
     try {
         const response = await AuthService.register(data);

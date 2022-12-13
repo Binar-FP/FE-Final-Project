@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { GoogleLogin } from 'react-google-login';
 import { gapi } from 'gapi-script';
 import { useDispatch} from 'react-redux';
-import { loginActions } from '../../config/redux/actions/authActions';
+import { loginActions, loginGoogleActions } from '../../config/redux/actions/authActions';
 
 
 
@@ -20,7 +20,8 @@ const LoginComponent = () => {
     }
     
     const responseGoogle = (response) => {
-        console.log(response);
+        dispatch(loginGoogleActions(response, history));
+        console.log(response.accessToken);
     }
 
     useEffect(() => {
