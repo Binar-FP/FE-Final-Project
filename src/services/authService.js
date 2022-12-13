@@ -23,6 +23,28 @@ export const AuthService = {
         return response;
     },
 
+    loginGoogle : async (data) => {
+        const response = await API.post('/google', data);
+        const Name = response.data.data.firstName;
+        setHeadersAndStorage(response.data, Name);
+        if (data.rememberMe === true) {
+            setTimeout(() => {
+                localStorage.removeItem('token');
+                localStorage.removeItem('isLogged');
+            }
+            , 604800000);
+        } else {
+            setTimeout(() => {
+                localStorage.removeItem('token');
+                localStorage.removeItem('isLogged');
+            }
+            , 86400000);
+        }
+        console.log(response.data);
+        
+        return response;
+    },
+
     register : async (data) => {
         const response = await API.post('/register', data);
         return response;
