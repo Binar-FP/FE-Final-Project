@@ -14,5 +14,30 @@ import AllTopics from "./AllTopics";
 import SendQuestion from "./SendQuestion";
 import SettingBox from "./SettingBox";
 import LoginAdminComponent from "./LoginAdmin";
+import Sidebar from "./sidebar";
+import NavbarAdmin from "./NavbarAdmin";
+import AirportAdmin from "./airportAdmin";
+import DestinationsAdmin from "./destinationsAdmin";
 
-export { Navbar, RegisterComponent, LoginComponent, Footer, BookingBox, Carousel, Hero, Reviews, ERROR_HANDLER_404, ERROR_HANDLER_500, SearchHelp, CommonQuestion, AllTopics, SendQuestion, LoginAdminComponent, SettingBox };
+export { 
+    Navbar,
+    RegisterComponent,
+    LoginComponent,
+    Footer,
+    BookingBox,
+    Carousel,
+    Hero,
+    Reviews,
+    ERROR_HANDLER_404,
+    ERROR_HANDLER_500,
+    SearchHelp,
+    CommonQuestion,
+    AllTopics,
+    SendQuestion,
+    LoginAdminComponent,
+    SettingBox,
+    Sidebar,
+    NavbarAdmin,
+    AirportAdmin,
+    DestinationsAdmin,
+ };
