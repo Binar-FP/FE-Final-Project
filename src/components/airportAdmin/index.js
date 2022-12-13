@@ -1,22 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import './airportAdmin.css'
 import { PencilSquare, PlusCircle, Trash, } from 'react-bootstrap-icons'
-import { getAirportActions, PutAirportActions, DeleteAirportActions, CreateAirportActions } from '../../config/redux/actions/airportActions';
+import { PutAirportActions, DeleteAirportActions, CreateAirportActions } from '../../config/redux/actions/airportActions';
 import { useDispatch } from 'react-redux';
+import { AirportService } from '../../services/airportService';
 
 const AirportAdmin = () => {
     const [airport, setAirport] = useState([])
     const [formValues, setFormValues] = useState([])
     const dispatch = useDispatch();
-    
 
-    const getAirport = async () => {
-        const data = await dispatch(getAirportActions());
-        setAirport(data.data.data)
-    }
-    
     useEffect(() => {
-        getAirport()
+      AirportService.getAirport().then((res) => {
+        setAirport(res.data.data);
+      });
     }, [])
     
     console.log(formValues)
@@ -75,7 +72,7 @@ const AirportAdmin = () => {
                     </tr>
 
                     {/* <!-- Modal --> */}
-                    <div className="modal fade" id={`example${airport.id}`} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className="modal fade" id={`example${airport.id}`} aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog modal-dialog-centered">
                         <div className="modal-content">
                         <div className="modal-header">
@@ -105,14 +102,14 @@ const AirportAdmin = () => {
               </tbody>
             </table>
             {/* <!-- Modal Create --> */}
-              <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Create Airport</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <div className="modal fade" id="createModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog modal-dialog-centered">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title" id="exampleModalLabel">Create Airport</h5>
+                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
+                    <div className="modal-body">
                     <form className="">
                       <label htmlFor="" className="mb-2">Name</label>
                       <input placeholder='Name Airport' onChange={(e)=> setFormValues({...formValues,name: e.target.value, id :airport.id})} className="form-control" name='name' type="text"/>
@@ -122,9 +119,9 @@ const AirportAdmin = () => {
                       <input placeholder='location Airport' onChange={(e)=> setFormValues({...formValues,location: e.target.value, id :airport.id})} className="form-control" name='location' type="text"/>
                       </form>
                     </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={createHandler}>Create</button>
+                    <div className="modal-footer">
+                      <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={createHandler}>Create</button>
                     </div>
                   </div>
                 </div>
