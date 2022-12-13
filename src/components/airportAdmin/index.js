@@ -5,17 +5,13 @@ import { PencilSquare, PlusCircle, Trash, } from 'react-bootstrap-icons'
 
 const AirportAdmin = () => {
     const [airport, setAirport] = useState([])
-    const [formValues, setFormValues] = useState({
-        id: '',
-        name: '',
-        code: '',
-        location: ''
-      })
+    const [formValues, setFormValues] = useState([])
 
     const getAirport = async () => {
         const response = await AirportService.getAirport();
         setAirport(response.data.data)
     }
+
     useEffect(() => {
         getAirport()
     }, [formValues])
@@ -35,6 +31,12 @@ const AirportAdmin = () => {
         window.location.reload(false);
     }
 
+    const createHandler = async () => {
+        const response = await AirportService.createAirport(formValues);
+        console.log(response)
+        window.location.reload(true);
+    }
+
   return (
     <>
       <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
@@ -42,7 +44,7 @@ const AirportAdmin = () => {
         <h1 className="h2">Airport</h1>
         <div className="btn-toolbar mb-2 mb-md-0">
           <div className="btn-group me-2">
-            <button type="button" className="btn btn-sm btn-outline-secondary"><PlusCircle className='me-2'/>Add</button>
+            <button type="button" className="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#createModal"><PlusCircle className='me-2'/>Add</button>
           </div>
         </div>
       </div>
@@ -104,6 +106,31 @@ const AirportAdmin = () => {
             })}
               </tbody>
             </table>
+            {/* <!-- Modal Create --> */}
+              <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Create Airport</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    <form className="">
+                      <label htmlFor="" className="mb-2">Name</label>
+                      <input placeholder='Name Airport' onChange={(e)=> setFormValues({...formValues,name: e.target.value, id :airport.id})} className="form-control" name='name' type="text"/>
+                      <label htmlFor="" className="mb-2">Code</label>
+                      <input placeholder='Code Airport' maxLength={3} onChange={(e)=> setFormValues({...formValues,code: e.target.value, id :airport.id})} className="form-control" name='code' type="text"/>
+                      <label htmlFor="" className="mb-2">Location</label>
+                      <input placeholder='location Airport' onChange={(e)=> setFormValues({...formValues,location: e.target.value, id :airport.id})} className="form-control" name='location' type="text"/>
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={createHandler}>Create</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
           </div>
     </main>
     </>

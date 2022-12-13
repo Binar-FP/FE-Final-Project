@@ -17,4 +17,9 @@ export const AirportService = {
         return response;
     },
 
+    createAirport : async (data) => {
+        const response = await API.post('/airports/add', data);
+        return response;
+    },
+
 }
