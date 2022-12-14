@@ -1,5 +1,5 @@
 import React from 'react'
-import { Sidebar, NavbarAdmin, AirportAdmin, DestinationsAdmin } from '../../components'
+import { Sidebar, NavbarAdmin, AirportAdmin, DestinationsAdmin, FlightsAdmin } from '../../components'
 
 const Admin = () => {
   return (
@@ -10,6 +10,7 @@ const Admin = () => {
             <Sidebar />
             <AirportAdmin />
             <DestinationsAdmin />
+            <FlightsAdmin />
         </div>
     </div>
     </>
