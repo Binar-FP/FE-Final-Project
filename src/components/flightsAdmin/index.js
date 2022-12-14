@@ -312,15 +312,12 @@ const FlightsAdmin = () => {
                                             <label htmlFor="" className="mb-2">Airport</label>
                                             <select 
                                             className="form-select" 
-                                            onChange={(e)=> setFormValues({...formValues,airPortId: e.target.value})}>
+                                            onChange={(e)=> setFormValues({...formValues,airPortId: e.target.value})}
+                                            value={formValues.airPortId}>
                                             {airport.map((airport) => {
                                             return (
                                             <>
-                                                if (airport.id === formValues.airPortId) {
-                                                    <option value={airport.id} selected>{airport.name}</option>
-                                                } else {
-                                                <option key={airport.id} value={airport.id}>{airport.name}</option>
-                                                }
+                                                    <option key={airport.id} value={airport.id}>{airport.name}</option>
                                             </> 
                                             )})}
                                             </select>
@@ -329,15 +326,12 @@ const FlightsAdmin = () => {
                                           <label htmlFor="" className="mb-2">Destination</label>
                                           <select 
                                           className="form-select" 
-                                          onChange={(e)=> setFormValues({...formValues,destinationId: e.target.value})}>
+                                          onChange={(e)=> setFormValues({...formValues,destinationId: e.target.value})}
+                                          value={formValues.destinationId}>
                                           {destinations.map((destinations) => {
                                           return (
                                           <>
-                                              if (destinations.id === formValues.destinationId) {
-                                                  <option value={destinations.id} selected>{destinations.nameDestination}</option>
-                                              } else {
                                               <option key={destinations.id} value={destinations.id}>{destinations.nameDestination}</option>
-                                              }
                                           </> 
                                           )})}
                                         </select>
