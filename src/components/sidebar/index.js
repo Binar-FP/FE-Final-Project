@@ -1,42 +1,48 @@
 import React from 'react'
 import './sidebar.css'
-import { Airplane, ClockHistory, CloudFog2, Globe, HouseExclamation } from 'react-bootstrap-icons';
+import { Airplane, Calendar2Check, ClockHistory, CloudFog2, Globe, HouseExclamation } from 'react-bootstrap-icons';
 
-const Sidebar = () => {
+const Sidebar = ({page}) => {
   return (
     <>
       <nav id="sidebarMenu" className="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse mt-4">
       <div className="position-sticky pt-3">
         <ul className="nav flex-column">
-          <li className="nav-item">
-            <a className="nav-link active" aria-current="page" href="#/">
+          {/* <li className="nav-item">
+            <button className="nav-link active btn" onClick={(e)=>page('dashboard')} >
             <HouseExclamation color="black" className='me-2' />
               Dashboard
-            </a>
-          </li>
+            </button>
+          </li> */}
           <li className="nav-item">
-            <a className="nav-link" href="#/">
+            <button className="nav-link btn" onClick={(e)=>page('airports')}>
             <Airplane color="black" className='me-2' />
               Airport
-            </a>
+            </button>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#/">
+            <button className="nav-link btn" onClick={(e)=>page('flights')}>
             <CloudFog2 color="black" className='me-2' />
               Flights
-            </a>
+            </button>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#/">
+            <button className="nav-link btn" onClick={(e)=>page('destinations')}>
             <Globe color="black" className='me-2' />
               Destinations
-            </a>
+            </button>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#/">
+            <button className="nav-link btn" onClick={(e)=>page('schedules')}>
+            <Calendar2Check color="black" className='me-2' />
+              Schedules
+            </button>
+          </li>
+          <li className="nav-item">
+            <button className="nav-link btn" onClick={(e)=>page('history')}>
             <ClockHistory color="black" className='me-2' />
               History
-            </a>
+            </button>
           </li>
         </ul>
 
