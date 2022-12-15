@@ -4,7 +4,8 @@ import './index.css'
 const AllTopics = () => {
   return (
     <div className='container mt-5'>
-      <div className='row'>
+      <div className='d-flex justify-content-center align-items-between '>
+      <div className='row content-topics'>
         <div className='col-sm-4'>
             <h5>All Topics</h5>
         </div>
@@ -30,6 +31,7 @@ const AllTopics = () => {
             <button type="button" className="btn btn-outline-info m-2 outline-color">About Us</button>
             <button type="button" className="btn btn-outline-info m-2 outline-color">Mobile app</button>
         </div>
+      </div>
       </div>
     </div>
   )

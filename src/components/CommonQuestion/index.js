@@ -1,11 +1,13 @@
 import React from 'react'
+import './common.css'
 
 const CommonQuestion = () => {
   return (
     <div className='container mt-5'>
-      <div className='row'>
+      <div className='d-flex justify-content-center align-items-center '>
+      <div className='row content-common'>
         <div className='col-sm-4'>
-            <h5>Common Question</h5>
+            <h5 >Common Question</h5>
         </div>
         <div className='col-sm-4'>
             <h6 className='mb-4'>How can I cancel my flight ticket?</h6>
@@ -21,6 +23,7 @@ const CommonQuestion = () => {
             <h6 className='mb-4'>Does my small child need to be checked in?</h6>
             <h6 className='mb-4'>How can I travel with my child?</h6>
         </div>
+      </div>
       </div>
     </div>
   )
