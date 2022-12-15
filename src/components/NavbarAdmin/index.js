@@ -10,7 +10,7 @@ const NavbarAdmin = () => {
     const dispatch = useDispatch();
 
     const logoutHandle = () => {
-        dispatch(logoutActions(history));
+        dispatch(logoutActions(history,'admin'));
     }
   return (
     <>
