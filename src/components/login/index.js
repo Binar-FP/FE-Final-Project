@@ -36,6 +36,7 @@ const LoginComponent = (props) => {
             gapi.load('client:auth2', () => {
                 gapi.auth2.init({
                     clientId: '310809761322-ci5u1ija6vd0auki4ppqjqghqp1tum18.apps.googleusercontent.com',
+                    mode: 'cors',
                 })
             })};
         gapi.load('client:auth2', start);
@@ -105,7 +106,6 @@ const LoginComponent = (props) => {
                             onSuccess={responseGoogle}
                             onFailure={responseGoogle}
                             cookiePolicy={'single_host_origin'}
-                            // isSignedIn={true}
                         />
                     </div>
                     <p className="text-center">Don't Have account? <a href="/register" className="text-danger"> Sign Up</a></p>
