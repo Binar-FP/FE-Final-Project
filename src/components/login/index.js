@@ -6,11 +6,11 @@ import { useNavigate } from 'react-router-dom';
 import { GoogleLogin } from 'react-google-login';
 import { gapi } from 'gapi-script';
 import { useDispatch} from 'react-redux';
-import { loginActions } from '../../config/redux/actions/authActions';
+import { loginActions, loginGoogleActions, verifyAccountActions } from '../../config/redux/actions/authActions';
 
 
 
-const LoginComponent = () => {
+const LoginComponent = (props) => {
     const history = useNavigate();
     const { register, handleSubmit, formState: { errors, isDirty, isValid } } = useForm();
 
@@ -18,9 +18,17 @@ const LoginComponent = () => {
     const onSubmit = (data) => {
         dispatch(loginActions(data, history));
     }
+
+    // Verify Account From Email
+    if (props.tokenVerify) {
+        const token={urlToken :props.tokenVerify};
+        dispatch(verifyAccountActions(token, history));
+    }
     
+    // Login With Google 
     const responseGoogle = (response) => {
-        console.log(response);
+        dispatch(loginGoogleActions(response, history));
+        console.log(response.accessToken);
     }
 
     useEffect(() => {
@@ -37,8 +45,7 @@ const LoginComponent = () => {
     <>
       <div className="d-flex justify-content-center content-login mx-auto">
         <form className="form-login" onSubmit={handleSubmit(onSubmit)}>
-            <div className="left-login ps-5 pt-5">
-                    {/* {sessionStorage.getItem('isLogged') && <h1>TEST SESSIon</h1>} */}
+            <div className="left-login">
                     <h3 className="mb-5 text-center">Welcome to FlyWithMe</h3>
                     
                     <div className="form-group mb-3">

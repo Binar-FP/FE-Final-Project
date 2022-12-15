@@ -1,6 +1,5 @@
 .content-booking{
     background-color: #F5F8FF;
-    height: 36vh;
     width: 70vw;
     position: relative;
     margin: auto;
@@ -20,4 +19,11 @@
     border-bottom: 3px solid #59C1BD !important;
     border-radius: 0px !important;
     color: #59C1BD !important;
+}
+
+@media screen and (max-width: 768px) {
+    .content-booking{
+        width: 90vw !important;
+    }
+
 }

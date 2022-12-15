@@ -10,6 +10,7 @@
     "bootstrap": "^5.2.3",
     "gapi-script": "^1.2.0",
     "react": "^18.2.0",
+    "react-bootstrap-icons": "^1.10.2",
     "react-dom": "^18.2.0",
     "react-google-login": "^5.2.2",
     "react-hook-form": "^7.40.0",
