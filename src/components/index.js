@@ -20,6 +20,7 @@ import AirportAdmin from "./airportAdmin";
 import DestinationsAdmin from "./destinationsAdmin";
 import FlightsAdmin from "./flightsAdmin";
 import SchedulesAdmin from "./schedulesAdmin";
+import UsersManagement from "./UsersManagement";
 
 export { 
     Navbar,
@@ -44,4 +45,5 @@ export {
     DestinationsAdmin,
     FlightsAdmin,
     SchedulesAdmin,
+    UsersManagement,
  };

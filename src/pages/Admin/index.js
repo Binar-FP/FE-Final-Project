@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { Sidebar, NavbarAdmin, AirportAdmin, DestinationsAdmin, FlightsAdmin, SchedulesAdmin } from '../../components'
+import { Sidebar, NavbarAdmin, AirportAdmin, DestinationsAdmin, FlightsAdmin, SchedulesAdmin, UsersManagement } from '../../components'
 
 const Admin = () => {
-  const [componentOpen, setComponentOpen] = useState('airports')
+  const [componentOpen, setComponentOpen] = useState('users')
 
   const handleComponent = (e) => {
     setComponentOpen(e)
@@ -18,6 +18,7 @@ const Admin = () => {
             {componentOpen === 'destinations' && <DestinationsAdmin />}
             {componentOpen === 'flights' && <FlightsAdmin />}
             {componentOpen === 'schedules' && <SchedulesAdmin />}
+            {componentOpen === 'users' && <UsersManagement />}
         </div>
     </div>
     </>
