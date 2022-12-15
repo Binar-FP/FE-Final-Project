@@ -46,6 +46,16 @@ export const registerActions = (data, history) => async (dispatch) => {
     }   
 }
 
+export const verifyAccountActions = (data, history) => async (dispatch) => {
+    try {
+        await AuthService.verifyAccount(data);
+        SweatAlert('Verified Account', 'success');
+        history('/login');
+    } catch (error) {
+        SweatAlert(String(error.response.data.message), 'warning')
+    }   
+}
+
 export const logoutActions = (history) => async (dispatch) => {
     try {
         const response = await AuthService.logout();

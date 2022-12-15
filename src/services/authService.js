@@ -4,7 +4,8 @@ export const AuthService = {
     login : async (data) => {
         const response = await API.post('/login', data);
         const Name = response.data.data.firstName;
-        setHeadersAndStorage(response.data, Name);
+        const RoleId = response.data.data.roleId;
+        setHeadersAndStorage(response.data, Name, RoleId);
         if (data.rememberMe === true) {
             setTimeout(() => {
                 localStorage.removeItem('token');
@@ -73,10 +74,16 @@ export const AuthService = {
         return response;
     },
 
+    verifyAccount : async (data) => {
+        const response = await API.post('/auth/send-email', data);
+        return response;
+    },
+
     logout : async () => {
         localStorage.removeItem('token');
         localStorage.removeItem('isLogged');
         localStorage.removeItem('user');
+        localStorage.removeItem('role');
         return;
     }
 }
