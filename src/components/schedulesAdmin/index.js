@@ -102,7 +102,7 @@ const SchedulesAdmin = () => {
             </table>
             {/* <!-- Modal Create --> */}
               <div className="modal fade" id="createModalSchedules" aria-labelledby="Modal" aria-hidden="true">
-                <div className="modal-dialog modal-dialog-centered modal-lg">
+                <div className="modal-dialog modal-dialog-centered modal-md">
                   <div className="modal-content">
                     <div className="modal-header">
                       <h5 className="modal-title" id="Modal">Create Schedules</h5>
@@ -112,7 +112,7 @@ const SchedulesAdmin = () => {
                       <form className="" onSubmit={onSubmit}>
                           <div className="modal-body">
                               <div className="row">
-                                  <div className="col-md-6">
+                                  <div className="col-md-12">
                                   <div className="form-group mb-3">
                                         <label htmlFor="" className="mb-2">Date Flight</label>
                                         <input 
