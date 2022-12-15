@@ -7,6 +7,11 @@ export const DestinationsService = {
         return response;
     },
 
+    getDestinationsById : async (id) => {
+        const response = await API.get('/destinations/findById/'+id);
+        return response;
+    },
+
     postDestinations : async (id, data) => {
         const response = await API.put('/destinations/update/'+id, data,{
             headers: {
