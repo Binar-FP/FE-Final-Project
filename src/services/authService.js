@@ -26,8 +26,10 @@ export const AuthService = {
 
     loginGoogle : async (data) => {
         const response = await API.post('/google', data);
+        console.log(response.data.data.roleId);
         const Name = response.data.data.firstName;
-        setHeadersAndStorage(response.data, Name);
+        const RoleId = response.data.data.roleId;
+        setHeadersAndStorage(response.data, Name, RoleId);
         if (data.rememberMe === true) {
             setTimeout(() => {
                 localStorage.removeItem('token');
