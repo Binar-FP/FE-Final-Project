@@ -122,9 +122,6 @@ const BuyTiket = ({handlerData}) => {
                         <button className="form-control button text-light" placeholder="Default input"onClick={()=>handlerData(formValues)}>Booking Now</button>
                     </div>
                 </div>
-                {/* { trip==="first" ?<OneWay />:''}
-                { trip==="oneway" ?<OneWay />:''}
-                <RoundWay /> */}
     </>
   )
 }
