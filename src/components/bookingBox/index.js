@@ -3,7 +3,7 @@ import './bookingbox.css'
 import BuyTiket from '../BuyTiket'
 import SearchTiket from '../SearchTiket'
 
-const BookingBox = () => {
+const BookingBox = ({handlerData}) => {
     const [action, setAction] = useState('BuyTiket')
   return (
     <div className='container'>
@@ -23,7 +23,7 @@ const BookingBox = () => {
                     </div>
                 </div>
                 <hr></hr>
-                {action==="BuyTiket"?<BuyTiket />:''}
+                {action==="BuyTiket"?<BuyTiket  handlerData={handlerData}/>:''}
                 {action==="SearchFlight"?<SearchTiket />:''}
                 </div>
     </div>

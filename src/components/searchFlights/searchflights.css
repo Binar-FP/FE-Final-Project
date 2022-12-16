@@ -1,0 +1,18 @@
+.content-searchlight{
+    width: 70vw !important;
+}
+
+.img-arrow{
+    width: 80%;
+}
+
+.bg-card{
+    background-color: #CFF5E7 !important;
+}
+
+@media screen and (max-width: 768px) {
+    .content-carousel{
+        width: 80vw !important;
+    }
+
+}

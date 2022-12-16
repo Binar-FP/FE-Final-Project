@@ -1,41 +1,22 @@
 import React from "react";
 import './index.css'
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
 import { useForm } from 'react-hook-form';
+import { loginAdminActions } from '../../config/redux/actions/authActions';
+import { useDispatch } from "react-redux";
 
 
 
 
 const LoginAdminComponent = () => {
 
-  const navigate = useNavigate();
-  const { register, handleSubmit, formState: { errors, isDirty, isValid } } = useForm();
+  const history = useNavigate();
+    const { register, handleSubmit, formState: { errors, isDirty, isValid } } = useForm();
 
-  const onSubmit = (data) => {
-    axios.post('http://localhost:5000/api/login/admin', data)
-    .then((response) => {
-      console.log(response.data);
-      SweatAlert('Login Berhasil', 'success');
-      navigate('/');
-  }).catch(function (error) {
-      console.log(error);
-      if(error){
-          SweatAlert(String(error.response.data.message), 'warning')
-      }
-  });
-  }
-
-  const SweatAlert = (title,icon) => {
-    const MySwal = withReactContent(Swal)
-    MySwal.fire({
-        title: title,
-        icon: icon,
-        confirmButtonText: 'Oke'
-        })
-}
+    const dispatch = useDispatch();
+    const onSubmit = (data) => {
+        dispatch(loginAdminActions(data, history));
+    }
 
   return (
     <>

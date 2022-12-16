@@ -4,7 +4,7 @@ const API = axios.create({
   baseURL: 'https://www.flywithme-api.me/api',
   headers: {
     'Accept': 'application/json',
-    'Authorization': `Bearer ${localStorage.getItem('token') || ''}`
+    'Authorization': `Bearer ${localStorage.getItem('token') || ''}`,
   }
 })
 
