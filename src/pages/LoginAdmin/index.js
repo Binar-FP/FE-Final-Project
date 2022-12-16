@@ -9,7 +9,7 @@ const LoginAdmin = () => {
 
   useEffect(() => {
     if (checkLogin === true) {
-      history('/')
+      history('/admin')
     }
   }, [checkLogin, history])
 
