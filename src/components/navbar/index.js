@@ -1,12 +1,22 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './navbar.css'
 import { Logo } from '../../assets'
-import { House, PencilSquare, QuestionCircle, ArrowRightCircle, Bell, Gear, BoxArrowRight } from 'react-bootstrap-icons';
+import { House, PencilSquare, QuestionCircle, ArrowRightCircle, Bell, Gear, BoxArrowRight, BoxArrowDownRight } from 'react-bootstrap-icons';
 import { useSelector, useDispatch } from 'react-redux';
 import { logoutActions } from '../../config/redux/actions/authActions';
 import { useNavigate } from 'react-router';
+import { UsersService } from '../../services/usersService';
 
 const Navbar = () => {
+    const [formValues, setFormValues] = useState({});
+    const id = useSelector(state => state.auth.id)
+
+    useEffect(() => {
+        UsersService.getUsersById(id).then((res) => {
+            console.log(res)
+            setFormValues(res.data.data);
+            });
+    }, [id])
 
     const history = useNavigate();
     const checkLogin = useSelector(state => state.auth.isLoggedIn);
@@ -15,6 +25,7 @@ const Navbar = () => {
     const logoutHandle = () => {
         dispatch(logoutActions(history,'buyer'));
     }
+
   return (
     <>
       {/* <!-- navbar  --> */}
@@ -69,13 +80,12 @@ const Navbar = () => {
 
                     <li className="dropdown destop-item">
                         <a className="nav-link dropdown-toggle destop-item" href="#/" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Profile
+                            <img className='img-profile me-2' src={formValues.image} alt=''></img>{formValues.firstName}
                         </a>
-                        <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><a className="dropdown-item" href="/profile">Setting</a></li>
-                            {/* <li><a className="dropdown-item" href="#/">Another action</a></li> */}
+                        <ul className="dropdown-menu dropdown-menu-end m-2" aria-labelledby="navbarDropdown">
+                            <li className='d-flex align-items-center'><a className="dropdown-item" href="/profile"><Gear className="ms-2" /> Setting</a></li>
                             <li><hr className="dropdown-divider"/></li>
-                            <li><a className="dropdown-item" href="#/" onClick={logoutHandle}>Logout</a></li>
+                            <li className='d-flex align-items-center'><a className="dropdown-item" href="#/" onClick={logoutHandle}><BoxArrowDownRight className="ms-2" /> Logout</a></li>
                         </ul>
                     </li>
                     </>
