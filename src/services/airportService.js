@@ -7,6 +7,12 @@ export const AirportService = {
         return response;
     },
 
+    getAirportById : async (id) => {
+        const response = await API.get('/airports/findById/'+id);
+        return response;
+    },
+
+
     postAirport : async (id, data) => {
         const response = await API.put('/airports/update/'+id, data);
         return response;

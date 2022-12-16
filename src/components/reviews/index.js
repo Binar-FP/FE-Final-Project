@@ -27,11 +27,11 @@ const Reviews = () => {
             <div className='item'>
                 <div className="card-body d-flex text-start align-items-start">
                     <div className='mx-2'>
-                        <img src={NatureBg2} class="card-img" alt="..."/>
+                        <img src={NatureBg2} className="card-img" alt="..."/>
                     </div>
                     <div>
                         <h6 className="card-subtitle mb-1 text-muted">Malik</h6>
-                        <p className="card-text"><img src={Star} class="star-img" alt="..."/></p> 
+                        <p className="card-text"><img src={Star} className="star-img" alt="..."/></p> 
                         <p className="card-text">What a great experience using Tripma! I booked all of my flights for my gap year through Tripma and never had any issues. When I had to cancel a flight because of an emergency, Tripma support helped me read more...</p> 
                     </div>
                 </div>
@@ -39,11 +39,11 @@ const Reviews = () => {
             <div className='item'>
                 <div className="card-body d-flex text-start align-items-start">
                     <div className='mx-2'>
-                        <img src={NatureBg} class="card-img" alt="..."/>
+                        <img src={NatureBg} className="card-img" alt="..."/>
                     </div>
                     <div>
                         <h6 className="card-subtitle mb-1 text-muted">Alim</h6>
-                        <p className="card-text"><img src={Star} class="star-img" alt="..."/></p> 
+                        <p className="card-text"><img src={Star} className="star-img" alt="..."/></p> 
                         <p className="card-text">What a great experience using Tripma! I booked all of my flights for my gap year through Tripma and never had any issues. When I had to cancel a flight because of an emergency, Tripma support helped me read more...</p> 
                     </div>
                 </div>
@@ -51,11 +51,11 @@ const Reviews = () => {
             <div className='item'>
                 <div className="card-body d-flex text-start align-items-start">
                     <div className='mx-2'>
-                        <img src={NatureBg1} class="card-img" alt="..."/>
+                        <img src={NatureBg1} className="card-img" alt="..."/>
                     </div>
                     <div>
                         <h6 className="card-subtitle mb-1 text-muted">Syahid</h6>
-                        <p className="card-text"><img src={Star} class="star-img" alt="..."/></p> 
+                        <p className="card-text"><img src={Star} className="star-img" alt="..."/></p> 
                         <p className="card-text">What a great experience using Tripma! I booked all of my flights for my gap year through Tripma and never had any issues. When I had to cancel a flight because of an emergency, Tripma support helped me read more...</p> 
                     </div>
                 </div>
