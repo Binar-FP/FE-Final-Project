@@ -8,8 +8,8 @@ const Hero = () => {
         <div className='container'>
             <div className='content-hero mt-5'>
                 <div className='row'>
-                    <div className='col-lg-4 col-sm-12 d-flex justify-content-between'>
-                        <img className='img-user img-fluid' src={UserBg} alt="" />
+                    <div className='col-lg-4 col-sm-12 d-flex justify-content-center'>
+                        <img className='img-users img-fluid' src={UserBg} alt="" />
                     </div>
                     <div className='col-lg-8 col-sm-12 text-center my-auto'>
                         <h1>TRAVEL ALL OF THE WORLD</h1>
