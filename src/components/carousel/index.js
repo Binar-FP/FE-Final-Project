@@ -25,27 +25,27 @@ const Carousel = () => {
       <div className='container mt-5'>
         <div className='d-flex justify-content-center text-center align-items-center '>
         <OwlCarousel className='content-carousel' loop={true} items={3} margin={8} autoplay ={true} center={true} responsive={options.responsive} >  
-            <div class='item'>
-                <div class="card">
-                    <img src={NatureBg} class="card-img-top" alt="..."/>
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <div className='item'>
+                <div className="card">
+                    <img src={NatureBg} className="card-img-top" alt="..."/>
+                    <div className="card-body">
+                        <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                     </div>
                 </div>
             </div>
-            <div class='item'>
-                <div class="card">
-                    <img src={NatureBg1} class="card-img-top" alt="..."/>
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <div className='item'>
+                <div className="card">
+                    <img src={NatureBg1} className="card-img-top" alt="..."/>
+                    <div className="card-body">
+                        <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                     </div>
                 </div>
             </div>
-            <div class='item'>
-                <div class="card">
-                    <img src={NatureBg2} class="card-img-top" alt="..."/>
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <div className='item'>
+                <div className="card">
+                    <img src={NatureBg2} className="card-img-top" alt="..."/>
+                    <div className="card-body">
+                        <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                     </div>
                 </div>
             </div>
