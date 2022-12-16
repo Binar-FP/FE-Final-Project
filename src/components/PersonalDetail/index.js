@@ -1,13 +1,25 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import { UsersService } from '../../services/usersService';
 import './index.css'
 
 const PersonalDetail = () => {
-    const[loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
     const { register, handleSubmit, formState: { errors} ,getValues} = useForm();
+    const [formValues, setFormValues] = useState({});
+    const id = useSelector(state => state.auth.id)
+
+    useEffect(() => {
+        UsersService.getUsersById(id).then((res) => {
+            console.log(res)
+            setFormValues(res.data.data);
+            });
+    }, [id,loading])
+
     const onSubmit = (data) => {
         setLoading(true);
         const updatedObject = {
@@ -15,7 +27,7 @@ const PersonalDetail = () => {
             image:data.image[0]
           };
         console.log(updatedObject);
-        axios.put(`http://www.flywithme-api.me/api/users/update/${data.id}`, updatedObject,{
+        axios.put(`http://www.flywithme-api.me/api/users/update/${id}`, updatedObject,{
             headers: {
                 'Content-Type': 'multipart/form-data',
             }
@@ -59,7 +71,8 @@ const PersonalDetail = () => {
                         <label className="mb-2">First Name</label>
                         <input className={errors.firstName?"form-control ps-4 border-danger":"form-control ps-4"} 
                         type="text" placeholder="Enter your First Name" 
-                        aria-label="" 
+                        aria-label=""
+                        defaultValue={formValues.firstName} 
                         name='firstName'
                         {...register('firstName',{
                             required: "First Name is Required",
@@ -75,8 +88,10 @@ const PersonalDetail = () => {
                         <input className={errors.email?"form-control ps-4 border-danger":"form-control ps-4"} 
                         type="text" 
                         placeholder="Enter your Email" 
-                        aria-label="" 
+                        aria-label=""
+                        readOnly 
                         name='email'
+                        value={formValues.email}
                         {...register('email',{
                             required: "Email is Required",
                             pattern: {
@@ -93,6 +108,7 @@ const PersonalDetail = () => {
                         placeholder="Enter your NIK" 
                         aria-label="" 
                         name='NIK'
+                        defaultValue={formValues.NIK}
                         {...register('NIK',{
                             required: "Email is Required",
                             maxLength: {
@@ -125,11 +141,10 @@ const PersonalDetail = () => {
                         {errors.password && <p className="text-danger">{errors.password.message}</p>}
                     </div>
                     <div class="mb-3">
-                        <label for="formFile" class="form-label">Default file input example</label>
+                        <label for="formFile" class="form-label">Image Profile</label>
                         <input class="form-control" type="file" id="formFile" {...register("image")}/>
-                        <input class="form-control" type="hidden" value={'buyer'} id="formFile" {...register("roleId")}/>
-                        <input class="form-control" type="hidden" name='id' value={2} id="formFile" {...register("id")}/>
-                        <input class="form-control" type="hidden" value={'Male'} id="formFile" {...register("gender")}/>
+                        <input class="form-control" type="hidden" value={formValues.roleId} id="formFile" {...register("roleId")}/>
+                        <input class="form-control" type="hidden" name='id' value={formValues.id} {...register("id")}/>
                     </div>
                 </div>
                 <div className="col-6">
@@ -140,6 +155,7 @@ const PersonalDetail = () => {
                         placeholder="Enter Your Last Name" 
                         aria-label="" 
                         name='lastName'
+                        defaultValue={formValues.lastName}
                         {...register('lastName',{
                             required: "Last Name is Required",
                         })}/>
@@ -152,6 +168,7 @@ const PersonalDetail = () => {
                         placeholder="mm/dd/yy" 
                         aria-label="" 
                         name='dateOfBirth'
+                        defaultValue={formValues.dateOfBirth}
                         {...register('dateOfBirth',{
                             required: "Date Of Birth is Required",
                         })}/>
@@ -160,10 +177,11 @@ const PersonalDetail = () => {
                     <div className="form-group mb-3">
                         <label className="mb-2">Phone Number</label>
                         <input className={errors.phoneNumber?"form-control ps-4 border-danger":"form-control ps-4"}
-                        type="number" 
+                        type="text" 
                         placeholder="Enter Your Phone Number" 
                         aria-label="" 
                         name='phoneNumber'
+                        defaultValue={formValues.phoneNumber}
                         {...register('phoneNumber',{
                             required: "Phone Number is Required",
                             minLength: {
@@ -184,6 +202,7 @@ const PersonalDetail = () => {
                         placeholder="**************" 
                         aria-label="" 
                         name='passwordConfirm'
+                        defaultValue={formValues.passwordConfirm}
                         {...register('confirmPassword',{
                             required: "Password is Required",
                             minLength: {
@@ -198,12 +217,31 @@ const PersonalDetail = () => {
                         })}/>
                         {errors.confirmPassword && <p className="text-danger">{errors.confirmPassword.message}</p>}
                     </div>
-                    <label for="formFile" class="form-label">Default file input example</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected disabled>Open this select menu</option>
-                        <option value="1">Laki- Laki</option>
-                        <option value="2">Perempuan</option>
-                    </select>
+                    <div class="form-check mb-3">
+                        {formValues.gender === "Male" ?
+                            <input class="form-check-input" value={'Male'} checked type="radio" name="gender" id="flexRadioDefault1"{...register('gender',{
+                            required: "Date Of Birth is Required",
+                        })}/>
+                        : <input class="form-check-input" value={'Male'}  type="radio" name="gender" id="flexRadioDefault1"{...register('gender',{
+                            required: "Date Of Birth is Required",
+                        })}/>}
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            Male
+                        </label>
+                        </div>
+                        <div class="form-check">
+                        {formValues.gender === "Female" ?
+                            <input class="form-check-input" value={'Female'} type="radio" checked name="gender" id="flexRadioDefault2"{...register('gender',{
+                            required: "Date Of Birth is Required",
+                        })}/>
+                        :
+                        <input class="form-check-input" value={'Female'} type="radio" name="gender" id="flexRadioDefault2"{...register('gender',{
+                            required: "Date Of Birth is Required",
+                        })}/>}
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Female
+                        </label>
+                    </div>
                 </div>
                 <div className="form-group mb-3">
                     <label className="mb-2">Address</label>
@@ -211,6 +249,7 @@ const PersonalDetail = () => {
                     placeholder="Enter your address here" 
                     id="floatingTextarea2" 
                     name='address'
+                    defaultValue={formValues.address}
                     {...register('address',{
                         required: "Adress is Required",
                         minLength: {
