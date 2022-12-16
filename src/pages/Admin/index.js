@@ -6,6 +6,7 @@ import { Sidebar, NavbarAdmin, AirportAdmin, DestinationsAdmin, FlightsAdmin, Sc
 const Admin = () => {
   const history = useNavigate()
   const role = useSelector(state => state.auth.roleId)
+  const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
   const [componentOpen, setComponentOpen] = useState('users')
   
   const handleComponent = (e) => {
@@ -13,10 +14,10 @@ const Admin = () => {
   }
   
   useEffect(() => {
-    if (role === "buyer") {
+    if (role === "buyer" || !isLoggedIn ) {
       history('/')
     }
-  }, [role, history])
+  }, [role, history, isLoggedIn])
 
   return (
     <>
