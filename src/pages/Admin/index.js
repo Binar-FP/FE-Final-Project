@@ -1,13 +1,24 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router'
 import { Sidebar, NavbarAdmin, AirportAdmin, DestinationsAdmin, FlightsAdmin, SchedulesAdmin, UsersManagement } from '../../components'
 
 const Admin = () => {
+  const history = useNavigate()
+  const role = useSelector(state => state.auth.roleId)
+  const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
   const [componentOpen, setComponentOpen] = useState('users')
-
+  
   const handleComponent = (e) => {
     setComponentOpen(e)
   }
   
+  useEffect(() => {
+    if (role === "buyer" || !isLoggedIn ) {
+      history('/')
+    }
+  }, [role, history, isLoggedIn])
+
   return (
     <>
     <NavbarAdmin />

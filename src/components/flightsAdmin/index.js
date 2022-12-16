@@ -101,6 +101,7 @@ const FlightsAdmin = () => {
                   <th scope="col">Arrival Date</th>
                   <th scope="col">Arrival Time</th>
                   <th scope="col">Capasity</th>
+                  <th scope="col">Type Of Flights</th>
                   <th scope="col">Economy ClassPrice</th>
                   <th scope="col">Business ClassPrice</th>
                   <th scope="col">First ClassPrice</th>
@@ -125,6 +126,7 @@ const FlightsAdmin = () => {
                     <td>{flights.arrivalDate}</td>
                     <td>{flights.arrivalTime}</td>
                     <td>{flights.capasity}</td>
+                    <td>{flights.typeOfFlight}</td>
                     <td>{flights.economyClassPrice}</td>
                     <td>{flights.businessClassPrice}</td>
                     <td>{flights.firstClassPrice}</td>

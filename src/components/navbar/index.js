@@ -9,11 +9,11 @@ import { useNavigate } from 'react-router';
 const Navbar = () => {
 
     const history = useNavigate();
-    const cekLogin = useSelector(state => state.auth.isLoggedIn);
+    const checkLogin = useSelector(state => state.auth.isLoggedIn);
     const dispatch = useDispatch();
 
     const logoutHandle = () => {
-        dispatch(logoutActions(history));
+        dispatch(logoutActions(history,'buyer'));
     }
   return (
     <>
@@ -25,7 +25,7 @@ const Navbar = () => {
                 <div className="navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav ms-auto ps-4 pe-4">
                     {/* jika tidak Login  */}
-                    {cekLogin === true ?
+                    {checkLogin === true ?
                     <li className="nav-item mobile-item">
                         <House className='icon' color="white" size={30}/>
                         <a className="nav-link active" aria-current="page" href="/">Home</a>
@@ -35,7 +35,7 @@ const Navbar = () => {
                         <a className="nav-link active" aria-current="page" href="/">Home</a>
                     </li>}
 
-                    {cekLogin === false &&
+                    {checkLogin === false &&
                     <>
                         <li className="nav-item">
                             <QuestionCircle className='icon' color="white" size={30}/>
@@ -52,7 +52,7 @@ const Navbar = () => {
                     </>
                     }
                     {/* jika login  */}
-                    {cekLogin === true &&
+                    {checkLogin === true &&
                     <>
                     <li className="nav-item mobile-item">
                         <Bell className='icon' color="white" size={30} />
@@ -72,7 +72,7 @@ const Navbar = () => {
                             Profile
                         </a>
                         <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><a className="dropdown-item" href="#/">Setting</a></li>
+                            <li><a className="dropdown-item" href="/profile">Setting</a></li>
                             {/* <li><a className="dropdown-item" href="#/">Another action</a></li> */}
                             <li><hr className="dropdown-divider"/></li>
                             <li><a className="dropdown-item" href="#/" onClick={logoutHandle}>Logout</a></li>
