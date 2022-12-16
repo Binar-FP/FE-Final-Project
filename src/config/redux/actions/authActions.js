@@ -37,8 +37,7 @@ export const loginAdminActions = (data, history) => async (dispatch) => {
 
 export const registerActions = (data, history) => async (dispatch) => {
     try {
-        const response = await AuthService.register(data);
-        dispatch({type: 'REGISTER', payload: response.data});
+        await AuthService.register(data);
         SweatAlert('Register Success', 'success');
         history('/login');
     } catch (error) {
