@@ -17,13 +17,6 @@ const auth = (state = initialState, action) => {
                 isLoggedIn: true,
                 roleId: action.payload.roleId
             });
-        case 'REGISTER':
-            return ({
-                ...state,
-                user: action.payload.user,
-                token: action.payload.token,
-                isLoggedIn: true
-            });
         case 'LOGOUT':
             return ({
                 ...state,
