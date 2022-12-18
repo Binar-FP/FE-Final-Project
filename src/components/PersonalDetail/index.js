@@ -42,7 +42,7 @@ const PersonalDetail = () => {
               </div>
               <div className="card-body">
               <form className="" encType="multipart/form-data" onSubmit={handleSubmit(onSubmit)}>
-              {loader === false ? <Loading/>: ''}
+              {loader === true ? <Loading/>: ''}
             <div className="row">
                 <div className="col-6">
                     <div className="form-group mb-3">
