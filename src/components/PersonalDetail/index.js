@@ -1,58 +1,36 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+import { useDispatch, useSelector } from 'react-redux';
 import { UsersService } from '../../services/usersService';
+import { updateProfile } from '../../config/redux/actions/authActions';
+import { useNavigate } from 'react-router-dom';
+import Loading from '../loading';
 import './index.css'
 
 const PersonalDetail = () => {
-    const [loading, setLoading] = useState(false);
-    const { register, handleSubmit, formState: { errors} ,getValues} = useForm();
+    const { register, handleSubmit, formState: { errors} ,getValues} = useForm({defaultValues: {firstName: 'test'}});
     const [formValues, setFormValues] = useState({});
     const id = useSelector(state => state.auth.id)
+    const loader = useSelector(state => state.loading.loading)
+    console.log(loader)
+
+    const history = useNavigate();
+    const dispatch = useDispatch();
+
 
     useEffect(() => {
         UsersService.getUsersById(id).then((res) => {
-            console.log(res)
             setFormValues(res.data.data);
             });
-    }, [id,loading])
-
+    }, [id])
+    
     const onSubmit = (data) => {
-        setLoading(true);
         const updatedObject = {
             ...data,
             image:data.image[0]
           };
-        console.log(updatedObject);
-        axios.put(`http://www.flywithme-api.me/api/users/update/${id}`, updatedObject,{
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            }
-        })
-        .finally(() => {
-            setLoading(false);
-        })
-        .then((response) => {
-            console.log(response.data);
-            SweatAlert('Update Berhasil', 'success');
-        }).catch(function (error) {
-            console.log(error);
-            if(error){
-                SweatAlert(String(error.response.data.message), 'warning')
-            }
-        });
-
-        const SweatAlert = (title,icon) => {
-            const MySwal = withReactContent(Swal)
-            MySwal.fire({
-                title: title,
-                icon: icon,
-                confirmButtonText: 'Oke'
-                })
-        }
+        dispatch({type: 'PROGRESS'})
+        dispatch(updateProfile(id, updatedObject,   history));
     }
 
   return (
@@ -64,7 +42,7 @@ const PersonalDetail = () => {
               </div>
               <div className="card-body">
               <form className="" encType="multipart/form-data" onSubmit={handleSubmit(onSubmit)}>
-              {loading === true ? <div id="cover-spin"></div>: ''}
+              {loader === true ? <Loading/>: ''}
             <div className="row">
                 <div className="col-6">
                     <div className="form-group mb-3">
@@ -140,11 +118,11 @@ const PersonalDetail = () => {
                         })}/>
                         {errors.password && <p className="text-danger">{errors.password.message}</p>}
                     </div>
-                    <div class="mb-3">
-                        <label for="formFile" class="form-label">Image Profile</label>
-                        <input class="form-control" type="file" id="formFile" {...register("image")}/>
-                        <input class="form-control" type="hidden" value={formValues.roleId} id="formFile" {...register("roleId")}/>
-                        <input class="form-control" type="hidden" name='id' value={formValues.id} {...register("id")}/>
+                    <div className="mb-3">
+                        <label htmlFor="image" className="form-label">Image Profile</label>
+                        <input className="form-control" id='image' required type="file" {...register("image")}/>
+                        <input className="form-control" type="hidden" value="buyer" {...register("roleId")}/>
+                        <input className="form-control" type="hidden" name='id' value={id} {...register("id")}/>
                     </div>
                 </div>
                 <div className="col-6">
@@ -217,28 +195,28 @@ const PersonalDetail = () => {
                         })}/>
                         {errors.confirmPassword && <p className="text-danger">{errors.confirmPassword.message}</p>}
                     </div>
-                    <div class="form-check mb-3">
+                    <div className="form-check mb-3">
                         {formValues.gender === "Male" ?
-                            <input class="form-check-input" value={'Male'} checked type="radio" name="gender" id="flexRadioDefault1"{...register('gender',{
+                            <input className="form-check-input" value={'Male'} checked type="radio" name="gender" id="flexRadioDefault1"{...register('gender',{
                             required: "Date Of Birth is Required",
                         })}/>
-                        : <input class="form-check-input" value={'Male'}  type="radio" name="gender" id="flexRadioDefault1"{...register('gender',{
+                        : <input className="form-check-input" value={'Male'}  type="radio" name="gender" id="flexRadioDefault1"{...register('gender',{
                             required: "Date Of Birth is Required",
                         })}/>}
-                        <label class="form-check-label" for="flexRadioDefault1">
+                        <label className="form-check-label">
                             Male
                         </label>
                         </div>
-                        <div class="form-check">
+                        <div className="form-check">
                         {formValues.gender === "Female" ?
-                            <input class="form-check-input" value={'Female'} type="radio" checked name="gender" id="flexRadioDefault2"{...register('gender',{
+                            <input className="form-check-input" value={'Female'} type="radio" checked name="gender" id="flexRadioDefault2"{...register('gender',{
                             required: "Date Of Birth is Required",
                         })}/>
                         :
-                        <input class="form-check-input" value={'Female'} type="radio" name="gender" id="flexRadioDefault2"{...register('gender',{
+                        <input className="form-check-input" value={'Female'} type="radio" name="gender" id="flexRadioDefault2"{...register('gender',{
                             required: "Date Of Birth is Required",
                         })}/>}
-                        <label class="form-check-label" for="flexRadioDefault2">
+                        <label className="form-check-label">
                             Female
                         </label>
                     </div>
