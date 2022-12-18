@@ -45,6 +45,18 @@ export const registerActions = (data, history) => async (dispatch) => {
     }   
 }
 
+export const updateProfile = (id, data, history) => async (dispatch) => {
+    try {
+        const response = await AuthService.updateProfile(id, data);
+        dispatch({type: 'END'});
+        SweatAlert('Update Berhasil', 'success');
+        history('/profile');
+        return response;
+    } catch (error) {
+        SweatAlert(String(error.response.data.message), 'warning')
+    }       
+}
+
 export const verifyAccountActions = (data, history) => async (dispatch) => {
     try {
         await AuthService.verifyAccount(data);
