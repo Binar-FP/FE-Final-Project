@@ -1,46 +1,36 @@
-import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+import { useDispatch, useSelector } from 'react-redux';
+import { UsersService } from '../../services/usersService';
+import { updateProfile } from '../../config/redux/actions/authActions';
+import { useNavigate } from 'react-router-dom';
+import Loading from '../loading';
 import './index.css'
 
 const PersonalDetail = () => {
-    const[loading, setLoading] = useState(false);
-    const { register, handleSubmit, formState: { errors} ,getValues} = useForm();
+    const { register, handleSubmit, formState: { errors} ,getValues} = useForm({defaultValues: {firstName: 'test'}});
+    const [formValues, setFormValues] = useState({});
+    const id = useSelector(state => state.auth.id)
+    const loader = useSelector(state => state.loading.loading)
+    console.log(loader)
+
+    const history = useNavigate();
+    const dispatch = useDispatch();
+
+
+    useEffect(() => {
+        UsersService.getUsersById(id).then((res) => {
+            setFormValues(res.data.data);
+            });
+    }, [id])
+    
     const onSubmit = (data) => {
-        setLoading(true);
         const updatedObject = {
             ...data,
             image:data.image[0]
           };
-        console.log(updatedObject);
-        axios.put(`http://www.flywithme-api.me/api/users/update/${data.id}`, updatedObject,{
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            }
-        })
-        .finally(() => {
-            setLoading(false);
-        })
-        .then((response) => {
-            console.log(response.data);
-            SweatAlert('Update Berhasil', 'success');
-        }).catch(function (error) {
-            console.log(error);
-            if(error){
-                SweatAlert(String(error.response.data.message), 'warning')
-            }
-        });
-
-        const SweatAlert = (title,icon) => {
-            const MySwal = withReactContent(Swal)
-            MySwal.fire({
-                title: title,
-                icon: icon,
-                confirmButtonText: 'Oke'
-                })
-        }
+        dispatch({type: 'PROGRESS'})
+        dispatch(updateProfile(id, updatedObject,   history));
     }
 
   return (
@@ -52,14 +42,15 @@ const PersonalDetail = () => {
               </div>
               <div className="card-body">
               <form className="" encType="multipart/form-data" onSubmit={handleSubmit(onSubmit)}>
-              {loading === true ? <div id="cover-spin"></div>: ''}
+              {loader === true ? <Loading/>: ''}
             <div className="row">
                 <div className="col-6">
                     <div className="form-group mb-3">
                         <label className="mb-2">First Name</label>
                         <input className={errors.firstName?"form-control ps-4 border-danger":"form-control ps-4"} 
                         type="text" placeholder="Enter your First Name" 
-                        aria-label="" 
+                        aria-label=""
+                        defaultValue={formValues.firstName} 
                         name='firstName'
                         {...register('firstName',{
                             required: "First Name is Required",
@@ -75,8 +66,10 @@ const PersonalDetail = () => {
                         <input className={errors.email?"form-control ps-4 border-danger":"form-control ps-4"} 
                         type="text" 
                         placeholder="Enter your Email" 
-                        aria-label="" 
+                        aria-label=""
+                        readOnly 
                         name='email'
+                        value={formValues.email}
                         {...register('email',{
                             required: "Email is Required",
                             pattern: {
@@ -93,6 +86,7 @@ const PersonalDetail = () => {
                         placeholder="Enter your NIK" 
                         aria-label="" 
                         name='NIK'
+                        defaultValue={formValues.NIK}
                         {...register('NIK',{
                             required: "Email is Required",
                             maxLength: {
@@ -124,12 +118,11 @@ const PersonalDetail = () => {
                         })}/>
                         {errors.password && <p className="text-danger">{errors.password.message}</p>}
                     </div>
-                    <div class="mb-3">
-                        <label for="formFile" class="form-label">Default file input example</label>
-                        <input class="form-control" type="file" id="formFile" {...register("image")}/>
-                        <input class="form-control" type="hidden" value={'buyer'} id="formFile" {...register("roleId")}/>
-                        <input class="form-control" type="hidden" name='id' value={2} id="formFile" {...register("id")}/>
-                        <input class="form-control" type="hidden" value={'Male'} id="formFile" {...register("gender")}/>
+                    <div className="mb-3">
+                        <label htmlFor="image" className="form-label">Image Profile</label>
+                        <input className="form-control" id='image' required type="file" {...register("image")}/>
+                        <input className="form-control" type="hidden" value="buyer" {...register("roleId")}/>
+                        <input className="form-control" type="hidden" name='id' value={id} {...register("id")}/>
                     </div>
                 </div>
                 <div className="col-6">
@@ -140,6 +133,7 @@ const PersonalDetail = () => {
                         placeholder="Enter Your Last Name" 
                         aria-label="" 
                         name='lastName'
+                        defaultValue={formValues.lastName}
                         {...register('lastName',{
                             required: "Last Name is Required",
                         })}/>
@@ -152,6 +146,7 @@ const PersonalDetail = () => {
                         placeholder="mm/dd/yy" 
                         aria-label="" 
                         name='dateOfBirth'
+                        defaultValue={formValues.dateOfBirth}
                         {...register('dateOfBirth',{
                             required: "Date Of Birth is Required",
                         })}/>
@@ -160,10 +155,11 @@ const PersonalDetail = () => {
                     <div className="form-group mb-3">
                         <label className="mb-2">Phone Number</label>
                         <input className={errors.phoneNumber?"form-control ps-4 border-danger":"form-control ps-4"}
-                        type="number" 
+                        type="text" 
                         placeholder="Enter Your Phone Number" 
                         aria-label="" 
                         name='phoneNumber'
+                        defaultValue={formValues.phoneNumber}
                         {...register('phoneNumber',{
                             required: "Phone Number is Required",
                             minLength: {
@@ -184,6 +180,7 @@ const PersonalDetail = () => {
                         placeholder="**************" 
                         aria-label="" 
                         name='passwordConfirm'
+                        defaultValue={formValues.passwordConfirm}
                         {...register('confirmPassword',{
                             required: "Password is Required",
                             minLength: {
@@ -198,12 +195,31 @@ const PersonalDetail = () => {
                         })}/>
                         {errors.confirmPassword && <p className="text-danger">{errors.confirmPassword.message}</p>}
                     </div>
-                    <label for="formFile" class="form-label">Default file input example</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected disabled>Open this select menu</option>
-                        <option value="1">Laki- Laki</option>
-                        <option value="2">Perempuan</option>
-                    </select>
+                    <div className="form-check mb-3">
+                        {formValues.gender === "Male" ?
+                            <input className="form-check-input" value={'Male'} checked type="radio" name="gender" id="flexRadioDefault1"{...register('gender',{
+                            required: "Date Of Birth is Required",
+                        })}/>
+                        : <input className="form-check-input" value={'Male'}  type="radio" name="gender" id="flexRadioDefault1"{...register('gender',{
+                            required: "Date Of Birth is Required",
+                        })}/>}
+                        <label className="form-check-label">
+                            Male
+                        </label>
+                        </div>
+                        <div className="form-check">
+                        {formValues.gender === "Female" ?
+                            <input className="form-check-input" value={'Female'} type="radio" checked name="gender" id="flexRadioDefault2"{...register('gender',{
+                            required: "Date Of Birth is Required",
+                        })}/>
+                        :
+                        <input className="form-check-input" value={'Female'} type="radio" name="gender" id="flexRadioDefault2"{...register('gender',{
+                            required: "Date Of Birth is Required",
+                        })}/>}
+                        <label className="form-check-label">
+                            Female
+                        </label>
+                    </div>
                 </div>
                 <div className="form-group mb-3">
                     <label className="mb-2">Address</label>
@@ -211,6 +227,7 @@ const PersonalDetail = () => {
                     placeholder="Enter your address here" 
                     id="floatingTextarea2" 
                     name='address'
+                    defaultValue={formValues.address}
                     {...register('address',{
                         required: "Adress is Required",
                         minLength: {

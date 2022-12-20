@@ -13,9 +13,9 @@ const Error_Handler_404 = () => {
                     </div>
                     
                     <div className='col-8 text-center my-auto'>
-                        <h1 class="display-1 fw-bold">Error 404</h1>
-                        <p class="fs-3"> <span class="text-danger">Opps!</span> Page not found.</p>
-                        <p class="lead">
+                        <h1 className="display-1 fw-bold">Error 404</h1>
+                        <p className="fs-3"> <span className="text-danger">Opps!</span> Page not found.</p>
+                        <p className="lead">
                             The page you’re looking for doesn’t exist. The URL is invalid.
                         </p>
                         <button className="btn button text-light" placeholder="Default input">Back to Home</button>
@@ -24,18 +24,6 @@ const Error_Handler_404 = () => {
                 </div>
             </div>
         </div>
-
-        {/* <div class="d-flex align-items-center justify-content-center vh-100">
-            <div class="text-center">
-                <img src={Robot404} width="150px" />
-                <h1 class="display-1 fw-bold">404</h1>
-                <p class="fs-3"> <span class="text-danger">Opps!</span> Page not found.</p>
-                <p class="lead">
-                    The page you’re looking for doesn’t exist.
-                </p>
-                <a href="/" class="btn btn-primary">Go Home</a>
-            </div>
-        </div> */}
     </div>
   )
 }
