@@ -7,6 +7,7 @@ import Help from "./Help";
 import Profile from "./Profile";
 import LoginAdmin from "./LoginAdmin";
 import Admin from "./Admin";
+import Booking from "./Booking";
 // import DashboardAdmin from "./DasboardAdmin";
 
-export {Error404, Error500, Home, Login, Register, Help, Profile, LoginAdmin, Admin}
+export {Error404, Error500, Home, Login, Register, Help, Profile, LoginAdmin, Admin, Booking}
