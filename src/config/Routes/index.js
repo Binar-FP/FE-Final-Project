@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Error404, Error500, Home, Login, Register, Help, Profile, LoginAdmin, Admin } from '../../pages'
+import { Error404, Error500, Home, Login, Register, Help, Profile, LoginAdmin, Admin, Booking } from '../../pages'
 
 const index = () => {
   return (
@@ -15,6 +15,7 @@ const index = () => {
         <Route path="/profile" element={<Profile />} />
         <Route path="/login/admin" element={<LoginAdmin />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/booking" element={<Booking/>} />
       </Routes>
     </BrowserRouter>
   )
