@@ -108,6 +108,7 @@ const LoginComponent = (props) => {
                             cookiePolicy={'single_host_origin'}
                         />
                     </div>
+                    <p className="text-center">Forgot your password? <a href="/forgot" className="text-danger">Here</a></p>
                     <p className="text-center">Don't Have account? <a href="/register" className="text-danger"> Sign Up</a></p>
             </div>
         </form>
