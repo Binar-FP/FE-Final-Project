@@ -1,0 +1,20 @@
+.content-bookingSeat{
+    margin-top: -180px;
+    width: 70vw !important;
+}
+
+.card-color{
+    background-color: #F5F8FF;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.plane-seat{
+    background-color: salmon;
+}
+
+@media screen and (max-width: 768px) {
+    .content-bookingSeat{
+        width: 100vw !important;
+    }
+}
