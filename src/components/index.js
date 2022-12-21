@@ -24,6 +24,8 @@ import UsersManagement from "./UsersManagement";
 import SearchFlights from "./searchFlights";
 import BookingPassenger from "./bookingPassenger";
 import BookingSeat from "./bookingSeat";
+import ResetPasswordComponent from "./resetPasswordComponent";
+import ResetPasswordSend from "./resetPasswordSend";
 
 export { 
     Navbar,
@@ -52,4 +54,6 @@ export {
     SearchFlights,
     BookingPassenger,
     BookingSeat,
+    ResetPasswordComponent,
+    ResetPasswordSend,
  };
