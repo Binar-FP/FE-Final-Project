@@ -67,6 +67,25 @@ export const verifyAccountActions = (data, history) => async (dispatch) => {
     }   
 }
 
+export const forgotActions = (data) => async (dispatch) => {
+    try {
+        await AuthService.forgotPassword(data);
+        SweatAlert('Email Send, Check Your Email', 'success');
+    } catch (error) {
+        SweatAlert(String(error.response.data.message), 'warning')
+    }   
+}
+
+export const resetActions = (data, history, token, id) => async (dispatch) => {
+    try {
+        await AuthService.resetPassword(data, token, id);
+        SweatAlert('Password Success Change', 'success');
+        history('/login');
+    } catch (error) {
+        SweatAlert(String(error.response.data.message), 'warning')
+    }   
+}
+
 export const logoutActions = (history, role) => async (dispatch) => {
     try {
         const response = await AuthService.logout();

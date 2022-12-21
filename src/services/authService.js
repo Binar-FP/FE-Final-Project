@@ -89,7 +89,17 @@ export const AuthService = {
     },
 
     verifyAccount : async (data) => {
+        const response = await API.post('/forgotpassword', data);
+        return response;
+    },
+
+    forgotPassword : async (data) => {
         const response = await API.post('/auth/send-email', data);
+        return response;
+    },
+
+    resetPassword : async (data, token, id) => {
+        const response = await API.post('/reset-password/'+id+"/"+token, data);
         return response;
     },
 
