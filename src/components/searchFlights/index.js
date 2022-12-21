@@ -3,12 +3,15 @@ import './searchflights.css'
 import { Arrow } from '../../assets'
 import { BookingService } from '../../services/bookingService'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 
 const SearchFlights = (props) => {
     const [data, setData] = useState([])
     const [formValues, setFormValues] = useState({})
     const [button, setButton] = useState('')
     const history = useNavigate();
+    const dispatch = useDispatch();
+    const datacoba = useSelector(state => state.booking.fligth_id)
 
     useEffect(() => {
         BookingService.getBookingSchedules(props.data).then((res) => {
@@ -22,8 +25,10 @@ const SearchFlights = (props) => {
         return new Date(string).toLocaleDateString([],options);
     }
     const tanggal = formatDate(props.data.depatureDate)
-
+    console.log(data)
     const handleConfirm = (event) => {
+        // dispatch(BookingActions(formValues));
+        dispatch({type: 'CONFIRM_FLIGHT', payload: formValues});
         history('/booking');
         // event.preventDefault();
         console.log(formValues)
@@ -33,6 +38,7 @@ const SearchFlights = (props) => {
   return (
     <>
     <div>
+        <h1>{datacoba}</h1>
       <div className='container mt-5 mb-5'>
         <div className='d-flex justify-content-center text-start align-items-center '>
             <div className='content-searchlight'>
@@ -45,6 +51,7 @@ const SearchFlights = (props) => {
                             <div 
                             class={button ===flights.airLine?'card mb-4 bg-card':'card mb-4'} 
                             onClick={(event)=>{setButton(flights.airLine);setFormValues({
+                                id:flights.id,
                                 airLine:flights.airLine,
                                 depatureDate:flights.depatureDate,
                                 depatureTime:flights.depatureTime,
@@ -75,12 +82,6 @@ const SearchFlights = (props) => {
                                             <p>{flights.typeOfClass}</p>
                                             <p>{flights.ClassPrice}</p>
                                         </div>
-                                        {/* <Link to={{
-                                            pathname: '/booking',
-                                            state: { data: 'test'}
-                                        }}>
-                                            Confirm
-                                        </Link> */}
                                         {button ===flights.airLine?<button className='btn button btn-block text-light mt-3' onClick={handleConfirm} >Confirm</button>:''}
                                     </div>
                                         

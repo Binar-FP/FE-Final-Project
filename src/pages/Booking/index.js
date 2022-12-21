@@ -1,13 +1,20 @@
 import React from 'react'
-import { Navbar } from '../../components';
+import { useSelector } from 'react-redux';
+// import { useNavigate } from 'react-router-dom';
+import { Navbar, BookingPassenger, BookingSeat, ERROR_HANDLER_404, Footer } from '../../components';
 
 const Booking = (props) => {
-    // const data = props.location.state.data;
-    console.log(props)
+    const pages = useSelector(state => state.booking.pages)
+
   return (
     <>
       <div>
-        <Navbar />
+        {/* error handlernya nanti di perbaiki */}
+        {pages === ""? <ERROR_HANDLER_404 />:''}
+        {pages && <Navbar />}
+        {pages === "passenger"? <BookingPassenger />:'' }
+        {pages === "bagage"? <BookingSeat/>:'' }
+        {pages && <Footer />}
       </div>
     </>
   )
