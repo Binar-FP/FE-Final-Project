@@ -37,8 +37,8 @@ h1 {
 .grid td {
   width: 23px;
   height: 35px;
-  border: 2px solid #11a59e;
-  /* background-color: rgb(17, 165, 158); */
+  /* border: 2px solid #11a59e; */
+  background-color: #11a59e;
   border-radius: 20px 20px 0px 0;
   text-align: center;
   float: left;
@@ -52,13 +52,13 @@ h1 {
 
 .reserved {
   background-color: orange;
-  background: rgb(9, 22, 201);
+  background: rgb(9, 22, 201) !important;
   color: #fff;
   display: inline-block;
 }
 
 .selected {
-  background-color: rgb(116, 51, 92);
+  background-color: rgb(255, 19, 26) !important;
   background: rgb(204, 46, 125);
   color: #fff;
   display: inline-block;
@@ -67,9 +67,39 @@ h1 {
 .background-airplane{
     padding-top: 200px;
     /* background-color: #333; */
-    background-image: url("../../assets/images/seatku.png");
+    background-image: url("../../assets/images/seatku2.png");
     background-size: cover;
     padding-left: 20px !important;
+}
+
+.box{
+    background-color: #11a59e;
+    border-radius: 5px;
+    padding: 5px 15px;
+    margin-left: 20px;
+    position: relative;
+    top: 0;
+    left: 20px;
+}
+
+.box-selected{
+    background-color: rgb(255, 19, 26);
+    border-radius: 5px;
+    padding: 5px 15px;
+    margin-left: 20px;
+    position: relative;
+    top: 0;
+    left: 23px;
+}
+
+.box-reserved{
+    background-color: rgb(9, 22, 201);
+    border-radius: 5px;
+    padding: 5px 15px;
+    margin-left: 20px;
+    position: relative;
+    top: 0;
+    left: 19px;
 }
 
 @media screen and (max-width: 768px) {
@@ -78,7 +108,11 @@ h1 {
         padding-top: 0px;
         /* background-image: url("../../assets/images/seatbody.png"); */
         background-size: cover;
-        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+
+    .lg-seat{
+      display: none;
     }
 }
     

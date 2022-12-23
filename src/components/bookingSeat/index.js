@@ -1,38 +1,17 @@
-import { useState } from 'react';
-import { FileBreakFill, Square } from 'react-bootstrap-icons';
+import { useEffect, useState } from 'react';
+import { FileBreakFill} from 'react-bootstrap-icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { BookingActions } from '../../config/redux/actions/bookingActions';
+import { BookingService } from '../../services/bookingService';
 import './bookingseat.css'
 
 const BookingSeat = () => {
-    const history = useNavigate();
     const dispatch = useDispatch();
     const data = useSelector(state => state.booking)
-    console.log(data)
+    const FlightsId = data.id
+    console.log(FlightsId)
     
-    const onSubmit = (data) => {
-        dispatch({type: 'ADD_SEAT', payload: data})
-    }
-   
-    // ================== PENTING RESOURCES =========================
-    // const [seatSelected, setSeatSelected] = useState([
-    //     {
-    //         name: 'B1',
-    //     },
-    //     {
-    //         name: 'B2',
-    //     },
-    // ])
-
-    // Logic Ubah Array of Object menjadi Array of String
-    // const seatRefactor = seatSelected.map((item) => {
-    //     const name = item.name
-    //     return name
-    // })
-    // =================== TUTUP RESOURCES ==========================
-
-    const [seat, setSeat] = useState([
+    const [seat] = useState([
         "a1","a2","a3","a4","a5","a6","a7","a8","a9","a10",
         "b1","b2","b3","b4","b5","b6","b7","b8","b9","b10",
         "c1","c2","c3","c4","c5","c6","c7","c8","c9","c10",
@@ -43,11 +22,19 @@ const BookingSeat = () => {
     ]);
     const [seatAvailable, setSeatAvailable] = useState([]);
     const [seatReserved, setSeatReserved] = useState([]);
-    const [seatSelected, setSeatSelected] = useState([
-        "x7",
-        "y7",
-        "z7"
-    ]);
+    const [seatSelected, setSeatSelected] = useState([]);
+
+    useEffect(() => {
+        BookingService.SeatBooking().then((res) => {
+            const dataSeat = res.data.data;
+            const filterFlights = dataSeat.filter((item) => item.flightId === FlightsId);
+            const seatRefactor = filterFlights.map((item) => {
+                const name = item.seatNumber
+                return name
+            })
+            setSeatSelected(seatRefactor);
+        });
+    }, [FlightsId, setSeatSelected])
 
     const onClickData = (seat) => {
         if(seatReserved.indexOf(seat) > -1){
@@ -85,7 +72,6 @@ const BookingSeat = () => {
             price: data.price,
             flightId: data.id,
         }
-        console.log(dataBooking)
         dispatch(BookingActions(dataBooking))
         setSeatSelected(seatSelected.concat(seatReserved));
         setSeatReserved([]);
@@ -108,7 +94,28 @@ const BookingSeat = () => {
                                 <div className="form-group mb-3 col-md-12 col-lg-6">
                                     <FileBreakFill size={70} color="grey" />
                                     <label htmlFor="" className="mb-2">Seat</label>
-                                    <h6 className='ps-2 pt-3'>Choose your seats</h6>
+                                    <div className="card mt-5">
+                                    <ul className="list-group list-group-flush">
+                                        <li className="list-group-item">
+                                            Reserved
+                                            <span className='box-reserved'></span>
+                                        </li>
+                                        <li className="list-group-item">
+                                            Selected
+                                            <span className='box-selected'></span>
+                                        </li>
+                                        <li className="list-group-item">
+                                            Available
+                                            <span className='box'></span>
+                                        </li>
+                                    </ul>
+                                    </div>
+                                    <div className="card mt-5">
+                                    <ul className="list-group list-group-flush">
+                                        <li className="list-group-item bg-info">Choose your seat</li>
+                                        <li className="list-group-item">Your Seat {seatReserved}</li>
+                                    </ul>
+                                    </div>
                                 </div>
                                 <div className="form-group mb-3 col-md-12 col-lg-4">
                                     <div className='row'>
@@ -128,12 +135,10 @@ const BookingSeat = () => {
                                                         onClick={checktrue(row) 
                                                         ? null  : () => onClickSeat(row) }
                                                         >
-                                                            {row}
+                                                            {/* {row} */}
                                                         </td>
-                                                        {index % 3 === 2 && <td className='skip'></td>}
-                                                        {/* {index % 3 === 2 && <td className='skip'></td>} */}
+                                                        {index % 3 === 2 && <td className='skip lg-seat'></td>}
                                                         {index % 6 === 5 && <div className='pt-5'/>}
-                                                        {/* {index % 7 === 6 && <div className='pt-5'/>} */}
                                                         </>
                                                     )
                                                 })}
