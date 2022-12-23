@@ -7,4 +7,14 @@ export const BookingService = {
         return response;
     },
 
+    Booking : async (data) => {
+        const response = await API.post('/bookings/add/', data);
+        return response;
+    },
+
+    paymentBooking : async (data) => {
+        const response = await API.post('/checkout/create', data);
+        return response;
+    },
+
 }
