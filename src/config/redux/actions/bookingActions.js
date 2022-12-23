@@ -12,7 +12,17 @@ export const getBookingActions = (data) => async (dispatch) => {
 
 export const BookingActions = (data) => async (dispatch) => {
     try {
-        dispatch({type: 'CONFIRM_FLIGHT', payload: data});
+        const response = await BookingService.Booking(data);
+        return response;
+    } catch (error) {
+        SweatAlert(String(error.response.data.message), 'warning')
+    }       
+}
+
+export const PaymentActions = (data, history) => async (dispatch) => {
+    try {
+        const response = await BookingService.paymentBooking(data);
+        history(response.data.link);
         return;
     } catch (error) {
         SweatAlert(String(error.response.data.message), 'warning')
