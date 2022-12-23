@@ -1,5 +1,5 @@
 .content-bookingSeat{
-    margin-top: -180px;
+    margin-top: -200px;
     width: 70vw !important;
 }
 
@@ -17,4 +17,91 @@
     .content-bookingSeat{
         width: 100vw !important;
     }
+}
+
+
+.skip{
+    border: none !important;
+    background-color: transparent !important;
+}
+
+h1 {
+  text-align: center;
+}
+
+/* .container {
+  width: 600px;
+  margin: auto;
+} */
+
+.grid td {
+  width: 23px;
+  height: 35px;
+  border: 2px solid #11a59e;
+  /* background-color: rgb(17, 165, 158); */
+  border-radius: 20px 20px 0px 0;
+  text-align: center;
+  float: left;
+  margin: 5px;
+}
+
+.grid td:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.reserved {
+  background-color: orange;
+  background: rgb(9, 22, 201);
+  color: #fff;
+  display: inline-block;
+}
+
+.selected {
+  background-color: rgb(116, 51, 92);
+  background: rgb(204, 46, 125);
+  color: #fff;
+  display: inline-block;
+}
+
+.background-airplane{
+    padding-top: 200px;
+    /* background-color: #333; */
+    background-image: url("../../assets/images/seatku.png");
+    background-size: cover;
+    padding-left: 20px !important;
+}
+
+@media screen and (max-width: 768px) {
+    .background-airplane{
+        padding-top: 200px !important;
+        padding-top: 0px;
+        /* background-image: url("../../assets/images/seatbody.png"); */
+        background-size: cover;
+        padding-left: 20px !important;
+    }
+}
+    
+/* .reserved::after {
+  content: "R";
+} */
+
+/* .selected::after {
+  content: "S";
+}
+
+.available::after {
+  content: "A";
+} */
+
+.available {
+  color: #333;
+}
+
+li {
+  list-style: none;
+}
+
+.btnmargin {
+  margin-top: 15px;
 }
