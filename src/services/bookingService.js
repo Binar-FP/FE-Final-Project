@@ -17,4 +17,9 @@ export const BookingService = {
         return response;
     },
 
+    SeatBooking : async (data) => {
+        const response = await API.get('/seats/findAll/', data);
+        return response;
+    }
+
 }
