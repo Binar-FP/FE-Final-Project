@@ -9,6 +9,7 @@ const initialState ={
     NIK: 0, 
     phoneNumber: "0823243462344",
     seatNumber: "A1",
+    typeOfClass: "",
     
 }
 
@@ -20,6 +21,7 @@ const booking = (state = initialState, action) => {
                 ...state,
                 id: action.payload.id,
                 airLine: action.payload.airLine,
+                typeOfClass: action.payload.typeOfClass,
                 // price: action.payload.ClassPrice, ditembak dulu
                 price: "200000",
                 pages: "passenger"
@@ -39,10 +41,9 @@ const booking = (state = initialState, action) => {
                 ...state,
                 pages: "seat"
             });
-        case 'ADD_SEAT':
+        case 'BOOKING':
             return ({
                 ...state,
-                seatNumber: action.payload,
                 pages: "payment"
             });
         case 'ADD_PAYMENT':
