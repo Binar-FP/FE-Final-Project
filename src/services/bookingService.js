@@ -13,12 +13,17 @@ export const BookingService = {
     },
 
     paymentBooking : async (data) => {
-        const response = await API.post('/checkout/create', data);
+        const response = await API.post('/checkout/checkout', data);
         return response;
     },
 
     SeatBooking : async (data) => {
         const response = await API.get('/seats/findAll/', data);
+        return response;
+    },
+
+    updateBooking : async (data) => {
+        const response = await API.post('/bookings/update/', data);
         return response;
     }
 

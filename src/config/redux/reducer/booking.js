@@ -46,9 +46,10 @@ const booking = (state = initialState, action) => {
                 ...state,
                 pages: "payment"
             });
-        case 'ADD_PAYMENT':
+        case 'SUCCESS_PAYMENT':
             return ({
                 ...state,
+                pages: "success"
             });
         default:
             return state;
