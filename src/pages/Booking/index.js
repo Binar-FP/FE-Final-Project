@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
 import { Navbar, BookingPassenger, BookingSeat, BookingCheckout , Footer, PaymentSuccess} from '../../components';
 
 const Booking = (props) => {
