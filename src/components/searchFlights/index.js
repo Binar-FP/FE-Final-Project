@@ -11,7 +11,8 @@ const SearchFlights = (props) => {
     const [button, setButton] = useState('')
     const history = useNavigate();
     const dispatch = useDispatch();
-    const datacoba = useSelector(state => state.booking.fligth_id)
+    const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
+    console.log(isLoggedIn)
 
     useEffect(() => {
         BookingService.getBookingSchedules(props.data).then((res) => {
@@ -27,24 +28,25 @@ const SearchFlights = (props) => {
     const tanggal = formatDate(props.data.depatureDate)
     console.log(data)
     const handleConfirm = (event) => {
-        // dispatch(BookingActions(formValues));
-        dispatch({type: 'CONFIRM_FLIGHT', payload: formValues});
-        history('/booking');
-        // event.preventDefault();
-        console.log(formValues)
-        // props.history.push('/booking', formValues);
+        if (isLoggedIn === false) {
+            history('/login')
+        }else{
+            dispatch({type: 'CONFIRM_FLIGHT', payload: formValues});
+            history('/booking');
+        }
     }
-
+    console.log(tanggal)
   return (
     <>
     <div>
-        <h1>{datacoba}</h1>
       <div className='container mt-5 mb-5'>
         <div className='d-flex justify-content-center text-start align-items-center '>
             <div className='content-searchlight'>
                 <div className="row">
                     <div className="col-12">
-                    <h4 className='text-center mb-4'>{tanggal}</h4>
+                    {tanggal !==  "Invalid Date" && <h4 className='text-center mb-4'>{tanggal}</h4>}
+                    {tanggal ===  "Invalid Date" && <h4 className='text-center mb-4'>Date not found</h4>}
+                    {/* <h4 className='text-center mb-4'>{tanggal}</h4> */}
                     {data.map((flights) => {
                         return (
                             <>
@@ -59,7 +61,7 @@ const SearchFlights = (props) => {
                                 arrivalDate:flights.arrivalDate,
                                 arrivalTime:flights.arrivalTime,
                                 to:flights.to,
-                                economyClassPrice:flights.economyClassPrice,
+                                typeOfClass:flights.typeOfClass,
                                 })}}>
                                 <div className="card-body">
                                     <div className='row  p-3'>

@@ -12,7 +12,27 @@ export const getBookingActions = (data) => async (dispatch) => {
 
 export const BookingActions = (data) => async (dispatch) => {
     try {
-        dispatch({type: 'CONFIRM_FLIGHT', payload: data});
+        const response = await BookingService.Booking(data);
+        dispatch({type: 'BOOKING'});
+        return response;
+    } catch (error) {
+        SweatAlert(String(error.response.data.message), 'warning')
+    }       
+}
+
+export const PaymentActions = (data, userId) => async (dispatch) => {
+    try {
+        const response = await BookingService.paymentBooking(data);
+        if (response.data.paid === true) {
+            console.log('masuk')
+            const updateData = {
+                status : true,
+                id : userId
+            }
+            await BookingService.updateBooking(updateData);
+            dispatch({type: 'SUCCESS_PAYMENT'});
+            dispatch({type: 'END'});
+        }
         return;
     } catch (error) {
         SweatAlert(String(error.response.data.message), 'warning')

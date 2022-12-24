@@ -7,12 +7,12 @@ import './bookingpassenger.css'
 const BookingPassenger = () => {
     const { register, handleSubmit, formState: { errors, isDirty, isValid } } = useForm();
     const dispatch = useDispatch();
-    const [bagage, setBagage] = useState()
+    const [bagage, setBagage] = useState(1)
     console.log(bagage)
     const onSubmit = (data) => {
         const newData= {
             ...data,
-            bagage: bagage
+            bagage: bagage * 20000
         }
         console.log(newData)
         dispatch({type: 'ADD_PASSENGER', payload: newData})
@@ -55,12 +55,8 @@ const BookingPassenger = () => {
                                         aria-label="" 
                                         {...register('name',{
                                             required: "Please enter your first Name",
-                                            minLength: {
-                                                value: 8,
-                                                message: "name Too Short",
-                                            },
                                             maxLength: {
-                                                value: 18,
+                                                value: 30,
                                                 message: "name Too Long",
                                             },
                                             }
@@ -70,19 +66,15 @@ const BookingPassenger = () => {
                                     <div className="form-group mb-3">
                                         <label htmlFor="" className="mb-2">Age</label>
                                         <input className={errors.password?"form-control ps-4 border-danger":"form-control ps-4"} 
-                                        type="text" 
+                                        type="number" 
                                         placeholder="Input your age" 
                                         name='age' 
                                         aria-label="" 
                                         {...register('age',{
                                             required: "Please enter your last Name",
-                                            minLength: {
-                                                value: 8,
-                                                message: "age Too Short",
-                                            },
                                             maxLength: {
-                                                value: 18,
-                                                message: "age Too Long",
+                                                value: 3,
+                                                message: "Age Too Long",
                                             },
                                             }
                                         )}/>
@@ -91,19 +83,15 @@ const BookingPassenger = () => {
                                     <div className="form-group mb-3">
                                         <label htmlFor="" className="mb-2">NIK</label>
                                         <input className={errors.password?"form-control ps-4 border-danger":"form-control ps-4"} 
-                                        type="text" 
+                                        type="number" 
                                         placeholder="Input your last name" 
                                         name='nik' 
                                         aria-label="" 
                                         {...register('nik',{
                                             required: "Please enter your nik",
-                                            minLength: {
-                                                value: 8,
-                                                message: "Nik Too Short",
-                                            },
                                             maxLength: {
-                                                value: 18,
-                                                message: "Nik Too Long",
+                                                value: 16,
+                                                message: "NIK Too Long",
                                             },
                                             }
                                         )}/>
@@ -112,19 +100,19 @@ const BookingPassenger = () => {
                                     <div className="form-group mb-3">
                                         <label htmlFor="" className="mb-2">Phone Number</label>
                                         <input className={errors.password?"form-control ps-4 border-danger":"form-control ps-4"} 
-                                        type="text" 
+                                        type="number" 
                                         placeholder="Input your Phone Number" 
                                         name='phoneNumber' 
                                         aria-label="" 
                                         {...register('phoneNumber',{
                                             required: "Please enter your last Name",
-                                            minLength: {
-                                                value: 8,
-                                                message: "Phone Number Too Short",
-                                            },
                                             maxLength: {
-                                                value: 18,
-                                                message: "Phone Number Too Long",
+                                                value: 13,
+                                                message: "phone number Too Short",
+                                            },
+                                            minLength: {
+                                                value: 12,
+                                                message: "phone number Too Long",
                                             },
                                             }
                                         )}/>
@@ -132,7 +120,7 @@ const BookingPassenger = () => {
                                     </div>
                                     <div className="form-group mb-3">
                                         <label for="bagage" class="form-label">Bagage</label>
-                                        <input type="range" className="form-range" min="0" max="20" id="bagage" onChange={(e)=>{setBagage(e.target.value)}}/>
+                                        <input type="range" className="form-range" min="0" max="20" id="bagage" defaultValue={1} onChange={(e)=>{setBagage(e.target.value)}}/>
                                         <p>{bagage} Kg x Rp. 20000 = Rp. {bagage*20000}</p>
                                     </div>
                                     <button  className={isDirty && isValid?'button form-control':'button form-control opacity-50'} placeholder="Default input" aria-label="default input example" disabled={!isDirty || !isValid}>Next</button>

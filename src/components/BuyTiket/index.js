@@ -46,7 +46,7 @@ const BuyTiket = ({handlerData}) => {
 
                 {/* BOOKING  */}
                 <div className='row'>
-                    <div className='col-sm-12 col-lg-4'>
+                    {/* <div className='col-sm-12 col-lg-4'>
                         <div className="form-group mb-3">
                             <label className="mb-2">From</label>
                             <select 
@@ -62,8 +62,37 @@ const BuyTiket = ({handlerData}) => {
                             )})}
                             </select>
                         </div>
+                    </div> */}
+                    <div className='col-sm-12 col-lg-4'>
+                        <label for="exampleDataList" class="form-label">From</label>
+                        <input class="form-control form-select-sm rounded" 
+                        list="datalistOptions"
+                        required 
+                        onChange={(e)=>{setFormValues({...formValues, from : e.target.value})} } placeholder="Airport"/>
+                        <datalist id="datalistOptions" >
+                        {airport.map((airport) => {
+                            return (
+                            <>
+                                <option key={airport.id} defaultValue={airport.name}>{airport.name}</option>
+                            </> 
+                            )})}
+                        </datalist>
                     </div>
                     <div className='col-sm-12 col-lg-4'>
+                        <label for="exampleDataList" class="form-label">To</label>
+                        <input class="form-control form-select-sm rounded" 
+                        list="datalistOptions" 
+                        onChange={(e)=>{setFormValues({...formValues, to : e.target.value})} } placeholder="Airport"/>
+                        <datalist id="datalistOptions" >
+                        {airport.map((airport) => {
+                            return (
+                            <>
+                                <option key={airport.id} defaultValue={airport.name}>{airport.name}</option>
+                            </> 
+                            )})}
+                        </datalist>
+                    </div>
+                    {/* <div className='col-sm-12 col-lg-4'>
                     <div className="form-group mb-3">
                             <label className="mb-2">To</label>
                             <select 
@@ -78,7 +107,7 @@ const BuyTiket = ({handlerData}) => {
                             )})}
                             </select>
                         </div>
-                    </div>
+                    </div> */}
                     <div className='col-sm-12 col-lg-4'>
                         <label className="mb-2">Class Flights</label>
                         <select className="form-select form-select-sm"
