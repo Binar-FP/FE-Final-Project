@@ -8,6 +8,7 @@ import './bookingseat.css'
 const BookingSeat = () => {
     const dispatch = useDispatch();
     const data = useSelector(state => state.booking)
+    const id_user= useSelector(state => state.auth.id)
     const FlightsId = data.id
     console.log(FlightsId)
     
@@ -64,6 +65,7 @@ const BookingSeat = () => {
     const handleSubmit = () => {
         console.log(seatReserved)
         const dataBooking ={
+            userId:id_user,
             name : data.name,
             age : parseInt(data.age),
             NIK : parseInt(data.NIK),
@@ -71,6 +73,7 @@ const BookingSeat = () => {
             phoneNumber : data.phoneNumber,
             price: data.price,
             flightId: data.id,
+            status:false
         }
         dispatch(BookingActions(dataBooking))
         setSeatSelected(seatSelected.concat(seatReserved));
