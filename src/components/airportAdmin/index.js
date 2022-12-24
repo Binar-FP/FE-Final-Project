@@ -32,7 +32,7 @@ const AirportAdmin = () => {
     }
 
     const createHandler = async () => {
-        await dispatch(CreateAirportActions(formValues));
+        await dispatch(CreateAirportActions(formCreate));
         setUpdate(!update)
         // window.location.reload(true);
     }
@@ -112,17 +112,17 @@ const AirportAdmin = () => {
                       <label htmlFor="" className="mb-2">Name</label>
                       <input 
                       placeholder='Name Airport' 
-                      onChange={(e)=> setFormCreate({...formCreate,name: e.target.value, id :airport.id})} 
+                      onChange={(e)=> setFormCreate({...formCreate,name: e.target.value})} 
                       className="form-control" 
                       name='name' 
                       type="text"/>
                       <label htmlFor="" className="mb-2">Code</label>
-                      <input placeholder='Code Airport' maxLength={3} onChange={(e)=> setFormCreate({...formCreate,code: e.target.value, id :airport.id})} 
+                      <input placeholder='Code Airport' maxLength={3} onChange={(e)=> setFormCreate({...formCreate,code: e.target.value})} 
                       className="form-control" 
                       name='code' 
                       type="text"/>
                       <label htmlFor="" className="mb-2">Location</label>
-                      <input placeholder='location Airport' onChange={(e)=> setFormCreate({...formCreate,location: e.target.value, id :airport.id})} 
+                      <input placeholder='location Airport' onChange={(e)=> setFormCreate({...formCreate,location: e.target.value})} 
                       className="form-control" 
                       name='location' 
                       type="text"/>

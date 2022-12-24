@@ -101,10 +101,9 @@ const FlightsAdmin = () => {
                   <th scope="col">Arrival Date</th>
                   <th scope="col">Arrival Time</th>
                   <th scope="col">Capasity</th>
-                  <th scope="col">Type Of Flights</th>
-                  <th scope="col">Economy ClassPrice</th>
-                  <th scope="col">Business ClassPrice</th>
-                  <th scope="col">First ClassPrice</th>
+                  <th scope="col">Type Flight</th>
+                  <th scope="col">Type Class</th>
+                  <th scope="col">Class Price</th>
                   <th scope="col">Update</th>
                   <th scope="col">Delete</th>
                 </tr>
@@ -127,9 +126,8 @@ const FlightsAdmin = () => {
                     <td>{flights.arrivalTime}</td>
                     <td>{flights.capasity}</td>
                     <td>{flights.typeOfFlight}</td>
-                    <td>{flights.economyClassPrice}</td>
-                    <td>{flights.businessClassPrice}</td>
-                    <td>{flights.firstClassPrice}</td>
+                    <td>{flights.typeOfClass}</td>
+                    <td>{flights.ClassPrice}</td>
                     {/* MODAL */}
                         {/* <!-- Button trigger modal --> */}
                         <td>
@@ -171,7 +169,7 @@ const FlightsAdmin = () => {
                                       </> 
                                       )})}
                                       </select>
-                                    </div>
+                                  </div>
                                   <div className="form-group mb-3">
                                     <label htmlFor="" className="mb-2">Destination</label>
                                     <select 
@@ -202,20 +200,30 @@ const FlightsAdmin = () => {
                                         value={formCreate.airLine}/>
                                     </div>
                                     <div className="form-group mb-3">
-                                        <label htmlFor="" className="mb-2">Form</label>
-                                        <input 
-                                        className="form-control ps-4" 
-                                        type="text" 
-                                        onChange={(e)=> setFormCreate({...formCreate,from: e.target.value})} 
-                                        value={formCreate.from} />
+                                      <label htmlFor="" className="mb-2">From</label>
+                                      <select 
+                                      className="form-select" 
+                                      onChange={(e)=> setFormCreate({...formCreate,from: e.target.value})}>
+                                      {airport.map((airport) => {
+                                      return (
+                                      <>
+                                          <option key={airport.id} value={airport.name}>{airport.name}</option>
+                                      </> 
+                                      )})}
+                                      </select>
                                     </div>
                                     <div className="form-group mb-3">
-                                        <label htmlFor="" className="mb-2">To</label>
-                                        <input 
-                                        className="form-control ps-4" 
-                                        type="text" 
-                                        onChange={(e)=> setFormCreate({...formCreate,to: e.target.value})} 
-                                        value={formCreate.to} />
+                                      <label htmlFor="" className="mb-2">To</label>
+                                      <select 
+                                      className="form-select" 
+                                      onChange={(e)=> setFormCreate({...formCreate,to: e.target.value})}>
+                                      {airport.map((airport) => {
+                                      return (
+                                      <>
+                                          <option key={airport.id} value={airport.name}>{airport.name}</option>
+                                      </> 
+                                      )})}
+                                      </select>
                                     </div>
                                     <div className="form-group mb-3">
                                         <label htmlFor="" className="mb-2">Capasity</label>
@@ -258,6 +266,37 @@ const FlightsAdmin = () => {
                                         type="time" 
                                         onChange={(e)=> setFormCreate({...formCreate,arrivalTime: e.target.value})} 
                                         value={formCreate.arrivalTime} />
+                                    </div>
+                                    <div className="form-group mb-3">
+                                      <label htmlFor="" className="mb-2">Type Class</label>
+                                      <select 
+                                      className="form-select" 
+                                      onChange={(e)=> setFormValues({...formCreate,typeOfClass: e.target.value})}
+                                      value={formCreate.typeOfClass}>
+                                      <option >Type Of Class</option>
+                                      <option value={'Economy Class'}>Economy Class</option>
+                                      <option value={'Bussines Class'}>Bussines Class</option>
+                                      <option value={'First Class'}>First Class</option>
+                                      </select>
+                                    </div>
+                                    <div className="form-group mb-3">
+                                        <label htmlFor="" className="mb-2">Class Price</label>
+                                        <input 
+                                        className="form-control ps-4" 
+                                        type="text" 
+                                        onChange={(e)=> setFormCreate({...formCreate,ClassPrice: e.target.value})} 
+                                        value={formCreate.ClassPrice} />
+                                    </div>
+                                    <div className="form-group mb-3">
+                                      <label htmlFor="" className="mb-2">Type Flight</label>
+                                      <select 
+                                      className="form-select" 
+                                      onChange={(e)=> setFormValues({...formCreate,typeOfFlight: e.target.value})}
+                                      value={formCreate.typeOfFlight}>
+                                      <option >Type Of Flight</option>
+                                      <option value={'One Way'}>One Way</option>
+                                      <option value={'Round Way'}>Round Way</option>
+                                      </select>
                                     </div>
                                     <div className="form-group mb-3">
                                         <label htmlFor="" className="mb-2">Economy ClassPrice</label>
@@ -323,7 +362,7 @@ const FlightsAdmin = () => {
                                             </> 
                                             )})}
                                             </select>
-                                          </div>
+                                        </div>
                                         <div className="form-group mb-3">
                                           <label htmlFor="" className="mb-2">Destination</label>
                                           <select 
@@ -356,20 +395,32 @@ const FlightsAdmin = () => {
                                               value={formValues.airLine}/>
                                           </div>
                                           <div className="form-group mb-3">
-                                              <label htmlFor="" className="mb-2">Form</label>
-                                              <input 
-                                              className="form-control ps-4" 
-                                              type="text" 
-                                              onChange={(e)=> setFormValues({...formValues,from: e.target.value})} 
-                                              value={formValues.from} />
+                                            <label htmlFor="" className="mb-2">From</label>
+                                            <select 
+                                            className="form-select" 
+                                            onChange={(e)=> setFormValues({...formValues,from: e.target.value})}
+                                            value={formValues.from}>
+                                            {airport.map((airport) => {
+                                            return (
+                                            <>
+                                                    <option key={airport.id} value={airport.name}>{airport.name}</option>
+                                            </> 
+                                            )})}
+                                            </select>
                                           </div>
                                           <div className="form-group mb-3">
-                                              <label htmlFor="" className="mb-2">To</label>
-                                              <input 
-                                              className="form-control ps-4" 
-                                              type="text" 
-                                              onChange={(e)=> setFormValues({...formValues,to: e.target.value})} 
-                                              value={formValues.to} />
+                                            <label htmlFor="" className="mb-2">To</label>
+                                            <select 
+                                            className="form-select" 
+                                            onChange={(e)=> setFormValues({...formValues,to: e.target.value})}
+                                            value={formValues.to}>
+                                            {airport.map((airport) => {
+                                            return (
+                                            <>
+                                                    <option key={airport.id} value={airport.name}>{airport.name}</option>
+                                            </> 
+                                            )})}
+                                            </select>
                                           </div>
                                           <div className="form-group mb-3">
                                               <label htmlFor="" className="mb-2">Capasity</label>
@@ -414,28 +465,34 @@ const FlightsAdmin = () => {
                                               value={formValues.arrivalTime} />
                                           </div>
                                           <div className="form-group mb-3">
-                                              <label htmlFor="" className="mb-2">Economy ClassPrice</label>
-                                              <input 
-                                              className="form-control ps-4" 
-                                              type="text" 
-                                              onChange={(e)=> setFormValues({...formValues,economyClassPrice: e.target.value})} 
-                                              value={formValues.economyClassPrice} />
+                                            <label htmlFor="" className="mb-2">Type Class</label>
+                                            <select 
+                                            className="form-select" 
+                                            onChange={(e)=> setFormValues({...formValues,typeOfClass: e.target.value})}
+                                            value={formValues.typeOfClass}>
+                                            <option >Type Of Class</option>
+                                            <option value={'Economy Class'}>Economy Class</option>
+                                            <option value={'Bussines Class'}>Bussines Class</option>
+                                            <option value={'First Class'}>First Class</option>
+                                            </select>
                                           </div>
                                           <div className="form-group mb-3">
-                                              <label htmlFor="" className="mb-2">Business ClassPrice</label>
+                                              <label htmlFor="" className="mb-2">Class Price</label>
                                               <input 
                                               className="form-control ps-4" 
                                               type="text" 
-                                              onChange={(e)=> setFormValues({...formValues,businessClassPrice: e.target.value})} 
-                                              value={formValues.businessClassPrice} />
+                                              onChange={(e)=> setFormCreate({...formValues,ClassPrice: e.target.value})} 
+                                              value={formValues.ClassPrice} />
                                           </div>
                                           <div className="form-group mb-3">
-                                              <label htmlFor="" className="mb-2">First ClassPrice</label>
-                                              <input 
-                                              className="form-control ps-4" 
-                                              type="text" 
-                                              onChange={(e)=> setFormValues({...formValues,firstClassPrice: e.target.value})} 
-                                              value={formValues.firstClassPrice} />
+                                            <label htmlFor="" className="mb-2">Type Flight</label>
+                                            <select 
+                                            className="form-select" 
+                                            onChange={(e)=> setFormValues({...formValues,typeOfFlight: e.target.value})}
+                                            value={formValues.typeOfFlight}>
+                                            <option value={'One Way'}>One Way</option>
+                                            <option value={'Round Way'}>Round Way</option>
+                                            </select>
                                           </div>
                                         </div>
                                     </div>
