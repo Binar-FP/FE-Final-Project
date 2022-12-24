@@ -26,6 +26,8 @@ import BookingPassenger from "./bookingPassenger";
 import BookingSeat from "./bookingSeat";
 import BookingCheckout from "./bookingCheckout";
 import PaymentSuccess from "./paymentSuccess";
+import ResetPasswordComponent from "./resetPasswordComponent";
+import ResetPasswordSend from "./resetPasswordSend";
 
 export { 
     Navbar,
@@ -56,4 +58,6 @@ export {
     BookingSeat,
     BookingCheckout,
     PaymentSuccess,
+    ResetPasswordComponent,
+    ResetPasswordSend,
  };
