@@ -13,21 +13,21 @@ export const getBookingActions = (data) => async (dispatch) => {
 export const BookingActions = (data) => async (dispatch) => {
     try {
         const response = await BookingService.Booking(data);
-        dispatch({type: 'BOOKING'});
+        dispatch({type: 'BOOKING', payload : response.data.data.newBooking.id});
         return response;
     } catch (error) {
         SweatAlert(String(error.response.data.message), 'warning')
     }       
 }
 
-export const PaymentActions = (data, userId) => async (dispatch) => {
+export const PaymentActions = (data, bookingid) => async (dispatch) => {
     try {
         const response = await BookingService.paymentBooking(data);
         if (response.data.paid === true) {
             console.log('masuk')
             const updateData = {
                 status : true,
-                id : userId
+                id : bookingid
             }
             await BookingService.updateBooking(updateData);
             dispatch({type: 'SUCCESS_PAYMENT'});
