@@ -28,6 +28,7 @@ import BookingCheckout from "./bookingCheckout";
 import PaymentSuccess from "./paymentSuccess";
 import ResetPasswordComponent from "./resetPasswordComponent";
 import ResetPasswordSend from "./resetPasswordSend";
+import History from "./History";
 
 export { 
     Navbar,
@@ -60,4 +61,5 @@ export {
     PaymentSuccess,
     ResetPasswordComponent,
     ResetPasswordSend,
+    History,
  };

@@ -33,6 +33,19 @@
     border-radius: 50%;
 }
 
+.box-notification{
+    max-height: 12vw !important;
+    overflow-y: scroll !important;
+}
+
+.notification-read{
+    background-color: #F5F8FF !important;
+}
+
+.notification-unread{
+    background-color: #59c1be59 !important;
+}
+
 @media screen and (max-width: 994px) {
     .container-fluid{
         /* width: auto !important; */

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import './navbar.css'
 import { Logo } from '../../assets'
-import { House, PencilSquare, QuestionCircle, ArrowRightCircle, Bell, Gear, BoxArrowRight, BoxArrowDownRight } from 'react-bootstrap-icons';
+import { House, PencilSquare, QuestionCircle, ArrowRightCircle, Bell, Gear, BoxArrowRight, BoxArrowDownRight, BellFill } from 'react-bootstrap-icons';
 import { useSelector, useDispatch } from 'react-redux';
 import { logoutActions } from '../../config/redux/actions/authActions';
 import { useNavigate } from 'react-router';
 import { UsersService } from '../../services/usersService';
+import { HistoryService } from '../../services/historyService'
 
 const Navbar = () => {
     const [formValues, setFormValues] = useState({});
@@ -25,6 +26,22 @@ const Navbar = () => {
     const logoutHandle = () => {
         dispatch(logoutActions(history,'buyer'));
     }
+
+    //Notification
+    const [notification, setNotification] = useState([]);
+    const [status, setStatus] = useState(false)
+
+    useEffect(() => {
+        HistoryService.getHistory({id}).then((res) => {
+            setNotification(res.data.orderList);
+            setStatus(true)
+            console.log(res)
+        });
+      }, [id])
+      
+      const filterNotification= notification.filter((item) => item.Notifications[0].status === false);
+      const lengthNotification= filterNotification.length;
+    //   console.log(lengthNotification)
 
   return (
     <>
@@ -65,6 +82,46 @@ const Navbar = () => {
                     {/* jika login  */}
                     {checkLogin === true &&
                     <>
+                    <li class="nav-item dropdown me-5">
+                        <a className="nav-link" href="/#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <BellFill size={20}/>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                {lengthNotification}
+                            <span class="visually-hidden">unread messages</span>
+                            </span>
+                        </a>
+                        <ul className="dropdown-menu dropdown-menu-end box-notification" aria-labelledby="navbarDropdown">
+                        {status && notification.map((item) => {
+                            return (
+                                <>  
+                                    {item.Booking.status === false ?
+                                    <li>
+                                        <a className={item.Notifications[0].status === false ? 
+                                        "dropdown-item notification-unread" 
+                                        : 
+                                        "dropdown-item"} href="/#">The order on behalf of 
+                                        {' '+item.Booking.Passengers[0].name+' '}
+                                        was successful, please make payment</a></li>
+                                    :
+                                    <li>
+                                        <a 
+                                        className={item.Notifications[0].status === false ?
+                                        "dropdown-item notification-unread" 
+                                        :
+                                        "dropdown-item"} href="/#">
+                                        Payment Successful Thank you   
+                                        {' '+item.Booking.Passengers[0].name+' '},
+                                        Please check the ticket on the history page
+                                        </a>
+                                    </li>  }
+                                    
+                                </>
+                                )
+                            })}
+                            {/* <li><hr className="dropdown-divider"/></li>
+                            <li><a className="dropdown-item" href="/">Something else here</a></li> */}
+                        </ul>
+                    </li>
                     <li className="nav-item mobile-item">
                         <Bell className='icon' color="white" size={30} />
                         <a className="nav-link" href="/login">Notifikasi</a>
@@ -90,17 +147,6 @@ const Navbar = () => {
                     </li>
                     </>
                     }
-                    {/* <li class="nav-item dropdown">
-                        <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Dropdown
-                        </a>
-                        <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><a className="dropdown-item" href="/">Action</a></li>
-                            <li><a className="dropdown-item" href="/">Another action</a></li>
-                            <li><hr className="dropdown-divider"/></li>
-                            <li><a className="dropdown-item" href="/">Something else here</a></li>
-                        </ul>
-                    </li> */}
                     </ul>
                 </div>
                 </div>

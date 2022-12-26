@@ -89,12 +89,12 @@ export const AuthService = {
     },
 
     verifyAccount : async (data) => {
-        const response = await API.post('/forgotpassword', data);
+        const response = await API.post('/auth/send-email', data);
         return response;
     },
 
     forgotPassword : async (data) => {
-        const response = await API.post('/auth/send-email', data);
+        const response = await API.post('/forgotpassword', data);
         return response;
     },
 
