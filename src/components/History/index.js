@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux'
 const History = () => {
   const [history, setHistory] = useState({});
   const [status, setStatus] = useState(false)
+  const [statusData , setStatusData] = useState(false)
   const [detailData, setDetailData] = useState([])
   const id = useSelector(state => state.auth.id)
   
@@ -27,13 +28,14 @@ const History = () => {
 
   const handleDetail = (data) => {
     setDetailData(data)
+    setStatusData(true)
   }
   
   console.log(detailData)
 
   return (
     <>
-      <div className="col-12 col-md-8">
+      <div className="col-sm-12 col-md-9">
             <div className="card">
               <div className="card-header fw-bold bg-color">
                 <h6>History</h6>
@@ -51,20 +53,21 @@ const History = () => {
                             <div className="col-sm-12 col-md-4 col-lg-9">
                                 <div className='row'>
                                     <div className="col-sm-12 col-md-6 col-lg-3 d-flex justify-content-between flex-column">
-                                      <p>{item.Flight.from}</p>
+                                      <p>From {item.Flight.from}</p>
                                       <p>{item.Flight.depatureDate}</p>
                                       <p>{item.Flight.flightNumber}</p>
                                     </div>
                                     <div className="col-sm-12 col-md-6 col-lg-3 d-flex justify-content-between flex-column">
-                                      <p>{item.Flight.to}</p>
+                                      <p>To {item.Flight.to}</p>
                                       <p>{item.Flight.arrivalDate}</p>
                                       <p>{item.Flight.flightNumber}</p>
                                     </div>
                                     <div className="col-sm-12 col-md-6 col-lg-3 d-flex align-items-end">
-                                      <button data-bs-toggle="modal" data-bs-target="#showDetail" onClick={()=>handleDetail(item)}>More Detail</button>
+                                      <button className='btn mb-2 border-0 text-color' data-bs-toggle="modal" data-bs-target="#showDetail" onClick={()=>handleDetail(item)}>More Detail</button>
                                     </div>
                                     <div className="col-sm-12 col-md-6 col-lg-3 d-flex align-items-end">
-                                      <button onClick={()=>handleBoardingPass({
+                                      <button className='btn mb-2 border-0 text-color' 
+                                        onClick={()=>handleBoardingPass({
                                           name :item.Booking.Passengers[0].name,
                                           NIK :item.Booking.Passengers[0].NIK,
                                           from :item.Flight.from,
@@ -104,7 +107,12 @@ const History = () => {
                             Status Pembayan
                           </div>
                           <ul className="list-group list-group-flush">
-                            <li className="list-group-item">Paid</li>
+                            <li className="list-group-item">{statusData === true ?
+                            detailData.Booking.status === true?
+                            <p>Paid</p>
+                            :
+                            <p>UnPaid</p>
+                            :''}</li>
                           </ul>
                         </div>
                       </div>
@@ -120,7 +128,7 @@ const History = () => {
                               <p>Flights</p>
                             </div>
                             <div className="col-12 col-md-6">
-                              <p>: GARUDA</p>
+                              <p>: {statusData === true ?detailData.Flight.airLine:''}</p>
                             </div>
                           </div>
                         </li>
@@ -130,7 +138,7 @@ const History = () => {
                               <p>From</p>
                             </div>
                             <div className="col-12 col-md-6">
-                              <p>: Sultan Iskandar Muda International Airport </p>
+                              <p>: {statusData === true ?detailData.Flight.from:''}</p>
                             </div>
                           </div>
                         </li>
@@ -140,7 +148,7 @@ const History = () => {
                               <p>To</p>
                             </div>
                             <div className="col-12 col-md-6">
-                              <p>: Polonia International Airport</p>
+                              <p>: {statusData === true ?detailData.Flight.to:''}</p>
                             </div>
                           </div>
                         </li>
@@ -150,7 +158,7 @@ const History = () => {
                               <p>Seats</p>
                             </div>
                             <div className="col-12 col-md-6">
-                              <p>: a9</p>
+                              <p>: {statusData === true ?detailData.Booking.Seats[0].seatNumber:''}</p>
                             </div>
                           </div>
                         </li>
@@ -167,7 +175,7 @@ const History = () => {
                               <p>Name</p>
                             </div>
                             <div className="col-12 col-md-6">
-                              <p>: Fathan Mubarok</p>
+                              <p>: {statusData === true ?detailData.Booking.Passengers[0].name:''}</p>
                             </div>
                           </div>
                         </li>
@@ -177,7 +185,7 @@ const History = () => {
                               <p>Age</p>
                             </div>
                             <div className="col-12 col-md-6">
-                              <p>: 23</p>
+                              <p>: {statusData === true ?detailData.Booking.Passengers[0].age:''}</p>
                             </div>
                           </div>
                         </li>
@@ -187,7 +195,7 @@ const History = () => {
                               <p>NIK</p>
                             </div>
                             <div className="col-12 col-md-6">
-                              <p>: 320411151001001</p>
+                              <p>: {statusData === true ?detailData.Booking.Passengers[0].NIK:''}</p>
                             </div>
                           </div>
                         </li>
@@ -197,7 +205,7 @@ const History = () => {
                               <p>Phone Number</p>
                             </div>
                             <div className="col-12 col-md-6">
-                              <p>: 081222560289</p>
+                              <p>: {statusData === true ?detailData.Booking.Passengers[0].phoneNumber:''}</p>
                             </div>
                           </div>
                         </li>

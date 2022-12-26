@@ -3,3 +3,7 @@
     max-height: 70vh;
     overflow-y: scroll;
 }
+
+.text-color{
+    color: #0eb5af !important;
+}
