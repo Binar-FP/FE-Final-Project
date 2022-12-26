@@ -10,6 +10,7 @@ const initialState ={
     phoneNumber: "0823243462344",
     seatNumber: "A1",
     typeOfClass: "",
+    idBooking: 0
     
 }
 
@@ -44,7 +45,8 @@ const booking = (state = initialState, action) => {
         case 'BOOKING':
             return ({
                 ...state,
-                pages: "payment"
+                pages: "payment",
+                idBooking: action.payload
             });
         case 'SUCCESS_PAYMENT':
             return ({
