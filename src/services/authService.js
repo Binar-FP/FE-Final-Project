@@ -94,7 +94,7 @@ export const AuthService = {
     },
 
     forgotPassword : async (data) => {
-        const response = await API.post('/auth/send-email', data);
+        const response = await API.post('/forgotpassword', data);
         return response;
     },
 
