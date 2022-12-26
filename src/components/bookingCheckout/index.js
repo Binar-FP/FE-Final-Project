@@ -9,11 +9,11 @@ import StripeCheckout from 'react-stripe-checkout';
 
 const BookingCheckout = () => {
     const data = useSelector(state => state.booking)
-    const userId = useSelector(state => state.auth.id)
     const totalPrice =parseInt(data.price)+parseInt(data.bagage)
     const price = String(totalPrice)
     const totalpriceNew = parseInt(price.concat('00'))
     const loader = useSelector(state => state.loading.loading)
+    const bookingid = useSelector(state => state.booking.idBooking)
     const dispatch = useDispatch();
 
     const hadlePayment = (data) => {
@@ -23,7 +23,7 @@ const BookingCheckout = () => {
             amount:totalpriceNew
         }
         dispatch({type: 'PROGRESS'})
-        dispatch(PaymentActions(dataPayment, userId))
+        dispatch(PaymentActions(dataPayment, bookingid))
     }
   return (
     <>
