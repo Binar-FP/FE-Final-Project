@@ -20,10 +20,27 @@ const History = () => {
   }, [id])
 
   const handleBoardingPass = (data) => {
-    console.log(data)
-    HistoryService.getBoardingPass(data).then((res) => {
-      console.log(res)
-    });
+    
+      fetch(`https://www.flywithme-api.me/api/boardingPass/add`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      }).then(async res => {
+        if (res.status === 200) {
+          const blob = await res.blob();
+          const file = new Blob(
+            [blob], 
+            {type: 'application/pdf'}
+          );
+          //Build a URL from the file
+          const fileURL = URL.createObjectURL(file);
+          //Open the URL on new Window
+          window.open(fileURL);  
+        }
+      })
+      
   }
 
   const handleDetail = (data) => {
