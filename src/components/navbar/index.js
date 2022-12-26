@@ -7,6 +7,7 @@ import { logoutActions } from '../../config/redux/actions/authActions';
 import { useNavigate } from 'react-router';
 import { UsersService } from '../../services/usersService';
 import { HistoryService } from '../../services/historyService'
+import { NotificationService } from '../../services/notificationService'
 
 const Navbar = () => {
     const [formValues, setFormValues] = useState({});
@@ -41,7 +42,18 @@ const Navbar = () => {
       
       const filterNotification= notification.filter((item) => item.Notifications[0].status === false);
       const lengthNotification= filterNotification.length;
-    //   console.log(lengthNotification)
+
+    const handleAllRead = () => {
+    NotificationService.readAll({userId:id, status:true}).then((res) => {
+        console.log(res)
+    });
+    }
+
+    const handleReadOne = (data) => {
+    NotificationService.readOne({historyId:data, status:true}).then((res) => {
+        console.log(res)
+    });
+    }
 
   return (
     <>
@@ -83,28 +95,37 @@ const Navbar = () => {
                     {checkLogin === true &&
                     <>
                     <li class="nav-item dropdown me-5">
-                        <a className="nav-link" href="/#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a className="nav-link" href="/#" id="navbarDropdown" role="button" data-bs-toggle={ notification.lenght !== 0 ?"dropdown":""} aria-expanded="false">
                             <BellFill size={20}/>
+                            { lengthNotification === 0 ?'':
                             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                 {lengthNotification}
                             <span class="visually-hidden">unread messages</span>
                             </span>
+                            }
+                            
+                            
                         </a>
-                        <ul className="dropdown-menu dropdown-menu-end box-notification" aria-labelledby="navbarDropdown">
+                        <ul className="dropdown-menu dropdown-menu-end pt-2" aria-labelledby="navbarDropdown">
+                        <div className='d-flex justify-content-end align-items-center'>
+                            <button type="button" className="read-all btn" onClick={handleAllRead}>Read All</button>
+                        </div>
+                        <div className=' box-notification'>
                         {status && notification.map((item) => {
                             return (
                                 <>  
                                     {item.Booking.status === false ?
-                                    <li>
-                                        <a className={item.Notifications[0].status === false ? 
+                                    <li >
+                                        <button onClick={()=>handleReadOne(item.id)} 
+                                        className={item.Notifications[0].status === false ? 
                                         "dropdown-item notification-unread" 
                                         : 
                                         "dropdown-item"} href="/#">The order on behalf of 
                                         {' '+item.Booking.Passengers[0].name+' '}
-                                        was successful, please make payment</a></li>
+                                        was successful, please make payment</button></li>
                                     :
                                     <li>
-                                        <a 
+                                        <button onClick={()=>handleReadOne(item.id)}
                                         className={item.Notifications[0].status === false ?
                                         "dropdown-item notification-unread" 
                                         :
@@ -112,7 +133,7 @@ const Navbar = () => {
                                         Payment Successful Thank you   
                                         {' '+item.Booking.Passengers[0].name+' '},
                                         Please check the ticket on the history page
-                                        </a>
+                                        </button>
                                     </li>  }
                                     
                                 </>
@@ -120,7 +141,9 @@ const Navbar = () => {
                             })}
                             {/* <li><hr className="dropdown-divider"/></li>
                             <li><a className="dropdown-item" href="/">Something else here</a></li> */}
-                        </ul>
+                        </div>
+                    </ul>
+                    
                     </li>
                     <li className="nav-item mobile-item">
                         <Bell className='icon' color="white" size={30} />

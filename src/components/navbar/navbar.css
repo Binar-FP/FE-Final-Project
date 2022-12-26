@@ -46,6 +46,19 @@
     background-color: #59c1be59 !important;
 }
 
+.read-all{
+    background-color:#ddd;
+    border: none;
+    width: auto;
+    color: red !important;
+    font-weight: bold;
+    border: 0px !important;
+}
+
+.read-all:hover{
+    color: rgb(237, 151, 151) !important;
+}
+
 @media screen and (max-width: 994px) {
     .container-fluid{
         /* width: auto !important; */
