@@ -8,9 +8,13 @@ import './bookingseat.css'
 const BookingSeat = () => {
     const dispatch = useDispatch();
     const data = useSelector(state => state.booking)
+    // console.log(data)
     const id_user= useSelector(state => state.auth.id)
     const FlightsId = data.id
-    console.log(FlightsId)
+    const FlightsIdRound = data.idFlightRound
+    const [seatOne, setSeatOne] = useState()
+    const [seatTwo, setSeatTwo] = useState()
+    // console.log(FlightsId)
     
     const [seat] = useState([
         "a1","a2","a3","a4","a5","a6","a7","a8","a9","a10",
@@ -24,20 +28,43 @@ const BookingSeat = () => {
     const [seatAvailable, setSeatAvailable] = useState([]);
     const [seatReserved, setSeatReserved] = useState([]);
     const [seatSelected, setSeatSelected] = useState([]);
+    const [status, setStatus] = useState(false);
 
     useEffect(() => {
-        BookingService.SeatBooking().then((res) => {
-            const dataSeat = res.data.data;
-            const filterFlights = dataSeat.filter((item) => item.flightId === FlightsId);
-            const seatRefactor = filterFlights.map((item) => {
-                const name = item.seatNumber
-                return name
-            })
-            setSeatSelected(seatRefactor);
-        });
-    }, [FlightsId, setSeatSelected])
+        if(status === false){
+            BookingService.SeatBooking().then((res) => {
+                const dataSeat = res.data.data;
+                const filterFlights = dataSeat.filter((item) => item.flightId === FlightsId);
+                const seatRefactor = filterFlights.map((item) => {
+                    const name = item.seatNumber
+                    return name
+                })
+                setSeatSelected(seatRefactor);
+            });
+        }else{
+            BookingService.SeatBooking().then((res) => {
+                const dataSeat = res.data.data;
+                const filterFlights = dataSeat.filter((item) => item.flightId === FlightsIdRound);
+                const seatRefactor = filterFlights.map((item) => {
+                    const name = item.seatNumber
+                    return name
+                })
+                setSeatSelected(seatRefactor);
+            });
+        }
+    
+    }, [FlightsId, setSeatSelected, status, FlightsIdRound])
+
+    // console.log(seatSelected)
+    // console.log("ini data")
 
     const onClickData = (seat) => {
+        if(status === false){
+            setSeatOne(seat)
+        }else{
+            setSeatTwo(seat)
+        }
+        
         if(seatReserved.indexOf(seat) > -1){
             setSeatAvailable([...seatAvailable, seat]);
             setSeatReserved(seatReserved.filter(item => item !== seat));
@@ -53,7 +80,8 @@ const BookingSeat = () => {
             setSeatAvailable(seatAvailable.filter(item => item !== seat));
         }
     };
-
+    console.log(seatOne)
+    console.log(seatTwo)
     const checktrue= (row) =>{
         if(seatSelected.indexOf(row) > -1){
             return true;
@@ -64,26 +92,46 @@ const BookingSeat = () => {
 
     const handleSubmit = () => {
         console.log(seatReserved)
-        const dataBooking ={
+        const dataBooking =[
+            {
             userId:id_user,
             name : data.name,
             age : parseInt(data.age),
             NIK : parseInt(data.NIK),
-            seatNumber: seatReserved.toString(),
+            seatNumber: seatOne.toString(),
             phoneNumber : data.phoneNumber,
             price: data.price,
             flightId: data.id,
             status:false
+            }
+        ]
+
+        if(data.roundtrip === true){
+            dataBooking.push(
+                {
+                userId:id_user,
+                name : data.name,
+                age : parseInt(data.age),
+                NIK : parseInt(data.NIK),
+                seatNumber: seatTwo.toString(),
+                phoneNumber : data.phoneNumber,
+                price: data.priceRound,
+                flightId: data.idFlightRound,
+                status:false
+                }
+            )
         }
-        dispatch(BookingActions(dataBooking))
-        setSeatSelected(seatSelected.concat(seatReserved));
-        setSeatReserved([]);
-    }
-
-    const onClickSeat = (seat) => {
-        onClickData(seat);
-    }
-
+            console.log(dataBooking)
+            
+            dispatch(BookingActions(dataBooking, data.roundtrip))
+            setSeatSelected(seatSelected.concat(seatReserved));
+            setSeatReserved([]);
+        }
+        
+        const onClickSeat = (seat) => {
+            onClickData(seat);
+        }
+        
 
   return (
     <>
@@ -97,6 +145,27 @@ const BookingSeat = () => {
                                 <div className="form-group mb-3 col-md-12 col-lg-6">
                                     <FileBreakFill size={70} color="grey" />
                                     <label htmlFor="" className="mb-2">Seat</label>
+                                    
+                                    {data.roundtrip === true ?
+                                    <>
+                                    <div class="row mt-5">
+                                        <div class="col-sm-6">
+                                            <div class={status === false ? "card bg-color-menu":'card'} onClick={() => setStatus(false)}>
+                                                <div class="card-body">
+                                                    Departure
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class={status === true ? "card bg-color-menu":'card'} onClick={() => setStatus(true)}>
+                                                <div class="card-body">
+                                                    Return
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </>
+                                    :''}
                                     <div className="card mt-5">
                                     <ul className="list-group list-group-flush">
                                         <li className="list-group-item">
@@ -116,7 +185,8 @@ const BookingSeat = () => {
                                     <div className="card mt-5">
                                     <ul className="list-group list-group-flush">
                                         <li className="list-group-item bg-info">Choose your seat</li>
-                                        <li className="list-group-item">Your Seat {seatReserved}</li>
+                                        <li className="list-group-item">Your Seat Departure {seatOne}</li>
+                                        {seatTwo && <li className="list-group-item">Your Seat Return {seatTwo}</li>}
                                     </ul>
                                     </div>
                                 </div>
@@ -148,10 +218,16 @@ const BookingSeat = () => {
                                             </tr>
                                         </tbody>
                                     </table>
-                                    </div>   
-                                    <button 
+                                    </div>
+                                    {data.roundtrip === true && seatOne && seatTwo ?
+                                     <button 
                                     className="button form-control mt-5" 
-                                    onClick={handleSubmit}>Next</button>
+                                    onClick={handleSubmit}>Next</button>:''}
+                                    {data.roundtrip === false && seatOne ?
+                                     <button 
+                                    className="button form-control mt-5" 
+                                    onClick={handleSubmit}>Next</button>:''}
+                                    
                                 </div>   
                             </div>
                         {/* </form> */}

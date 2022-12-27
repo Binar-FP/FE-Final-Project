@@ -10,7 +10,14 @@ const initialState ={
     phoneNumber: "0823243462344",
     seatNumber: "A1",
     typeOfClass: "",
-    idBooking: 0
+    idBooking: 0,
+    // FLights RoundWay
+    roundtrip: false,
+    idBookingRound: 0,
+    idFlightRound: 1,
+    airLineRound: "",
+    priceRound: "0",
+    seatNumberRound: "A1",
     
 }
 
@@ -23,10 +30,19 @@ const booking = (state = initialState, action) => {
                 id: action.payload.id,
                 airLine: action.payload.airLine,
                 typeOfClass: action.payload.typeOfClass,
-                // price: action.payload.ClassPrice, ditembak dulu
-                price: "200000",
+                price: action.payload.ClassPrice,
                 pages: "passenger"
             });
+        case 'CONFIRM_FLIGHT_ROUND':
+        return ({
+            ...state,
+            idFlightRound: action.payload.id,
+            airLineRound: action.payload.airLine,
+            typeOfClassRound: action.payload.typeOfClass,
+            priceRound: action.payload.ClassPrice,
+            roundtrip: true,
+            pages: "passenger"
+        });
         case 'ADD_PASSENGER':
             return ({
                 ...state,
@@ -47,6 +63,13 @@ const booking = (state = initialState, action) => {
                 ...state,
                 pages: "payment",
                 idBooking: action.payload
+            });
+        case 'BOOKING_ROUND':
+            return ({
+                ...state,
+                pages: "payment",
+                idBooking: action.payload.newBooking[0].id,
+                idBookingRound: action.payload.newBooking[1].id
             });
         case 'SUCCESS_PAYMENT':
             return ({
