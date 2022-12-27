@@ -31,6 +31,7 @@ const Navbar = () => {
     //Notification
     const [notification, setNotification] = useState([]);
     const [status, setStatus] = useState(false)
+    const [read, setRead] = useState(false)
 
     useEffect(() => {
         HistoryService.getHistory({id}).then((res) => {
@@ -38,7 +39,7 @@ const Navbar = () => {
             setStatus(true)
             console.log(res)
         });
-      }, [id])
+      }, [id,read])
       
       const filterNotification= notification.filter((item) => item.Notifications[0].status === false);
       const lengthNotification= filterNotification.length;
@@ -47,12 +48,14 @@ const Navbar = () => {
     NotificationService.readAll({userId:id, status:true}).then((res) => {
         console.log(res)
     });
+    setRead(!read)
     }
 
     const handleReadOne = (data) => {
     NotificationService.readOne({historyId:data, status:true}).then((res) => {
         console.log(res)
     });
+    setRead(!read)
     }
 
   return (
@@ -106,43 +109,47 @@ const Navbar = () => {
                             
                             
                         </a>
-                        <ul className="dropdown-menu dropdown-menu-end pt-2" aria-labelledby="navbarDropdown">
-                        <div className='d-flex justify-content-end align-items-center'>
-                            <button type="button" className="read-all btn" onClick={handleAllRead}>Read All</button>
-                        </div>
-                        <div className=' box-notification'>
-                        {status && notification.map((item) => {
-                            return (
-                                <>  
-                                    {item.Booking.status === false ?
-                                    <li >
-                                        <button onClick={()=>handleReadOne(item.id)} 
-                                        className={item.Notifications[0].status === false ? 
-                                        "dropdown-item notification-unread" 
-                                        : 
-                                        "dropdown-item"} href="/#">The order on behalf of 
-                                        {' '+item.Booking.Passengers[0].name+' '}
-                                        was successful, please make payment</button></li>
-                                    :
-                                    <li>
-                                        <button onClick={()=>handleReadOne(item.id)}
-                                        className={item.Notifications[0].status === false ?
-                                        "dropdown-item notification-unread" 
+                        {notification.lenght !== 0 ?
+                            <ul className="dropdown-menu dropdown-menu-end pt-2" aria-labelledby="navbarDropdown">
+                            <div className='d-flex justify-content-end align-items-center'>
+                                <button type="button" className="read-all btn" onClick={handleAllRead}>Read All</button>
+                            </div>
+                            
+                            <div className=' box-notification'>
+                            {status && notification.map((item) => {
+                                return (
+                                    <>  
+                                        {item.Booking.status === false ?
+                                        <li >
+                                            <button onClick={()=>handleReadOne(item.id)} 
+                                            className={item.Notifications[0].status === false ? 
+                                            "dropdown-item notification-unread" 
+                                            : 
+                                            "dropdown-item"} href="/#">The order on behalf of 
+                                            {' '+item.Booking.Passengers[0].name+' '}
+                                            was successful, please make payment</button></li>
                                         :
-                                        "dropdown-item"} href="/#">
-                                        Payment Successful Thank you   
-                                        {' '+item.Booking.Passengers[0].name+' '},
-                                        Please check the ticket on the history page
-                                        </button>
-                                    </li>  }
-                                    
-                                </>
-                                )
-                            })}
-                            {/* <li><hr className="dropdown-divider"/></li>
-                            <li><a className="dropdown-item" href="/">Something else here</a></li> */}
-                        </div>
-                    </ul>
+                                        <li>
+                                            <button onClick={()=>handleReadOne(item.id)}
+                                            className={item.Notifications[0].status === false ?
+                                            "dropdown-item notification-unread" 
+                                            :
+                                            "dropdown-item"} href="/#">
+                                            Payment Successful Thank you   
+                                            {' '+item.Booking.Passengers[0].name+' '},
+                                            Please check the ticket on the history page
+                                            </button>
+                                        </li>  }
+                                        
+                                    </>
+                                    )
+                                })}
+                                {/* <li><hr className="dropdown-divider"/></li>
+                                <li><a className="dropdown-item" href="/">Something else here</a></li> */}
+                            </div>
+                            
+                            </ul>
+                        :''}
                     
                     </li>
                     <li className="nav-item mobile-item">
