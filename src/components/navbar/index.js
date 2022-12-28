@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './navbar.css'
 import { Logo } from '../../assets'
-import { House, PencilSquare, QuestionCircle, ArrowRightCircle, Bell, Gear, BoxArrowRight, BoxArrowDownRight, BellFill, PersonFillGear, ClockHistory } from 'react-bootstrap-icons';
+import { House, PencilSquare, QuestionCircle, ArrowRightCircle, Bell, BoxArrowRight, BoxArrowDownRight, BellFill, PersonFillGear, ClockHistory } from 'react-bootstrap-icons';
 import { useSelector, useDispatch } from 'react-redux';
 import { logoutActions } from '../../config/redux/actions/authActions';
 import { useNavigate } from 'react-router';
