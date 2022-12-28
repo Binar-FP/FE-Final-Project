@@ -9,6 +9,10 @@
     padding: 20px;
 }
 
+.bg-color-menu{
+    background-color: #54d0ef !important;
+}
+
 .plane-seat{
     background-color: salmon;
 }
@@ -114,20 +118,22 @@ h1 {
     .lg-seat{
       display: none;
     }
+
+    .card-color{
+      height: auto  !important;
+      border: 0px !important;
+    }
+
+    .content-bookingSeat{
+        overflow: scroll;
+        width: 100vw !important;
+        height: 100vh !important;
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding-bottom: 100px !important;
+    }
 }
-    
-/* .reserved::after {
-  content: "R";
-} */
-
-/* .selected::after {
-  content: "S";
-}
-
-.available::after {
-  content: "A";
-} */
-
 .available {
   color: #333;
 }
@@ -139,3 +145,5 @@ li {
 .btnmargin {
   margin-top: 15px;
 }
+
+
