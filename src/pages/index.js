@@ -10,6 +10,7 @@ import Admin from "./Admin";
 import Booking from "./Booking";
 import ResetPassword from "./ResetPassword";
 import ForgotPassword from "./ForgotPassword";
+import NotificationsPage from "./Notification";
 // import DashboardAdmin from "./DasboardAdmin";
 
-export {Error404, Error500, Home, Login, Register, Help, Profile, LoginAdmin, Admin, Booking, ResetPassword, ForgotPassword}
+export {Error404, Error500, Home, Login, Register, Help, Profile, LoginAdmin, Admin, Booking, ResetPassword, ForgotPassword, NotificationsPage}

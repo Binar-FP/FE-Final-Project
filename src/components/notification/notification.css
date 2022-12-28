@@ -1,0 +1,40 @@
+.content-notification{
+    overflow-y: auto !important;
+    overflow-x: hidden  !important;
+    width: 100% !important;
+    height: 90vh !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin-top: 10vh !important;
+    padding-bottom: 100px !important;
+}
+
+.card-item{
+    position: fixed;
+    height: 100% !important;
+    border: 0px !important;
+}
+
+.read-all-notif{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100px !important;
+    background-color: #F5F8FF;
+    border-radius: 0px 0px 10px 10px;
+    padding: 20px;
+}
+
+.card-notifku{
+    padding-top: 200px !important;
+}
+
+.color-primary{
+    background-color: #11a59e;
+}
+
+.notification-unread{
+    background-color: #59c1be59 !important;
+}

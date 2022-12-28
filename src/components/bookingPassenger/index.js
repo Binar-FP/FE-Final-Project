@@ -8,13 +8,11 @@ const BookingPassenger = () => {
     const { register, handleSubmit, formState: { errors, isDirty, isValid } } = useForm();
     const dispatch = useDispatch();
     const [bagage, setBagage] = useState(1)
-    console.log(bagage)
     const onSubmit = (data) => {
         const newData= {
             ...data,
             bagage: bagage * 20000
         }
-        console.log(newData)
         dispatch({type: 'ADD_PASSENGER', payload: newData})
 
     }
@@ -23,14 +21,6 @@ const BookingPassenger = () => {
     <>
     <div className='container content-bookingPassenger'>
         <div className='row'>
-            {/* <div className='col-md-12 col-lg-3'>
-            <div className="card">
-                <ul className="list-group list-group-flush">
-                    <li className="list-group-item">Price</li>
-                    <li className="list-group-item">500000</li>
-                </ul>
-            </div>
-            </div> */}
             <div className='col-md-12 col-lg-12'>
                 <div className="card p-4 card-color">
                     {/* <div className="card-header">
