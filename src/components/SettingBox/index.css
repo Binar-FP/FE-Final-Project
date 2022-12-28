@@ -11,3 +11,9 @@
 .bg-color{
     background-color: #59C1BD !important;
 }
+
+@media screen and (max-width: 768px) {
+    .card-profile{
+        display: none !important;
+    }
+}
