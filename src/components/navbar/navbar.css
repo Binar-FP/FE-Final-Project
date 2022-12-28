@@ -80,6 +80,10 @@
     .mobile-item{
         display: block;
     }
+
+    .table-none{
+        display: none !important;
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -136,5 +140,13 @@
         margin: 15px 0px 0px 0px !important;
         justify-content: center !important;
         display: flex   !important;
+    }
+
+    .notifications-destop{
+        display: none !important;
+    }
+
+    .table-none{
+        display: block !important;
     }
 }
