@@ -29,6 +29,7 @@ import PaymentSuccess from "./paymentSuccess";
 import ResetPasswordComponent from "./resetPasswordComponent";
 import ResetPasswordSend from "./resetPasswordSend";
 import History from "./History";
+import Notification from "./notification";
 
 export { 
     Navbar,
@@ -62,4 +63,5 @@ export {
     ResetPasswordComponent,
     ResetPasswordSend,
     History,
+    Notification,
  };
