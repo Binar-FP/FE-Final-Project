@@ -15,12 +15,26 @@
         width: 100vw !important;
         height: 120vh !important;
         position: fixed;
+        font-size: 1rem;
+        
+    }
+
+    .text-passenger{
+        display: none;
+    }
+
+    .form-passenger{
+       height: 2rem;
+       border-radius: 8px !important;
+        
     }
     
     .card-color{
+        font-size: 1rem;
         width: 100vw !important;
         height: 100vh !important;
         padding-bottom: 500px !important;
+        
     }
 
     .container {
