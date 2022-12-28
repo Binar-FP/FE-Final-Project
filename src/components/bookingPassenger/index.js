@@ -20,7 +20,7 @@ const BookingPassenger = () => {
   return (
     <>
     <div className='container content-bookingPassenger'>
-        <div className='row'>
+        <div className='row row-passenger'>
             <div className='col-md-12 col-lg-12'>
                 <div className="card p-4 card-color">
                     {/* <div className="card-header">
@@ -28,17 +28,17 @@ const BookingPassenger = () => {
                     </div> */}
                     <div className="card-body pt-4">
                         <form onSubmit={handleSubmit(onSubmit)}>
-                            <div className='row'>
+                            <div className='row pb-5'>
                                 <div className="form-group mb-3 col-md-12 col-lg-6">
                                     <image src='https://www.flaticon.com/svg/static/icons/svg/149/149071.svg' alt=''/>
                                     <PersonFill size={70} color="grey" />
                                     <label htmlFor="" className="mb-2">Passenger and Bagage</label>
-                                    <h6 className='ps-2'>Enter  the names as they appear on the passport</h6>
+                                    <h6 className='ps-2 text-passenger'>Enter  the names as they appear on the passport</h6>
                                 </div>
                                 <div className="form-group mb-3 col-md-12 col-lg-6">
                                     <div className="form-group mb-3">
                                         <label htmlFor="" className="mb-2">Name</label>
-                                        <input className={errors.password?"form-control ps-4 border-danger":"form-control ps-4"} 
+                                        <input className={errors.password?"form-control form-passenger ps-4 border-danger":"form-control form-passenger ps-4"} 
                                         type="text" 
                                         placeholder="Input your first name" 
                                         name='name' 
@@ -55,7 +55,7 @@ const BookingPassenger = () => {
                                     </div>
                                     <div className="form-group mb-3">
                                         <label htmlFor="" className="mb-2">Age</label>
-                                        <input className={errors.password?"form-control ps-4 border-danger":"form-control ps-4"} 
+                                        <input className={errors.password?"form-control form-passenger ps-4 border-danger":"form-control form-passenger ps-4"} 
                                         type="number" 
                                         placeholder="Input your age" 
                                         name='age' 
@@ -72,7 +72,7 @@ const BookingPassenger = () => {
                                     </div>
                                     <div className="form-group mb-3">
                                         <label htmlFor="" className="mb-2">NIK</label>
-                                        <input className={errors.password?"form-control ps-4 border-danger":"form-control ps-4"} 
+                                        <input className={errors.password?"form-control form-passenger ps-4 border-danger":"form-control form-passenger ps-4"} 
                                         type="number" 
                                         placeholder="Input your last name" 
                                         name='nik' 
@@ -89,7 +89,7 @@ const BookingPassenger = () => {
                                     </div>
                                     <div className="form-group mb-3">
                                         <label htmlFor="" className="mb-2">Phone Number</label>
-                                        <input className={errors.password?"form-control ps-4 border-danger":"form-control ps-4"} 
+                                        <input className={errors.password?"form-control form-passenger ps-4 border-danger":"form-control form-passenger ps-4"} 
                                         type="number" 
                                         placeholder="Input your Phone Number" 
                                         name='phoneNumber' 
