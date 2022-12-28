@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { Navbar, BookingPassenger, BookingSeat, BookingCheckout , Footer, PaymentSuccess} from '../../components';
+import { Navbar, BookingPassenger, BookingSeat, BookingCheckout , PaymentSuccess} from '../../components';
 
 const Booking = (props) => {
     const pages = useSelector(state => state.booking.pages)
@@ -21,7 +21,6 @@ const Booking = (props) => {
         {pages === "bagage"? <BookingSeat/>:'' }
         {pages === "payment"? <BookingCheckout/>:'' }
         {pages === "success"? <PaymentSuccess/>:'' }
-        {pages && <Footer />}
       </div>
     </>
   )

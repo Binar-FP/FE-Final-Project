@@ -44,10 +44,12 @@ const BookingCheckout = () => {
                             <div className='row mt-3'>
                                 <div className="form-group mb-3 col-md-12 col-lg-6">
                                     <h6>Flights Tiket</h6>
+                                    {data.priceRound === true ? <h6>Flights Tiket Return</h6>:''}
                                     <h6>Bagage</h6>
                                 </div>
                                 <div className="form-group mb-3 col-md-12 col-lg-6">
                                     <h6>Rp. {data.price}</h6>
+                                    {data.priceRound === true ? <h6>Rp. {data.priceRound}</h6>:''}
                                     <h6>Rp. {data.bagage}</h6>
                                     <hr></hr>
                                     <h6>Rp. {totalPrice}</h6>
