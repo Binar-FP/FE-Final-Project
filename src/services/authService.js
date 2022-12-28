@@ -83,6 +83,11 @@ export const AuthService = {
         return response;
     },
 
+    updatePassword : async (id, data) => {
+        const response = await API.put('/users/update-password/'+id, data);
+        return response;
+    },
+
     register : async (data) => {
         const response = await API.post('/register', data);
         return response;
