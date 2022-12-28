@@ -1,12 +1,11 @@
 import React from 'react'
-import { Navbar, Footer, Notification } from '../../components'
+import { Navbar, Notification } from '../../components'
 
 const NotificationsPage = () => {
   return (
     <>
         <Navbar />
-            <Notification />
-        <Footer />
+        <Notification />
     </>
   )
 }

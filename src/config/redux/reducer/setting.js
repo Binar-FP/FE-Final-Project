@@ -20,6 +20,11 @@ const setting = (state = initialState, action) => {
             ...state,
             pages: "help"
         });
+        case 'NOTIFICATION':
+        return ({
+            ...state,
+            pages: "notification"
+        });
         default:
             return state;
     }

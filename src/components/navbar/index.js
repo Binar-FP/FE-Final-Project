@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router';
 import { UsersService } from '../../services/usersService';
 import { HistoryService } from '../../services/historyService'
 import { NotificationService } from '../../services/notificationService'
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     const [formValues, setFormValues] = useState({});
@@ -157,7 +158,7 @@ const Navbar = () => {
                         <span class="visually-hidden">unread messages</span>
                             </span>}
                         <Bell className='icon' color="white" size={25} />
-                        <a className="nav-link" href="/notification">Notifikasi</a>
+                        <Link className="nav-link" to="/notification" onClick={()=>dispatch({type:"NOTIFICATION"})}>History</Link>
                     </li>
                     <li className="nav-item mobile-item">
                         <PersonFillGear className='icon' color="white" size={25} />
@@ -165,7 +166,7 @@ const Navbar = () => {
                     </li>
                     <li className="nav-item mobile-item">
                         <ClockHistory className='icon' color="white" size={25} />
-                            <a className="nav-link" href="#/" onClick={()=>dispatch({type:"HISTORY"})}>History</a>
+                        <Link className="nav-link" to="/profile" onClick={()=>dispatch({type:"HISTORY"})}>History</Link>
                     </li>
                     
                     
@@ -180,7 +181,16 @@ const Navbar = () => {
                             <img className='img-profile me-2' src={formValues.image} alt=''></img>{formValues.firstName}
                         </a>
                         <ul className="dropdown-menu dropdown-menu-end m-2" aria-labelledby="navbarDropdown">
-                            <li className='d-flex align-items-center'><a className="dropdown-item" href="/profile"><Gear className="ms-2" /> Setting</a></li>
+                            <li className='d-flex align-items-center text-dark'>
+                                <Link className="dropdown-item text-dark" to="/profile" onClick={()=>dispatch({type:"PERSONAL_DETAIL"})}>
+                                    Profile
+                                </Link>
+                            </li>
+                            <li className='d-flex align-items-center'>
+                                <Link className="dropdown-item text-dark" to="/profile" onClick={()=>dispatch({type:"HISTORY"})}>
+                                    History
+                                </Link>
+                            </li>
                             <li><hr className="dropdown-divider"/></li>
                             <li className='d-flex align-items-center'><a className="dropdown-item" href="#/" onClick={logoutHandle}><BoxArrowDownRight className="ms-2" /> Logout</a></li>
                         </ul>
