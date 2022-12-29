@@ -47,10 +47,22 @@
     .body-cardku{
         border-radius: 0px !important;
     }
+
+    .text-mobile{
+        display: block !important;
+    }
 }
     
-.box-item-history{
+.text-mobile{
     display: none;
+}
+
+.box-item-profile{
+    display: none !important;
+}
+
+.box-item-profile p{
+    display: none !important;
 }
 
 .text-profile{

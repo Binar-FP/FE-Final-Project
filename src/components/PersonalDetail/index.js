@@ -59,9 +59,8 @@ const PersonalDetail = () => {
   return (
     <>
         <div className="col-md-12 col-lg-9">
-            <div className='box-item-profile d-flex justify-content-between bg-blue'>
-                <p className='p-4 text-light text-profile'>Profile</p>
-                <p className='p-4 text-light'></p>
+            <div className='box-item-profile d-flex justify-content-between'>
+                <h4 className='p-4 text-light text-profile'>Profile</h4>
             </div>
             <div className="card-content">
                 <div className="card-personal">
@@ -73,7 +72,7 @@ const PersonalDetail = () => {
                 </div>
                     <div class="card-body">
                         <div className="row">
-                    <h4 className="mt-4 mb-5 text-center">Update Profile</h4>
+                    <h4 className="mt-4 mb-5 text-center text-mobile">Update Profile</h4>
                         <div className="col-6">
                             <div className="form-group mb-3">
                                 <label className="mb-2">First Name</label>
@@ -211,9 +210,12 @@ const PersonalDetail = () => {
                     {/* Update Password */}
                     <form onSubmit={handleSubmit(onSubmit)}>
                     <div class="card mt-3">
+                    <div className="card-header fw-bold history-head text-light">
+                        <h4>Change Password</h4>
+                    </div>
                         <div class="card-body ">
                             <div className="row">
-                                <h4 className="mt-4 mb-5 text-center">Update Password</h4>
+                                <h4 className="mt-4 mb-5 text-center text-mobile">Update Password</h4>
                                 <div className="col-6">
                                     <div className="form-group mb-3">
                                         <label className="mb-2">Password</label>
