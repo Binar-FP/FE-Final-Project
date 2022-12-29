@@ -59,14 +59,18 @@ const PersonalDetail = () => {
   return (
     <>
         <div className="col-md-12 col-lg-9">
+            <div className='box-item-profile d-flex justify-content-between bg-blue'>
+                <p className='p-4 text-light text-profile'>Profile</p>
+                <p className='p-4 text-light'></p>
+            </div>
             <div className="card-content">
                 <div className="card-personal">
                 <div className="card-body">
                 {loader === true ? <Loading/>: ''}
-                <div class="card">
+                <div class="card  body-cardku">
                 <div className="card-header fw-bold history-head text-light">
-                <h4>Profile</h4>
-              </div>
+                    <h4>Profile</h4>
+                </div>
                     <div class="card-body">
                         <div className="row">
                     <h4 className="mt-4 mb-5 text-center">Update Profile</h4>
