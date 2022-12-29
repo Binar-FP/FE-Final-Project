@@ -13,17 +13,17 @@ const BuyTiket = ({handlerData}) => {
   
 
     useEffect(() => {
-        dispatch({type: 'PROGRESS'})
+        // dispatch({type: 'PROGRESS'})
         AirportService.getAirport().then((res) => {
           setAirport(res.data.data);
-          dispatch({type: 'END'})  
+        //   dispatch({type: 'END'})  
         });
       }, [dispatch])
 
 
       const handlerForm = () => {
         const dataLenght = Object.keys(formValues).length
-        if (dataLenght < 4) {
+        if (dataLenght < 5) {
             setMessage(true)
         }else{
             setMessage(!true)
