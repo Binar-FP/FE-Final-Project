@@ -92,6 +92,7 @@ const History = () => {
                                     <div className="col-sm-12 col-md-6 col-lg-3 d-flex align-items-end">
                                       <button className='btn mb-2 border-0 text-color' data-bs-toggle="modal" data-bs-target="#showDetail" onClick={()=>handleDetail(item)}>More Detail</button>
                                     </div>
+                                    {item.Booking.status === true?
                                     <div className="col-sm-12 col-md-6 col-lg-3 d-flex align-items-end">
                                       <button className='btn mb-2 border-0 text-color' 
                                         onClick={()=>handleBoardingPass({
@@ -106,6 +107,16 @@ const History = () => {
                                           seatNumber :item.Booking.Seats[0].seatNumber,
                                         })}>Select Tiket</button>
                                     </div>
+                                    :''}
+                                    {item.Booking.status === false?
+                                    <div className="col-sm-12 col-md-6 col-lg-3 d-flex align-items-end">
+                                      <button className='text-pay btn mb-2 border-0'>Pay Now</button>
+                                      <p className='text-color'>{console.log(history)}</p>
+                                    </div>
+                                    :''}
+                                    <div className="col-sm-12 col-md-6 col-lg-3 d-flex align-items-end">
+                                      <p className='text-color'>Status : {item.Booking.status === true ? 'Success' : 'Pending'}</p>
+                                    </div>
                                 </div>
                             </div>
                           </div>
@@ -119,7 +130,7 @@ const History = () => {
             {/* <!-- Button trigger modal --> */}
 
             {/* <!-- Modal --> */}
-            <div className="modal fade" id="showDetail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal fade" data-bs-backdrop="false" id="showDetail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div className="modal-dialog modal-dialog-centered modal-lg">
                 <div className="modal-content">
                   <div className="modal-header">
