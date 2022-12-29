@@ -20,10 +20,12 @@ const PersonalDetail = () => {
 
 
     useEffect(() => {
+        dispatch({type: 'PROGRESS'})
         UsersService.getUsersById(id).then((res) => {
             setFormValues(res.data.data);
+            dispatch({type: 'END'})
             });
-    }, [id])
+    }, [id,dispatch])
     
     const handleUpdate = () => {
         console.log(formValues)
@@ -62,7 +64,7 @@ const PersonalDetail = () => {
                 <div className="card-body">
                 {loader === true ? <Loading/>: ''}
                 <div class="card">
-                <div className="card-header fw-bold bgku-color text-light">
+                <div className="card-header fw-bold history-head text-light">
                 <h4>Profile</h4>
               </div>
                     <div class="card-body">
