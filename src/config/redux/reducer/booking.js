@@ -76,6 +76,14 @@ const booking = (state = initialState, action) => {
                 ...state,
                 pages: "success"
             });
+        case 'PAYMENT_IN_HISTORY':
+            return ({
+                ...state,
+                idBooking: action.payload.idBooking,
+                price: action.payload.price,
+                name: action.payload.name,
+                bagage: action.payload.bagage,
+            });
         default:
             return state;
     }
