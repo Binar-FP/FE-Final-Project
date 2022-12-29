@@ -10,6 +10,12 @@
     margin: 0px !important;
 }
 
+.text-pay{
+    color: #f3068c !important;
+    padding: 0px !important;
+    margin: 0px !important;
+}
+
 .history-head h4{
     font-size: medium;
     color: black;
@@ -33,6 +39,7 @@
         min-height: 90vh;
         max-height: 90vh;
         overflow-y: scroll;
+        padding-bottom: 20vh !important;
     }
     .history-head{
         display: block;
