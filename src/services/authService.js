@@ -6,7 +6,8 @@ export const AuthService = {
         const Name = response.data.data.firstName;
         const RoleId = response.data.data.roleId;
         const id = response.data.data.id;
-        setHeadersAndStorage(response.data, Name, RoleId, id);
+        const email = response.data.data.email;
+        setHeadersAndStorage(response.data, Name, RoleId, id, email);
         if (data.rememberMe === true) {
             setTimeout(() => {
                 localStorage.removeItem('token');
@@ -31,7 +32,8 @@ export const AuthService = {
         const Name = response.data.data.firstName;
         const RoleId = response.data.data.roleId;
         const id = response.data.data.id;
-        setHeadersAndStorage(response.data, Name, RoleId, id);
+        const email = response.data.data.email;
+        setHeadersAndStorage(response.data, Name, RoleId, id, email);
         if (data.rememberMe === true) {
             setTimeout(() => {
                 localStorage.removeItem('token');
@@ -118,11 +120,12 @@ export const AuthService = {
     }
 }
 
-const setHeadersAndStorage = ({ user, token}, Name, RoleId, id) => {
+const setHeadersAndStorage = ({ user, token}, Name, RoleId, id, email) => {
     API.defaults.headers['Authorization'] = `Bearer ${token}`;
     localStorage.setItem('user', JSON.stringify(Name));
     localStorage.setItem('role', JSON.stringify(RoleId));
     localStorage.setItem('id', JSON.stringify(id));
+    localStorage.setItem('email', JSON.stringify(email));
     localStorage.setItem('token', token);
     localStorage.setItem('isLogged',true);
     
