@@ -102,7 +102,8 @@ const BookingSeat = () => {
             phoneNumber : data.phoneNumber,
             price: data.price,
             flightId: data.id,
-            status:false
+            status:false,
+            bagage: data.bagage
             }
         ]
 
@@ -117,7 +118,8 @@ const BookingSeat = () => {
                 phoneNumber : data.phoneNumber,
                 price: data.priceRound,
                 flightId: data.idFlightRound,
-                status:false
+                status:false,
+                bagage: data.bagage
                 }
             )
         }

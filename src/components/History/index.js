@@ -4,15 +4,21 @@ import './history.css'
 import { HistoryService } from '../../services/historyService'
 import { useDispatch, useSelector } from 'react-redux'
 import Loading from '../loading';
+import StripeCheckout from 'react-stripe-checkout';
+import { PaymentActions } from '../../config/redux/actions/bookingActions'
 
 const History = () => {
   const [history, setHistory] = useState({});
   const [status, setStatus] = useState(false)
   const [statusData , setStatusData] = useState(false)
   const [detailData, setDetailData] = useState([])
+  const dataBooking = useSelector(state => state.booking)
+  // const [totalPrice, setTotalPrice] = useState(0)
+  const dataUser = useSelector(state => state.auth)
   const id = useSelector(state => state.auth.id)
   const loader = useSelector(state => state.loading.loading)
   const dispatch = useDispatch();
+  
   
   useEffect(() => {
     dispatch({type: 'PROGRESS'})
@@ -52,6 +58,31 @@ const History = () => {
     setDetailData(data)
     setStatusData(true)
   }
+
+  console.log(dataBooking)
+  // const hadlePayment = (data) => {
+  //   console.log(data)
+  //   const totalPricePay =parseInt(dataBooking.price)+parseInt(dataBooking.bagage)
+  //   const price = String(totalPricePay)
+  //   const totalpriceNew = parseInt(price.concat('00'))
+
+  //   const dataPayment ={
+  //       tokenId : data.id,
+  //       amount:1000000
+  //   }
+  //   dispatch({type: 'PROGRESS'})
+  //   dispatch(PaymentActions(dataPayment, dataBooking, dataUser.email))
+  // }
+
+  const hadlePayment = (data) => {
+    console.log(data.id)
+    const dataPayment ={
+        tokenId : data.id,
+        amount:dataBooking.price
+    }
+    dispatch({type: 'PROGRESS'})
+    dispatch(PaymentActions(dataPayment, dataBooking, dataUser.email))
+}
   
   console.log(detailData)
 
@@ -92,6 +123,7 @@ const History = () => {
                                     <div className="col-sm-12 col-md-6 col-lg-3 d-flex align-items-end">
                                       <button className='btn mb-2 border-0 text-color' data-bs-toggle="modal" data-bs-target="#showDetail" onClick={()=>handleDetail(item)}>More Detail</button>
                                     </div>
+                                    {item.Booking.status === true?
                                     <div className="col-sm-12 col-md-6 col-lg-3 d-flex align-items-end">
                                       <button className='btn mb-2 border-0 text-color' 
                                         onClick={()=>handleBoardingPass({
@@ -106,6 +138,39 @@ const History = () => {
                                           seatNumber :item.Booking.Seats[0].seatNumber,
                                         })}>Select Tiket</button>
                                     </div>
+                                    :''}
+                                    {item.Booking.status === false?
+                                    <div className="col-sm-12 col-md-6 col-lg-3 d-flex align-items-end"
+                                    >
+                                      <StripeCheckout
+                                        name='FlyWithMe'
+                                        image='https://media.istockphoto.com/id/1385318179/id/vektor/tampilan-atas-pesawat.jpg?s=612x612&w=0&k=20&c=aPlJsv8ggD_WILKrWYLz_HCRm1AaQzeRfuZQmZ_G1Ww='
+                                        billingAddress
+                                        shippingAddress
+                                        description={`Your total is Rp. ${item.Booking.price}`}
+                                        amount={item.Booking.price}
+                                        panelLabel='Pay Now'
+                                        token={hadlePayment}
+                                        currency='IDR'
+                                        stripeKey={'pk_test_51MHHIOD1b553Tlpye8YcK8e0HcvzPFrhG3Bim8pXv4bts5dckgVviqQK58ACFib7ge9kBJjeOWAJIl0smiGU64Xe00enwO2R53'}
+                                        >
+                                          <button
+                                          onClick={()=>{dispatch({type: 'PAYMENT_IN_HISTORY', payload: {
+                                            idBooking : item.Booking.id,
+                                            price : item.Booking.price,
+                                            name :item.Booking.Passengers[0].name,
+                                            bagage:0,
+                                          }})}
+                                          }
+                                          className='text-pay btn mb-2 border-0'
+                                          >Pay Now
+                                          </button>
+                                      </StripeCheckout>
+                                    </div>
+                                    :''}
+                                    <div className="col-sm-12 col-md-6 col-lg-3 d-flex align-items-end">
+                                      <p className='text-color'>Status : {item.Booking.status === true ? 'Success' : 'Pending'}</p>
+                                    </div>
                                 </div>
                             </div>
                           </div>
@@ -119,7 +184,7 @@ const History = () => {
             {/* <!-- Button trigger modal --> */}
 
             {/* <!-- Modal --> */}
-            <div className="modal fade" id="showDetail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal fade" data-bs-backdrop="false" id="showDetail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div className="modal-dialog modal-dialog-centered modal-lg">
                 <div className="modal-content">
                   <div className="modal-header">
