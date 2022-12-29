@@ -4,6 +4,7 @@ import { Arrow } from '../../assets'
 import { BookingService } from '../../services/bookingService'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import Loading from '../loading';
 
 const SearchFlights = (props) => {
     console.log(props.data)
@@ -17,12 +18,16 @@ const SearchFlights = (props) => {
     const history = useNavigate();
     const dispatch = useDispatch();
     const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
+    const loader = useSelector(state => state.loading.loading)
+
     // console.log(isLoggedIn)
 
     useEffect(() => {
+        dispatch({type: 'PROGRESS'})
         BookingService.getBookingSchedules(props.data).then((res) => {
             console.log(res)
             setData(res.data.data);
+            dispatch({type: 'END'})  
           });
 
           const searchRoundTrip = {
@@ -38,9 +43,10 @@ const SearchFlights = (props) => {
                 console.log("RoundTrip")
                 console.log(res)
                 setDataRoundTrip(res.data.data);
+                dispatch({type: 'END'})  
               });
         }
-    }, [props.data])
+    }, [props.data,dispatch])
 
     useEffect(() => {
         if (isLoggedIn === false) {
@@ -70,14 +76,15 @@ const SearchFlights = (props) => {
     <>
     <div>
       <div className='container mt-5 mb-5'>
+      {loader === true ? <Loading/>: ''}
         <div className='d-flex justify-content-center text-start align-items-center '>
             <div className='content-searchlight'>
                 <div className="row">
                     {checkTrue === false? 
                     <div className="col-12">
-                    <h4 className='text-center mb-4'>Departure</h4>
-                    {tanggal !==  "Invalid Date" && <h5 className='text-center mb-4'>{tanggal}</h5>}
-                    {tanggal ===  "Invalid Date" && <h5 className='text-center mb-4'>Date not found</h5>}
+                    {data.length > 0 && <h4 className='text-center mb-4'>Departure</h4>}
+                    {data.length > 0 && tanggal !==  "Invalid Date" ?<h5 className='text-center mb-4'>{tanggal}</h5>:''}
+                    {data.length === 0 && <h5 className='text-center mb-4'>Departure Flights it Not Found</h5>}
                     {data.map((flights) => {
                         return (
                             <>
@@ -128,8 +135,11 @@ const SearchFlights = (props) => {
 
                     {checkTrueRound === false && props.data.typeOfFlight === 'Round Way' ?
                     <div className="col-12">
-                    {dataRoundTrip && tanggalRound !== "Invalid Date" ?<h4 className='text-center mb-4'>Return</h4>:''} 
-                    {dataRoundTrip && tanggalRound !==  "Invalid Date" ? <h5 className='text-center mb-4'>{tanggal}</h5>:''}
+                    {dataRoundTrip.length > 0 && <h4 className='text-center mb-4'>Return</h4>}
+                    {dataRoundTrip.length > 0 && tanggal !==  "Invalid Date" ?<h5 className='text-center mb-4'>{tanggalRound}</h5>:''}
+                    {dataRoundTrip.length === 0 && <h5 className='text-center mb-4'>Return Flights it Not Found</h5>}
+                    {/* {dataRoundTrip && tanggalRound !== "Invalid Date" ?<h4 className='text-center mb-4'>Return</h4>:''} 
+                    {dataRoundTrip && tanggalRound !==  "Invalid Date" ? <h5 className='text-center mb-4'>{tanggal}</h5>:''} */}
                     {dataRoundTrip && dataRoundTrip.map((flights) => {
                         return (
                             <>

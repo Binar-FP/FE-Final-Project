@@ -1,21 +1,39 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { AirportService } from '../../services/airportService';
+import Loading from '../loading';
 
 const BuyTiket = ({handlerData}) => { 
     const [trip, setTrip] = useState('first')
     const [airport, setAirport] = useState([])
     const [formValues, setFormValues] = useState({typeOfFlight:"One Way"})
+    const [message, setMessage] = useState('')
+    const loader = useSelector(state => state.loading.loading)
+    const dispatch = useDispatch();
+  
 
     useEffect(() => {
+        dispatch({type: 'PROGRESS'})
         AirportService.getAirport().then((res) => {
           setAirport(res.data.data);
+          dispatch({type: 'END'})  
         });
-      }, [])
+      }, [dispatch])
 
-      console.log(formValues)
+
+      const handlerForm = () => {
+        const dataLenght = Object.keys(formValues).length
+        if (dataLenght < 4) {
+            setMessage(true)
+        }else{
+            setMessage(!true)
+            handlerData(formValues)
+        }
+    }
   return (
     <>
       <div className='row mb-3'>
+                    {loader === true ? <Loading/>: ''}
                     <div className='col-sm-12 col-lg-3'>
                         <div className="form-check">
                             <input className="form-check-input" 
@@ -46,23 +64,6 @@ const BuyTiket = ({handlerData}) => {
 
                 {/* BOOKING  */}
                 <div className='row'>
-                    {/* <div className='col-sm-12 col-lg-4'>
-                        <div className="form-group mb-3">
-                            <label className="mb-2">From</label>
-                            <select 
-                            className="form-select form-select-sm" 
-                            
-                            onClick={(e)=>{setFormValues({...formValues, from : e.target.value})}}>
-                            <option key="" >Airport</option>
-                            {airport.map((airport) => {
-                            return (
-                            <>
-                                <option key={airport.id} defaultValue={airport.name}>{airport.name}</option>
-                            </> 
-                            )})}
-                            </select>
-                        </div>
-                    </div> */}
                     <div className='col-sm-12 col-lg-4'>
                         <label for="exampleDataList" class="form-label">From</label>
                         <input class="form-control form-select-sm rounded" 
@@ -92,22 +93,6 @@ const BuyTiket = ({handlerData}) => {
                             )})}
                         </datalist>
                     </div>
-                    {/* <div className='col-sm-12 col-lg-4'>
-                    <div className="form-group mb-3">
-                            <label className="mb-2">To</label>
-                            <select 
-                            className="form-select form-select-sm"
-                            onClick={(e)=>{setFormValues({...formValues, to : e.target.value})} }>
-                            <option key="" >Airport</option>
-                            {airport.map((airport) => {
-                            return (
-                            <>
-                                <option key={airport.id} defaultValue={airport.name}>{airport.name}</option>
-                            </> 
-                            )})}
-                            </select>
-                        </div>
-                    </div> */}
                     <div className='col-sm-12 col-lg-4'>
                         <label className="mb-2">Class Flights</label>
                         <select className="form-select form-select-sm"
@@ -148,9 +133,10 @@ const BuyTiket = ({handlerData}) => {
 
                 <div className='row'>
                     <div className='col-sm-12 col-lg-4'>
+                    {message === true ? <p className='text-danger'>Please Fill all the form</p> : ''}
                     </div>
                     <div className='col-sm-12 col-lg-4 text-center'>
-                        <button className="form-control button text-light" placeholder="Default input" onClick={()=>handlerData(formValues)}>Booking Now</button>
+                        <button className="form-control button text-light" placeholder="Default input" onClick={()=>handlerForm()}>Booking Now</button>
                     </div>
                 </div>
     </>
