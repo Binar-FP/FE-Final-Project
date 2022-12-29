@@ -2,6 +2,7 @@
     overflow-y: auto !important;
     overflow-x: hidden  !important;
     width: 100% !important;
+    min-height: 90vh;
     height: 90vh !important;
     position: fixed;
     top: 0;
@@ -29,12 +30,28 @@
 
 .card-notifku{
     padding-top: 200px !important;
+    min-height: 100vh;
+    border-radius: 0px !important;
 }
 
 .color-primary{
-    background-color: #11a59e;
+    background-color: #003f3f;
 }
 
 .notification-unread{
     background-color: #59c1be59 !important;
+}
+
+.box-item{
+    background-color: #003f3f;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+}
+
+.text-notification{
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
 }

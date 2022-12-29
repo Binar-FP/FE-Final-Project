@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Ticket } from 'react-bootstrap-icons'
 import './history.css'
 import { HistoryService } from '../../services/historyService'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import Loading from '../loading';
 
 const History = () => {
   const [history, setHistory] = useState({});
@@ -10,17 +11,20 @@ const History = () => {
   const [statusData , setStatusData] = useState(false)
   const [detailData, setDetailData] = useState([])
   const id = useSelector(state => state.auth.id)
+  const loader = useSelector(state => state.loading.loading)
+  const dispatch = useDispatch();
   
   useEffect(() => {
+    dispatch({type: 'PROGRESS'})
     HistoryService.getHistory({id}).then((res) => {
       setHistory(res.data.orderList);
       setStatus(true)
-      console.log(res)
+      dispatch({type: 'END'})
     });
-  }, [id])
+  }, [id,dispatch])
 
   const handleBoardingPass = (data) => {
-    
+      dispatch({type: 'PROGRESS'})
       fetch(`https://www.flywithme-api.me/api/boardingPass/add`, {
         method: 'POST',
         headers: {
@@ -37,7 +41,8 @@ const History = () => {
           //Build a URL from the file
           const fileURL = URL.createObjectURL(file);
           //Open the URL on new Window
-          window.open(fileURL);  
+          window.open(fileURL);
+          dispatch({type: 'END'})  
         }
       })
       
@@ -52,10 +57,15 @@ const History = () => {
 
   return (
     <>
-      <div className="col-sm-12 col-md-9">
+      <div className="col-sm-12 col-lg-9">
+            <div className='box-item-history d-flex justify-content-between'>
+                <p className='p-4 text-light text-notification'>History</p>
+                <p className='p-4 text-light text-notification'></p>
+            </div>
             <div className="card">
-              <div className="card-header fw-bold bg-color">
-                <h6>History</h6>
+              {loader === true ? <Loading/>: ''}
+              <div className="card-header fw-bold text-light history-head">
+                <h4>History</h4>
               </div>
               <div className="card-body body-history">
                 <ul className="list-group list-group-flush">

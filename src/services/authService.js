@@ -113,6 +113,7 @@ export const AuthService = {
         localStorage.removeItem('isLogged');
         localStorage.removeItem('user');
         localStorage.removeItem('role');
+        localStorage.removeItem('id');
         return;
     }
 }

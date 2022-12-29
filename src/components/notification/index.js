@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import {  useSelector } from 'react-redux';
+import {  useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-// import { logoutActions } from '../../config/redux/actions/authActions';
+import Loading from '../loading';
 import { HistoryService } from '../../services/historyService';
 import { NotificationService } from '../../services/notificationService';
 import './notification.css'
@@ -10,6 +10,8 @@ const Notification = () => {
     const id = useSelector(state => state.auth.id);
     const history = useNavigate();
     const pages = useSelector(state => state.setting.pages)
+    const loader = useSelector(state => state.loading.loading)
+    const dispatch = useDispatch();
 
     if (pages !== 'notification') {
         history('/')
@@ -21,12 +23,14 @@ const Notification = () => {
     const [read, setRead] = useState(false)
 
     useEffect(() => {
+        dispatch({type: 'PROGRESS'})
         HistoryService.getHistory({id}).then((res) => {
             setNotification(res.data.orderList);
             setStatus(true)
+            dispatch({type: 'END'})  
             console.log(res)
         });
-      }, [id,read])
+      }, [id,read,dispatch])
       
     //   const filterNotification= notification.filter((item) => item.Notifications[0].status === false);
     //   const lengthNotification= filterNotification.length;
@@ -47,8 +51,12 @@ const Notification = () => {
 
   return (
     <>
+        {loader === true ? <Loading/>: ''}
         <div className="content-notif">
-        <button className='read-all-notif color-primary text-light' onClick={handleAllRead}>Read All</button>
+        <div className='box-item d-flex justify-content-between'>
+            <p className='p-4 text-light text-notification'>Notification</p>
+            <p className='p-4 text-danger' onClick={handleAllRead}>Read All</p>
+        </div>
         <div className='content-notification'>
             <div className='row'>
                 <div className='col-md-12 col-lg-12'>
