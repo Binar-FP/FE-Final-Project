@@ -56,7 +56,7 @@ const PersonalDetail = () => {
 
   return (
     <>
-        <div className="col-md-9">
+        <div className="col-md-12 col-lg-9">
             <div className="card-content">
                 <div className="card-personal">
                 <div className="card-body">
@@ -194,7 +194,7 @@ const PersonalDetail = () => {
                             {errors.address && <p className="text-danger">{errors.address.message}</p>}
                         </div>
                             <div className="form-group mb-3">
-                            <button className="button form-control" onClick={handleUpdate}>Update</button>   
+                            <button className="button form-control text-light" onClick={handleUpdate}>Update</button>   
                             </div>
                         </div>
                     </div>
@@ -253,7 +253,7 @@ const PersonalDetail = () => {
                                     </div>
                                 </div>
                                     <div className="form-group mb-3">
-                                    <button className="button form-control" onClick={handleSubmit}>Update Password</button>   
+                                    <button className="button form-control text-light" onClick={handleSubmit}>Update Password</button>   
                                     </div>
                             </div>
                         </div>
