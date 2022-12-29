@@ -58,6 +58,10 @@ const History = () => {
   return (
     <>
       <div className="col-sm-12 col-lg-9">
+            <div className='box-item-history d-flex justify-content-between'>
+                <p className='p-4 text-light text-notification'>History</p>
+                <p className='p-4 text-light text-notification'></p>
+            </div>
             <div className="card">
               {loader === true ? <Loading/>: ''}
               <div className="card-header fw-bold text-light history-head">
