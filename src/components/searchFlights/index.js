@@ -28,7 +28,11 @@ const SearchFlights = (props) => {
             console.log(res)
             setData(res.data.data);
             dispatch({type: 'END'})  
-          });
+        }).catch((err) => {
+            dispatch({type: 'END'})  
+            console.log(err)
+        });
+          ;
 
           const searchRoundTrip = {
             depatureDate: props.data.arrivalDate,
@@ -44,7 +48,10 @@ const SearchFlights = (props) => {
                 console.log(res)
                 setDataRoundTrip(res.data.data);
                 dispatch({type: 'END'})  
-              });
+              }).catch((err) => {
+                dispatch({type: 'END'})  
+                console.log(err)
+            });;
         }
     }, [props.data,dispatch])
 
