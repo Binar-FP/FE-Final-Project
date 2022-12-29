@@ -6,4 +6,36 @@
 
 .text-color{
     color: #0eb5af !important;
+    padding: 0px !important;
+    margin: 0px !important;
+}
+
+.bgku-color{
+    background-color: #003f3f !important;
+}
+
+.history-head h4{
+    font-size: medium;
+    color: black;
+}
+
+.history-head{
+    background-color: rgb(240, 240, 240) !important;
+}
+
+@media screen and (max-width: 768px) {
+    .body-history{
+        min-height: 100vh;
+        max-height: 100vh;
+        overflow-y: scroll;
+    }
+    .history-head{
+        display: block;
+        background-color: #003f3f !important;
+    }
+
+    .history-head h4{
+        font-size: 1.5rem;
+        color: white;
+    }
 }
