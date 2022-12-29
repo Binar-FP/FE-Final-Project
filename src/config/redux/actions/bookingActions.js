@@ -18,27 +18,34 @@ export const BookingActions = (data,roundtrip) => async (dispatch) => {
         }else{
             dispatch({type: 'BOOKING', payload : response.data.data.newBooking[0].id});
         }
-        // dispatch({type: 'BOOKING', payload : response.data.data.newBooking.id});
         return response;
     } catch (error) {
         SweatAlert(String(error.response.data.message), 'warning')
     }       
 }
 
-export const PaymentActions = (data, dataBooking) => async (dispatch) => {
-    console.log(dataBooking)
+export const PaymentActions = (data, dataBooking, email) => async (dispatch) => {
+    console.log(email)
     try {
         const response = await BookingService.paymentBooking(data);
         if (response.data.paid === true) {
             if(dataBooking.roundtrip === true){
                 const updateData = {
                     status : true,
-                    id : dataBooking.idBooking
+                    id : dataBooking.idBooking,
+                    price: dataBooking.price,
+                    bagage: dataBooking.bagage,
+                    name: dataBooking.name,
+                    email: email,
                 }
                 await BookingService.updateBooking(updateData);
                 const updateDataRound = {
                     status : true,
-                    id : dataBooking.idBookingRound
+                    id : dataBooking.idBookingRound,
+                    price: dataBooking.priceRound,
+                    bagage: dataBooking.bagage,
+                    name: dataBooking.name,
+                    email: email,
                 }
                 await BookingService.updateBooking(updateDataRound);
                 dispatch({type: 'SUCCESS_PAYMENT'});
@@ -46,7 +53,11 @@ export const PaymentActions = (data, dataBooking) => async (dispatch) => {
             }else{
                 const updateData = {
                     status : true,
-                    id : dataBooking.idBooking
+                    id : dataBooking.idBooking,
+                    price: dataBooking.price,
+                    bagage: dataBooking.bagage,
+                    name: dataBooking.name,
+                    email: email,
                 }
                 await BookingService.updateBooking(updateData);
                 dispatch({type: 'SUCCESS_PAYMENT'});
