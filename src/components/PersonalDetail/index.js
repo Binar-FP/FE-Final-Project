@@ -62,6 +62,9 @@ const PersonalDetail = () => {
                 <div className="card-body">
                 {loader === true ? <Loading/>: ''}
                 <div class="card">
+                <div className="card-header fw-bold bgku-color text-light">
+                <h4>Profile</h4>
+              </div>
                     <div class="card-body">
                         <div className="row">
                     <h4 className="mt-4 mb-5 text-center">Update Profile</h4>

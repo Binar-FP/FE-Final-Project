@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { Navbar, Footer, SettingBox } from '../../components'
+import { Navbar, SettingBox } from '../../components'
 
 
 const Profile = () => {
@@ -19,7 +19,6 @@ const Profile = () => {
     <>
       <Navbar />
       <SettingBox />
-      {/* <Footer /> */}
     </>
   )
 }
