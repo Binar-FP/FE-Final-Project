@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { PencilSquare, PlusCircle, Trash, } from 'react-bootstrap-icons'
 import { PutFlightsActions, DeleteFlightsActions, CreateFlightsActions } from '../../config/redux/actions/flightsActions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { FlightsService } from '../../services/flightsService';
 import { AirportService } from '../../services/airportService';
 import { DestinationsService } from '../../services/destinationsService';
+import Loading from '../loading';
 
 const FlightsAdmin = () => {
     const [update, setUpdate] = useState(false)
@@ -13,6 +14,7 @@ const FlightsAdmin = () => {
     const [destinations, setDestinations] = useState([])
     const [formValues, setFormValues] = useState([])
     const [formCreate, setFormCreate] = useState({airPortId: '1', destinationId: '1'})
+    const loader = useSelector(state => state.loading.loading)
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -31,22 +33,24 @@ const FlightsAdmin = () => {
     }, [])
     
     const updateHandler = async () => {
+        dispatch({type: 'PROGRESS'})
         await dispatch(PutFlightsActions(formValues.id,formValues));
         setUpdate(!update)
     }
 
     const deleteHandler = async (id) => {
+        dispatch({type: 'PROGRESS'})
         await dispatch(DeleteFlightsActions(id));
         setUpdate(!update)
     }
 
     const createHandler = async () => {
+        dispatch({type: 'PROGRESS'})
         await dispatch(CreateFlightsActions(formCreate));
         setUpdate(!update)
     }
 
     const modalHandler = async (id) => {
-
         const FlightsHit = await FlightsService.getFlightsById(id)
         setFormValues(FlightsHit.data.data)
     }
@@ -57,6 +61,7 @@ const FlightsAdmin = () => {
 
   return (
     <>
+      {loader === true ? <Loading/>: ''}
       <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 className="h2">Flights</h1>
@@ -77,9 +82,6 @@ const FlightsAdmin = () => {
               arrivalDate:'',
               arrivalTime:'',
               capasity:'',
-              economyClassPrice:'',
-              businessClassPrice:'',
-              firstClassPrice:''
               })}><PlusCircle className='me-2'/>Add</button>
           </div>
         </div>
@@ -101,7 +103,6 @@ const FlightsAdmin = () => {
                   <th scope="col">Arrival Date</th>
                   <th scope="col">Arrival Time</th>
                   <th scope="col">Capasity</th>
-                  <th scope="col">Type Flight</th>
                   <th scope="col">Type Class</th>
                   <th scope="col">Class Price</th>
                   <th scope="col">Update</th>
@@ -125,7 +126,6 @@ const FlightsAdmin = () => {
                     <td>{flights.arrivalDate}</td>
                     <td>{flights.arrivalTime}</td>
                     <td>{flights.capasity}</td>
-                    <td>{flights.typeOfFlight}</td>
                     <td>{flights.typeOfClass}</td>
                     <td>{flights.ClassPrice}</td>
                     {/* MODAL */}
@@ -271,7 +271,7 @@ const FlightsAdmin = () => {
                                       <label htmlFor="" className="mb-2">Type Class</label>
                                       <select 
                                       className="form-select" 
-                                      onChange={(e)=> setFormValues({...formCreate,typeOfClass: e.target.value})}
+                                      onChange={(e)=> setFormCreate({...formCreate,typeOfClass: e.target.value})}
                                       value={formCreate.typeOfClass}>
                                       <option >Type Of Class</option>
                                       <option value={'Economy Class'}>Economy Class</option>
@@ -286,41 +286,6 @@ const FlightsAdmin = () => {
                                         type="text" 
                                         onChange={(e)=> setFormCreate({...formCreate,ClassPrice: e.target.value})} 
                                         value={formCreate.ClassPrice} />
-                                    </div>
-                                    <div className="form-group mb-3">
-                                      <label htmlFor="" className="mb-2">Type Flight</label>
-                                      <select 
-                                      className="form-select" 
-                                      onChange={(e)=> setFormValues({...formCreate,typeOfFlight: e.target.value})}
-                                      value={formCreate.typeOfFlight}>
-                                      <option >Type Of Flight</option>
-                                      <option value={'One Way'}>One Way</option>
-                                      <option value={'Round Way'}>Round Way</option>
-                                      </select>
-                                    </div>
-                                    <div className="form-group mb-3">
-                                        <label htmlFor="" className="mb-2">Economy ClassPrice</label>
-                                        <input 
-                                        className="form-control ps-4" 
-                                        type="text" 
-                                        onChange={(e)=> setFormCreate({...formCreate,economyClassPrice: e.target.value})} 
-                                        value={formCreate.economyClassPrice} />
-                                    </div>
-                                    <div className="form-group mb-3">
-                                        <label htmlFor="" className="mb-2">Business ClassPrice</label>
-                                        <input 
-                                        className="form-control ps-4" 
-                                        type="text" 
-                                        onChange={(e)=> setFormCreate({...formCreate,businessClassPrice: e.target.value})} 
-                                        value={formCreate.businessClassPrice} />
-                                    </div>
-                                    <div className="form-group mb-3">
-                                        <label htmlFor="" className="mb-2">First ClassPrice</label>
-                                        <input 
-                                        className="form-control ps-4" 
-                                        type="text" 
-                                        onChange={(e)=> setFormCreate({...formCreate,firstClassPrice: e.target.value})} 
-                                        value={formCreate.firstClassPrice} />
                                     </div>
                                   </div>
                               </div>
@@ -472,7 +437,7 @@ const FlightsAdmin = () => {
                                             value={formValues.typeOfClass}>
                                             <option >Type Of Class</option>
                                             <option value={'Economy Class'}>Economy Class</option>
-                                            <option value={'Bussines Class'}>Bussines Class</option>
+                                            <option value={'Business Class'}>Bussines Class</option>
                                             <option value={'First Class'}>First Class</option>
                                             </select>
                                           </div>
@@ -481,20 +446,10 @@ const FlightsAdmin = () => {
                                               <input 
                                               className="form-control ps-4" 
                                               type="text" 
-                                              onChange={(e)=> setFormCreate({...formValues,ClassPrice: e.target.value})} 
+                                              onChange={(e)=> setFormValues({...formValues,ClassPrice: e.target.value})} 
                                               value={formValues.ClassPrice} />
                                           </div>
-                                          <div className="form-group mb-3">
-                                            <label htmlFor="" className="mb-2">Type Flight</label>
-                                            <select 
-                                            className="form-select" 
-                                            onChange={(e)=> setFormValues({...formValues,typeOfFlight: e.target.value})}
-                                            value={formValues.typeOfFlight}>
-                                            <option value={'One Way'}>One Way</option>
-                                            <option value={'Round Way'}>Round Way</option>
-                                            </select>
-                                          </div>
-                                        </div>
+                                      </div>
                                     </div>
                                 </div>
                                 <div className="modal-footer">

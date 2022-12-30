@@ -38,12 +38,20 @@ export const AuthService = {
             setTimeout(() => {
                 localStorage.removeItem('token');
                 localStorage.removeItem('isLogged');
+                localStorage.removeItem('user');
+                localStorage.removeItem('role');
+                localStorage.removeItem('id');
+                localStorage.removeItem('email');
             }
             , 604800000);
         } else {
             setTimeout(() => {
                 localStorage.removeItem('token');
                 localStorage.removeItem('isLogged');
+                localStorage.removeItem('user');
+                localStorage.removeItem('role');
+                localStorage.removeItem('id');
+                localStorage.removeItem('email');
             }
             , 86400000);
         }
@@ -62,12 +70,20 @@ export const AuthService = {
             setTimeout(() => {
                 localStorage.removeItem('token');
                 localStorage.removeItem('isLogged');
+                localStorage.removeItem('user');
+                localStorage.removeItem('role');
+                localStorage.removeItem('id');
+                localStorage.removeItem('email');
             }
             , 604800000);
         } else {
             setTimeout(() => {
                 localStorage.removeItem('token');
                 localStorage.removeItem('isLogged');
+                localStorage.removeItem('user');
+                localStorage.removeItem('role');
+                localStorage.removeItem('id');
+                localStorage.removeItem('email');
             }
             , 86400000);
         }
@@ -116,6 +132,7 @@ export const AuthService = {
         localStorage.removeItem('user');
         localStorage.removeItem('role');
         localStorage.removeItem('id');
+        localStorage.removeItem('email');
         return;
     }
 }
@@ -125,9 +142,11 @@ const setHeadersAndStorage = ({ user, token}, Name, RoleId, id, email) => {
     localStorage.setItem('user', JSON.stringify(Name));
     localStorage.setItem('role', JSON.stringify(RoleId));
     localStorage.setItem('id', JSON.stringify(id));
-    localStorage.setItem('email', JSON.stringify(email));
     localStorage.setItem('token', token);
     localStorage.setItem('isLogged',true);
+    if (email) {
+        localStorage.setItem('email', JSON.stringify(email));
+    }
     
     
   }

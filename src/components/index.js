@@ -30,6 +30,7 @@ import ResetPasswordComponent from "./resetPasswordComponent";
 import ResetPasswordSend from "./resetPasswordSend";
 import History from "./History";
 import Notification from "./notification";
+import HistoryAdmin from "./historyAdmin";
 
 export { 
     Navbar,
@@ -64,4 +65,5 @@ export {
     ResetPasswordSend,
     History,
     Notification,
+    HistoryAdmin,
  };
