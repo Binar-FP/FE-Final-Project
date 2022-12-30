@@ -158,7 +158,7 @@ const Navbar = () => {
                         <span class="visually-hidden">unread messages</span>
                             </span>}
                         <Bell className='icon' color="white" size={25} />
-                        <Link className="nav-link" to="/notification" onClick={()=>dispatch({type:"NOTIFICATION"})}>History</Link>
+                        <Link className="nav-link" to="/notification" onClick={()=>dispatch({type:"NOTIFICATION"})}>Notif</Link>
                     </li>
                     <li className="nav-item mobile-item">
                         <PersonFillGear className='icon' color="white" size={25} />
