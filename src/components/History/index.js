@@ -65,7 +65,7 @@ const History = () => {
               </div>
               <div className="card-body body-history">
                 <ul className="list-group list-group-flush">
-                {status && history.map((item) => {
+                {status && history.lenght > 0 ? history.map((item) => {
                   return (
                         <li className="list-group-item">
                           <div className="row">
@@ -108,7 +108,7 @@ const History = () => {
                         </li>
                       )
                       }
-                      )}
+                      ):<h5 className='text-center text-danger'>No History</h5>}
                 </ul>
               </div>
             </div>
