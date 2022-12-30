@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { PencilSquare, PlusCircle, Trash, } from 'react-bootstrap-icons'
 import { PutUsersActions, DeleteUsersActions, CreateUsersActions } from '../../config/redux/actions/usersActions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { UsersService } from '../../services/usersService';
+import Loading from '../loading';
 import './user.css'
 
 const UsersManagement = () => {
@@ -10,6 +11,7 @@ const UsersManagement = () => {
     const [users, setUsers] = useState([])
     const [formValues, setFormValues] = useState([])
     const [formCreate, setFormCreate] = useState({airPortId: '1', destinationId: '1'})
+    const loader = useSelector(state => state.loading.loading)
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -19,22 +21,24 @@ const UsersManagement = () => {
     }, [update])
     
     const updateHandler = async () => {
+         dispatch({type: 'PROGRESS'})
         await dispatch(PutUsersActions(formValues.id,formValues));
         setUpdate(!update)
     }
 
     const deleteHandler = async (id) => {
         await dispatch(DeleteUsersActions(id));
+        dispatch({type: 'PROGRESS'})
         setUpdate(!update)
     }
 
     const createHandler = async () => {
         await dispatch(CreateUsersActions(formCreate));
+        dispatch({type: 'PROGRESS'})
         setUpdate(!update)
     }
 
     const modalHandler = async (id) => {
-
         const UserssHit = await UsersService.getUsersById(id)
         setFormValues(UserssHit.data.data)
     }
@@ -46,6 +50,7 @@ const UsersManagement = () => {
 
   return (
     <>
+    {loader === true ? <Loading/>: ''}
       <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 className="h2">Users</h1>
@@ -81,6 +86,8 @@ const UsersManagement = () => {
                   <th scope="col">Date Of Birth</th>
                   <th scope="col">Gender</th>
                   <th scope="col">Role Id</th>
+                  <th scope="col">Status Account</th>
+                  <th scope="col">Google ID</th>
                   <th scope="col">Update</th>
                   <th scope="col">Delete</th>
                 </tr>
@@ -102,6 +109,8 @@ const UsersManagement = () => {
                     <td>{users.dateOfBirth}</td>
                     <td>{users.gender}</td>
                     <td>{users.roleId}</td>
+                    <td>{users.verified === true ? 'Actived':'Not Active'}</td>
+                    <td>{users.googleId}</td>
                     {/* MODAL */}
                         {/* <!-- Button trigger modal --> */}
                         <td>

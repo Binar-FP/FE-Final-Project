@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
-import { Sidebar, NavbarAdmin, AirportAdmin, DestinationsAdmin, FlightsAdmin, SchedulesAdmin, UsersManagement } from '../../components'
+import { Sidebar, NavbarAdmin, AirportAdmin, DestinationsAdmin, FlightsAdmin, SchedulesAdmin, UsersManagement,HistoryAdmin } from '../../components'
 
 const Admin = () => {
   const history = useNavigate()
@@ -30,6 +30,7 @@ const Admin = () => {
             {componentOpen === 'flights' && <FlightsAdmin />}
             {componentOpen === 'schedules' && <SchedulesAdmin />}
             {componentOpen === 'users' && <UsersManagement />}
+            {componentOpen === 'history' && <HistoryAdmin />}
         </div>
     </div>
     </>
