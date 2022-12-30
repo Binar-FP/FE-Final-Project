@@ -21,10 +21,15 @@ const PersonalDetail = () => {
 
     useEffect(() => {
         dispatch({type: 'PROGRESS'})
+        console.log(id)
         UsersService.getUsersById(id).then((res) => {
             setFormValues(res.data.data);
             dispatch({type: 'END'})
-            });
+            }).catch((err) => {
+            console.log(err)
+            dispatch({type: 'END'})
+            })
+            ;
     }, [id,dispatch])
     
     const handleUpdate = () => {
