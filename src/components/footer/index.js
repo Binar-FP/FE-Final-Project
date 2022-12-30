@@ -8,7 +8,7 @@ const Footer = () => {
       <section className="">
         <div className="container text-center mt-5">
 
-          <div className="row mt-3">
+          <div className="row row-footer mt-3">
 
             <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4 text-lg-start">
               <h6 className="text-uppercase fw-bold mb-4">
