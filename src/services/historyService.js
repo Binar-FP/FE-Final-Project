@@ -12,4 +12,9 @@ export const HistoryService = {
         return response;
     },
 
+    getHistoryAll : async () => {
+        const response = await API.get('/histories/all');
+        return response;
+    },
+
 }

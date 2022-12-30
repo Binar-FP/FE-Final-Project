@@ -13,10 +13,11 @@ const auth = (state = initialState, action) => {
         case 'LOGIN':
             return ({
                 ...state,
-                user: action.payload.user,
-                token: action.payload.token,
+                user: action.payload.data.user,
+                token: action.payload.data.token,
                 isLoggedIn: true,
-                roleId: action.payload.roleId
+                roleId: action.payload.data.roleId,
+                id: action.payload.data.id,
             });
         case 'LOGOUT':
             return ({
