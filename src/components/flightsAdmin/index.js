@@ -275,7 +275,7 @@ const FlightsAdmin = () => {
                                       value={formCreate.typeOfClass}>
                                       <option >Type Of Class</option>
                                       <option value={'Economy Class'}>Economy Class</option>
-                                      <option value={'Bussines Class'}>Bussines Class</option>
+                                      <option value={'Business Class'}>Bussines Class</option>
                                       <option value={'First Class'}>First Class</option>
                                       </select>
                                     </div>
