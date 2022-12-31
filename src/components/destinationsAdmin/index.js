@@ -33,7 +33,7 @@ const DestinationsAdmin = () => {
     }
 
     const createHandler = async () => {
-        await dispatch(CreateDestinationsActions(formValues));
+        await dispatch(CreateDestinationsActions(formCreate));
         setUpdate(!update)
         // window.location.reload(true);
     }
