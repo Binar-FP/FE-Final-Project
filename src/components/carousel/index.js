@@ -15,7 +15,7 @@ const Carousel = () => {
                 <div class="card">
                     <img src={NatureBg} class="card-img-top" alt="..."/>
                     <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <p class="card-text">Bangunan ini kerap disebut sebagai salah satu istana paling indah yang ada di Indonesia. Keunikan utama dari arsitektur istana ini adalah kombinasi unsur Melayu, Islam, India, Spanyol, dan Italia di dalamnya.</p>
                     </div>
                 </div>
             </div>
@@ -23,7 +23,7 @@ const Carousel = () => {
                 <div class="card">
                     <img src={NatureBg1} class="card-img-top" alt="..."/>
                     <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <p class="card-text">Masjid Kesultanan Aceh ini dibangun oleh Sultan Iskandar Muda, terletak tepat di jantung Kota Banda Aceh yang menjadikan titik pusat dari segala kegiatan di Aceh Darussalam. Masjid ini mirip dengan bangunan megah Taj Mahal di India dengan memberikan nuansa sholat seperti di Masjid Nabawi.</p>
                     </div>
                 </div>
             </div>
@@ -31,7 +31,7 @@ const Carousel = () => {
                 <div class="card">
                     <img src={NatureBg2} class="card-img-top" alt="..."/>
                     <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <p class="card-text">Kota Padang memiliki banyak tempat wisata yang menarik untuk dikunjungi. Kota Padang terkenal dengan pesisirnya karena letak kota Padang yang tidak terlalu jauh dari bibir pantai. Bangunan-bangunan ikonik juga menjadi salah satu daya tarik Padang terhadap wisatawan yang berkunjung ke kota ini.</p>
                     </div>
                 </div>
             </div>
