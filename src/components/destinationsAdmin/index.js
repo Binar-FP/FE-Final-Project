@@ -33,7 +33,7 @@ const DestinationsAdmin = () => {
     }
 
     const createHandler = async () => {
-        await dispatch(CreateDestinationsActions(formValues));
+        await dispatch(CreateDestinationsActions(formCreate));
         setUpdate(!update)
         // window.location.reload(true);
     }
@@ -114,6 +114,13 @@ const DestinationsAdmin = () => {
                       className="form-control" 
                       name='name' 
                       type="text"/>
+                      <label htmlFor="" className="mb-2">Description</label>
+                      <input 
+                      placeholder='Name destinations' 
+                      onChange={(e)=> setFormCreate({...formCreate,description: e.target.value, id :destinations.id})} 
+                      className="form-control" 
+                      name='name' 
+                      type="text"/>
                       <label htmlFor="" className="mb-2">Code</label>
                       <input 
                       placeholder='Image destinations'
@@ -145,6 +152,14 @@ const DestinationsAdmin = () => {
                               <input 
                               defaultValue={destinations.nameDestination} 
                               onChange={(e)=> setFormValues({...formValues,nameDestination: e.target.value})} 
+                              className="form-control" 
+                              name='namnameDestinatione' 
+                              type="text"
+                              value={formValues.nameDestination}/>
+                              <label htmlFor="" className="mb-2">Description</label>
+                              <input 
+                              defaultValue={destinations.nameDestination} 
+                              onChange={(e)=> setFormValues({...formValues,description: e.target.value})} 
                               className="form-control" 
                               name='namnameDestinatione' 
                               type="text"
