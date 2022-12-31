@@ -1,48 +1,28 @@
-import './index.css'
+import React from 'react';
+import './register.css'
 import { RegisterBg } from '../../assets'
-import axios from 'axios'
 import { useForm } from 'react-hook-form';
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { registerActions } from '../../config/redux/actions/authActions';
 
 const RegisterComponent = () => {
-    const navigate = useNavigate();
+    const history = useNavigate();
     const { register, handleSubmit, formState: { errors, dirtyFields, isValid} ,getValues} = useForm();
-
+    
+    const dispatch = useDispatch();
     const onSubmit = (data) => {
-        axios.post('https://flywithme-be.up.railway.app/api/register', data)
-        .then((response) => {
-            console.log(response.data);
-            SweatAlert('Register Berhasil', 'success');
-            navigate('/login');
-        }).catch(function (error) {
-            console.log(error);
-            if(error){
-                SweatAlert(String(error.response.data.message), 'warning')
-            }
-        });
+        dispatch(registerActions(data, history));
     }
-
-    const SweatAlert = (title,icon) => {
-        const MySwal = withReactContent(Swal)
-        MySwal.fire({
-            title: title,
-            icon: icon,
-            confirmButtonText: 'Oke'
-            })
-    }
-
-    console.log(errors);
 
   return (
     <>
     <div className="d-flex justify-content-center content mx-auto">
-        <div className="left ps-5 pt-5">
+        <div className="left ps-5-lg pt-5-lg p-4">
             <form className="" onSubmit={handleSubmit(onSubmit)}>
             <h3 className="mb-5 text-center">Create Account</h3>
             <div className="row">
-                <div className="col-6">
+                <div className="col-lg-6 col-sm-12">
                     <div className="form-group mb-3">
                         <label className="mb-2">First Name</label>
                         <input className={errors.firstName?"form-control ps-4 border-danger":"form-control ps-4"} 
@@ -113,7 +93,7 @@ const RegisterComponent = () => {
                         {errors.password && <p className="text-danger">{errors.password.message}</p>}
                     </div>
                 </div>
-                <div className="col-6">
+                <div className="col-md-6 col-sm-12">
                     <div className="form-group mb-3">
                         <label className="mb-2">Last Name</label>
                         <input className={errors.lastName?"form-control ps-4 border-danger":"form-control ps-4"} 
@@ -204,7 +184,7 @@ const RegisterComponent = () => {
         </div>
         <div className="right">
             <div className="plane d-flex justify-content-center align-items-center">
-                <img src={RegisterBg} alt=""/>
+                <img className='registerBg' src={RegisterBg} alt=""/>
             </div>
         </div>
     </div>

@@ -1,0 +1,20 @@
+.content-hero{
+    /* background-color: #F5F8FF; */
+    /* height: 50vh; */
+    width: 70vw;
+    position: relative;
+    margin: auto;
+    margin-top:-12vh;
+}
+
+.img-users{
+    height: 60vh;
+}
+
+@media screen and (max-width: 768px) {
+    .content-hero{
+        width: 80vw !important;
+    }
+
+}
+   

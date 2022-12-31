@@ -1,0 +1,25 @@
+.content-carousel{
+    width: 70vw !important;
+}
+
+.card-img{
+    width: 40px !important;
+    height: 40px;
+}
+
+.star-img{
+    width: 100px !important;
+    /* height: 20px; */
+}
+
+@media screen and (max-width: 994px) {
+
+}
+
+@media screen and (max-width: 768px) {
+    .content-carousel{
+        width: 80vw !important;
+    }
+
+}
+    

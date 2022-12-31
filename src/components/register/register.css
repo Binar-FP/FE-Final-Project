@@ -1,0 +1,48 @@
+.content{
+    background-color: #F5F8FF;
+    /* height: 120vh; */
+    width: 70vw;
+    margin-top:-190px;
+}
+
+.left{
+    height: auto;
+    width: 60vw;
+}
+
+.right{
+    height: auto;
+    width: 40vw;
+}
+
+.plane{
+    height: 100%;
+    width: 100%;
+}
+
+.registerBg{
+    width: 70vh;
+}
+
+.button{
+    background-color: #59C1BD;
+}
+
+input{
+    border-radius: 12px !important;
+    font-weight: 200;
+}
+
+@media screen and (max-width: 768px) {
+    .content{
+        width: 80vw;
+    }
+    .left{
+        width: 100vw;
+    }
+    .right{
+        display: none;
+    }
+
+  
+}

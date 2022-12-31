@@ -1,0 +1,57 @@
+.content-notification{
+    overflow-y: auto !important;
+    overflow-x: hidden  !important;
+    width: 100% !important;
+    min-height: 90vh;
+    height: 90vh !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin-top: 10vh !important;
+    padding-bottom: 100px !important;
+}
+
+.card-item{
+    position: fixed;
+    height: 100% !important;
+    border: 0px !important;
+}
+
+.read-all-notif{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100px !important;
+    background-color: #F5F8FF;
+    border-radius: 0px 0px 10px 10px;
+    padding: 20px;
+}
+
+.card-notifku{
+    padding-top: 200px !important;
+    min-height: 100vh;
+    border-radius: 0px !important;
+}
+
+.color-primary{
+    background-color: #003f3f;
+}
+
+.notification-unread{
+    background-color: #59c1be59 !important;
+}
+
+.box-item{
+    background-color: #003f3f;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+}
+
+.text-notification{
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+}

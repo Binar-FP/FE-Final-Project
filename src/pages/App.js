@@ -1,10 +1,14 @@
-import { Routes } from "../config";
+import React from 'react';
+import { Routes, store } from "../config";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import { Provider } from "react-redux";
 
 function App() {
   return (
-    <Routes/>
+    <Provider store={store}>
+      <Routes/>
+    </Provider>
   );
 }
 

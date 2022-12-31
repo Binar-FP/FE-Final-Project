@@ -1,5 +1,5 @@
 import React from 'react'
-import { Navbar, RegisterComponent,Footer  } from '../../components'
+import { Navbar, RegisterComponent, Footer  } from '../../components'
 
 const Register = () => {
   return (

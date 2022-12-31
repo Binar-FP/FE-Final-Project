@@ -1,0 +1,27 @@
+.content-question{
+    background-color: #F5F8FF;
+    /* width: 80%; */
+    /* margin-top:-190px; */
+}
+
+.left-question{
+    height: auto;
+    width: 35vw;
+}
+
+.right-question{
+    height: auto;
+    width: 65vw;
+}
+
+.bg-right{
+    background-color: #010C39;
+}
+
+.button-question{
+    background-color: #010C39 !important;
+}
+
+.text-quetions{
+    color: #59C1BD;
+}

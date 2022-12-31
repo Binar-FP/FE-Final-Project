@@ -1,0 +1,48 @@
+name: Lint and Test Before Merge
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize]
+    branches:
+      - release
+
+jobs: 
+    lint:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Cache dependencies
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+      - name: Install dependencies
+        run: npm install
+      - name: Lint code
+        run: npm run lint
+      - name: Send status to Discord
+        uses: nebularg/actions-discord-webhook@v1
+        with:
+          webhook_url: ${{ secrets.discord_webhook_url }} # required
+          status: ${{ job.status }} # optional, this is the default
+        if: always() # or failure() or success()
+
+      merge:
+    needs: [test, lint]
+    environment: testing
+    runs-on: ubuntu-latest
+    steps:
+      - name: Merge
+        run: echo "Can Be Merge..."
+  report:
+    needs: merge
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output information
+        run: |
+          echo "Something went wrong"
+          echo "${{ toJSON(github) }}" 

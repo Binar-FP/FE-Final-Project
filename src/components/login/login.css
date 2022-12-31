@@ -1,0 +1,60 @@
+.content-login{
+    background-color: #F5F8FF;
+    width: 70vw;
+    margin-top:-190px;
+}
+
+.left-login{
+    height: auto;
+    width: 25vw;
+    padding: 40px 0 0 50px;
+}
+
+.right-login{
+    height: auto;
+    width: 75vw;
+}
+
+.plane{
+    height: 100%;
+    width: 100%;
+}
+
+.plane-img{
+    width: 90%;
+}
+
+.button{
+    background-color: #59C1BD !important;
+}
+
+input{
+    border-radius: 12px !important;
+    font-weight: 200;
+}
+.border-red{
+    border: 1px solid red !important;
+}
+
+.btn-google{
+    border-radius: 8px !important;
+    border: none !important;
+    text-align: center !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+@media screen and (max-width: 768px) {
+    .content-login{
+        width: 80vw;
+    }
+    .left-login{
+        padding: 20px;
+        width: auto;
+    }
+    .right-login{
+        display: none;
+    }
+
+  
+}
