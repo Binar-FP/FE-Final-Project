@@ -29,7 +29,7 @@ const Carousel = () => {
                 <div className="card">
                     <img src={NatureBg} className="card-img-top" alt="..."/>
                     <div className="card-body">
-                        <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <p className="card-text">Bangunan ini kerap disebut sebagai salah satu istana paling indah yang ada di Indonesia. Keunikan utama dari arsitektur istana ini adalah kombinasi unsur Melayu, Islam, India, Spanyol, dan Italia di dalamnya.</p>
                     </div>
                 </div>
             </div>
