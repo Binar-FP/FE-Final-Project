@@ -1,6 +1,26 @@
 import React from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Error404, Error500, Home, Login, Register, Help, Profile, LoginAdmin, Admin, Booking, ResetPassword, NotificationsPage, ForgotPassword } from '../../pages'
+import { 
+   BrowserRouter,
+   Routes,
+   Route 
+} from 'react-router-dom'
+import { 
+   Error404,
+   Error500,
+   Home,
+   Login,
+   Register,
+   Help,
+   Profile,
+   LoginAdmin,
+   Admin,
+   Booking,
+   ResetPassword,
+   NotificationsPage,
+   ForgotPassword,
+   Destination,
+   Wishlist,
+} from '../../pages'
 
 const index = () => {
   return (
@@ -20,6 +40,8 @@ const index = () => {
         <Route path="/reset" element={<ResetPassword/>} />
         <Route path="/forgot" element={<ForgotPassword/>} />
         <Route path="/notification" element={<NotificationsPage/>} />
+        <Route path="/destination" element={<Destination/>} />
+        <Route path="/wishlist" element={<Wishlist/>} />
       </Routes>
     </BrowserRouter>
   )
