@@ -186,6 +186,16 @@ const Navbar = () => {
                                     Profile
                                 </Link>
                             </li>
+                            <li className='d-flex align-items-center text-dark'>
+                                <Link className="dropdown-item text-dark" to="/wishlist">
+                                    Wishlist
+                                </Link>
+                            </li>
+                            <li className='d-flex align-items-center text-dark'>
+                                <Link className="dropdown-item text-dark" to="/destination">
+                                    Destination
+                                </Link>
+                            </li>
                             <li className='d-flex align-items-center'>
                                 <Link className="dropdown-item text-dark" to="/profile" onClick={()=>dispatch({type:"HISTORY"})}>
                                     History
