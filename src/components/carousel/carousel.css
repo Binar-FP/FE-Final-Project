@@ -8,3 +8,70 @@
     }
 
 }
+
+
+.card-carouselku:hover{
+    opacity: 0.8;
+    /* background-color: #59C1BD ; */
+}
+
+.item:hover a p.new-label:after{
+    content: 'ADD';
+}
+
+.heart{
+    display: none;
+    animation-duration: 4s;
+    animation-iteration-count: 2;
+    animation-direction: alternate-reverse;  
+}
+
+.text-heart{
+    display: none;
+}
+
+.card-carouselku:hover .heart{
+    display: block;
+    position: fixed;
+    top: 30%;
+    right: 42%;
+    padding: 0px !important;
+    margin: 0px !important;
+    margin-left: 10px;
+    color: rgb(255, 253, 253);
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.card-carouselku:hover .text-heart{
+    color: rgb(255, 253, 253);
+    font-size: 20px;
+    top: 50%;
+    right: 25%;
+    position: absolute;
+    display: block;
+}
+
+.img-destinationku{
+    width: 40vh;
+    height: 40vh;
+    object-fit: cover;
+}
+
+@media screen and (max-width: 994px) {
+    .img-destinationku{
+        width: 30vh;
+        height: 25vh;
+        object-fit: cover;
+    }
+}
+
+  .click-heart{
+    animation-name: heart;
+  }
+  
+  @keyframes heart {
+    0%   {color: white;}
+    100% {color: red;}
+  }
+  

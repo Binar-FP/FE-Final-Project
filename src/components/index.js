@@ -31,6 +31,9 @@ import ResetPasswordSend from "./resetPasswordSend";
 import History from "./History";
 import Notification from "./notification";
 import HistoryAdmin from "./historyAdmin";
+import DestinationComponent from "./DestinationComponent";
+import DetailDestination from "./DetailDestinations";
+import WishlistComponent from "./WishlistComponent";
 
 export { 
     Navbar,
@@ -66,4 +69,7 @@ export {
     History,
     Notification,
     HistoryAdmin,
+    DestinationComponent,
+    DetailDestination,
+    WishlistComponent,
  };
