@@ -28,6 +28,7 @@ const Navbar = () => {
     const [formValues, setFormValues] = useState({});
     const id = useSelector(state => state.auth.id)
     const [navHidden, setNavHidden] = useState(false);
+    const pagesActive = useSelector(state => state.navbar.pages);
 
     useEffect(() => {
         UsersService.getUsersById(id).then((res) => {
@@ -86,31 +87,43 @@ const Navbar = () => {
                     {/* jika tidak Login  */}
                     {checkLogin === true ?
                     <li className="nav-item mobile-item">
-                        <House className='icon' color="white" size={25}/>
-                        <a className="nav-link active" aria-current="page" href="/">Home</a>
+                        <House className='icon' color={pagesActive === "home" ? "salmon": "white"} size={25}/>
+                        <Link className={pagesActive === "home" ? "nav-link active": "nav-link"} to="/" onClick={()=>dispatch({type:"HOME"})}>
+                            Home
+                        </Link>
                     </li>
                     :<li className="nav-item">
-                        <House className='icon' color="white" size={25}/>
-                        <a className="nav-link active" aria-current="page" href="/">Home</a>
+                        <House className='icon' color={pagesActive === "home" ? "salmon": "white"} size={25}/>
+                        <Link className={pagesActive === "home" ? "nav-link active": "nav-link"} to="/" onClick={()=>dispatch({type:"HOME"})}>
+                            Home
+                        </Link>
                     </li>}
 
                     {checkLogin === false &&
                     <>
                         <li className="nav-item">
-                            <QuestionCircle className='icon' color="white" size={25}/>
-                            <a className="nav-link" href="/help">Help</a>
+                            <QuestionCircle className='icon' color={pagesActive === "help" ? "salmon": "white"} size={25}/>
+                            <Link className={pagesActive === "help" ? "nav-link active": "nav-link"} to="/help" onClick={()=>dispatch({type:"HELP"})}>
+                                Help
+                            </Link>
                         </li>
                         <li className="nav-item">
-                        <SearchHeart className='icon' color="white" size={25} />
-                        <a className="nav-link" href="/destination">Destination</a>
+                        <SearchHeart className='icon' color={pagesActive === "destination" ? "salmon": "white"} size={25} />
+                            <Link className={pagesActive === "destination" ? "nav-link active": "nav-link"} to="/destination" onClick={()=>dispatch({type:"DESTINATION"})}>
+                                Destination
+                            </Link>
                         </li>
                         <li className="nav-item">
-                            <ArrowRightCircle className='icon' color="white" size={25} />
-                            <a className="nav-link" href="/login">Login</a>
+                            <ArrowRightCircle className='icon' color={pagesActive === "loginku" ? "salmon": "white"} size={25} />
+                            <Link className={pagesActive === "loginku" ? "nav-link active": "nav-link"} to="/login" onClick={()=>dispatch({type:"LOGIN_NAV"})}>
+                                Login
+                            </Link>
                         </li>
                         <li className="nav-item">
-                            <PencilSquare className='icon' color="white" size={25}/>
-                            <a className="nav-link" href="/register">Register</a>
+                            <PencilSquare className='icon' color={pagesActive === "register" ? "salmon": "white"} size={25}/>
+                            <Link className={pagesActive === "register" ? "nav-link active": "nav-link"} to="/register" onClick={()=>dispatch({type:"REGISTER_NAV"})}>
+                                Register
+                            </Link>
                         </li>
                     </>
                     }
@@ -171,8 +184,10 @@ const Navbar = () => {
                     
                     </li>
                     <li className="nav-item mobile-item">
-                        <SearchHeart className='icon' color="white" size={25} />
-                        <a className="nav-link" href="/destination">Destination</a>
+                        <SearchHeart className='icon' color={pagesActive === "destination" ? "salmon": "white"} size={25} />
+                        <Link className={pagesActive === "destination" ? "nav-link active": "nav-link"} to="/destination" onClick={()=>dispatch({type:"DESTINATION"})}>
+                                Destination
+                        </Link>
                     </li>
                     <li className="nav-item mobile-item">
                     { lengthNotification === 0 ?'':
@@ -180,8 +195,11 @@ const Navbar = () => {
                                 {lengthNotification}
                         <span class="visually-hidden">unread messages</span>
                             </span>}
-                        <Bell className='icon' color="white" size={25} />
-                        <Link className="nav-link" to="/notification" onClick={()=>dispatch({type:"NOTIFICATION"})}>Notif</Link>
+                        <Bell className='icon' color={pagesActive === "notification" ? "salmon": "white"} size={25} />
+                        <Link className={pagesActive === "notification" ? "nav-link active": "nav-link"} 
+                        to="/notification" onClick={()=>{dispatch({type:"NOTIF"});dispatch({type:"NOTIFICATION"})}}>
+                            Notif
+                        </Link>
                     </li>
                     <li className="nav-item mobile-item">
                         <ThreeDots className='icon' color="white" size={25} />
