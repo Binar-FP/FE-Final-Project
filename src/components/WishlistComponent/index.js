@@ -22,9 +22,9 @@ const WishlistComponent = () => {
 
   return (
     <>
-    <div className="container content-profile">
-        <div className="row">
-      <div className="col-sm-12 col-md-12 col-lg-12">
+    {/* <div className="container content-profile"> */}
+        {/* <div className="row"> */}
+      <div className="col-sm-12 col-md-12 col-lg-9">
             <div className='box-item-wishlist d-flex justify-content-between'>
                 <p className='p-4 text-light text-notification'>Wishlist</p>
                 <p className='p-4 text-light text-notification'></p>
@@ -42,7 +42,7 @@ const WishlistComponent = () => {
                         <li className="list-group-item">
                           <div className="row">
                             <div className="col-sm-12 col-md-4 col-lg-3 bg-light text-center d-flex justify-content-around flex-column">
-                                <h6><img className='img-fluid' src={item.WhislistDestination.imageDestination} alt=""/></h6>
+                                <div className='box-image'><img className='img-fluid box-image' src={item.WhislistDestination.imageDestination} alt=""/></div>
                                 <h6>{item.WhislistDestination.nameDestination}</h6>
                             </div>
                             <div className="col-sm-12 col-md-4 col-lg-7 pt-2">
@@ -50,7 +50,7 @@ const WishlistComponent = () => {
                             </div>
                             <div className="col-sm-12 col-md-4 col-lg-2 d-flex justify-content-center align-items-center">
                                 <Link 
-                                className="btn button-wishlist" 
+                                className="btn button-wishlist text-light" 
                                 to="/destination" 
                                 onClick={()=>{
                                   dispatch({type: 'DETAIL_DESTINATION', payload: item.WhislistDestination});
@@ -58,20 +58,20 @@ const WishlistComponent = () => {
                                 }}>
                                   Go Now
                                 </Link>
-                              {/* <button className='btn button-wishlist' onClick={dispatch({type: 'DETAIL_DESTINATION', payload: item})}>Go Now</button> */}
                             </div>
                           </div>
                         </li>
                        )
                       }
                       )}
+                {wishlist.length === 0 && status === true ? <p className='text-center'>Wishlist is empty</p> : ''}
                 </ul>
               </div>
             </div>
             {/* <!-- Button trigger modal --> */}
           </div>
-        </div>
-      </div>
+        {/* </div> */}
+      {/* </div> */}
     </>
   )
 }

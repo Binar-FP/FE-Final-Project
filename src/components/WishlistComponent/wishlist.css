@@ -28,6 +28,10 @@
     display: none;
 }
 
+.box-image{
+    min-height: 10vh;
+}
+
 @media screen and (max-width: 768px) {
     .body-wishlist{
         margin-top: 10vh;
