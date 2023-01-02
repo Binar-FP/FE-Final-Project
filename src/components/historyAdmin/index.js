@@ -4,7 +4,6 @@ import { HistoryService } from '../../services/historyService';
 import Loading from '../loading';
 
 const HistoryAdmin = () => {
-    // const [update, setUpdate] = useState(false)
     const [history, setHistory] = useState([])
     const loader = useSelector(state => state.loading.loading)
 
@@ -45,11 +44,11 @@ const HistoryAdmin = () => {
                 </tr>
               </thead>
               <tbody>
-                {history.map((history) => {
+                {history.map((history, index) => {
                 return (
                 <>
                     <tr>
-                    <td>{history.id}</td>
+                    <td>{index+1}</td>
                     <td>{history.historyDate}</td>
                     <td>{history.Booking.Passengers[0].NIK}</td>
                     <td>{history.Booking.Passengers[0].name}</td>

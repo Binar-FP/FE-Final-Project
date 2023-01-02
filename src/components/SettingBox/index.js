@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './index.css'
 import PersonalDetail from '../PersonalDetail'
 import History from '../History'
+import WishlistComponent from '../WishlistComponent'
 import { UsersService } from '../../services/usersService'
 import { useDispatch, useSelector } from 'react-redux'
 import { logoutActions } from '../../config/redux/actions/authActions';
@@ -39,12 +40,14 @@ const SettingBox = () => {
               <ul className="list-group list-group-flush mx-4">
                   <li className="list-group-item" onClick={()=>dispatch({type : 'PERSONAL_DETAIL'})}>Personal Details</li>
                   <li className="list-group-item" onClick={()=>dispatch({type : 'HISTORY'})}>Payment history</li>
+                  <li className="list-group-item" onClick={()=>dispatch({type : 'WISHLIST-SETTING'})}>Wishlist</li>
                   <li className="list-group-item" onClick={logoutHandle}>Logout</li>
               </ul>
             </div>
           </div>
           {pages === "personalDetail" ? <PersonalDetail/>:''}
           {pages === "history" ? <History/>:''}
+          {pages === "wishlist" ? <WishlistComponent/>:''}
 
         </div>
       </div>

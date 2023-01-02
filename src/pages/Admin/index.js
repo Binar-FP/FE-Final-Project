@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
-import { Sidebar, NavbarAdmin, AirportAdmin, DestinationsAdmin, FlightsAdmin, SchedulesAdmin, UsersManagement,HistoryAdmin } from '../../components'
+import { Sidebar, NavbarAdmin, AirportAdmin, DestinationsAdmin, FlightsAdmin, UsersManagement,HistoryAdmin } from '../../components'
 
 const Admin = () => {
   const history = useNavigate()
@@ -27,8 +27,7 @@ const Admin = () => {
             <Sidebar page={handleComponent} />
             {componentOpen === 'airports' && <AirportAdmin />}
             {componentOpen === 'destinations' && <DestinationsAdmin />}
-            {componentOpen === 'flights' && <FlightsAdmin />}
-            {componentOpen === 'schedules' && <SchedulesAdmin />}
+            {componentOpen === 'flights' && <FlightsAdmin />} 
             {componentOpen === 'users' && <UsersManagement />}
             {componentOpen === 'history' && <HistoryAdmin />}
         </div>

@@ -15,6 +15,11 @@ const setting = (state = initialState, action) => {
                 ...state,
                 pages: "history"
             });
+        case 'WISHLIST-SETTING':
+            return ({
+                ...state,
+                pages: "wishlist"
+            });
         case 'HELP':
         return ({
             ...state,
