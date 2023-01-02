@@ -21,6 +21,11 @@ const destinations = (state = initialState, action) => {
                 id: action.payload.id,
                 pages: "detail_destination"
             });
+        case 'BACK_DESTINATION':
+            return ({
+                ...state,
+                pages: "destination"
+            });
         default:
             return state;
     }

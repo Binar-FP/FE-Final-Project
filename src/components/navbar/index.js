@@ -182,22 +182,22 @@ const Navbar = () => {
                         </a>
                         <ul className="dropdown-menu dropdown-menu-end m-2" aria-labelledby="navbarDropdown">
                             <li className='d-flex align-items-center text-dark'>
-                                <Link className="dropdown-item text-dark" to="/profile" onClick={()=>dispatch({type:"PERSONAL_DETAIL"})}>
+                                <Link className="dropdown-item text-dark" to="/profile" onClick={()=>{dispatch({type:"PERSONAL_DETAIL"});dispatch({type:"BACK_DESTINATION"})}}>
                                     Profile
                                 </Link>
                             </li>
                             <li className='d-flex align-items-center text-dark'>
-                                <Link className="dropdown-item text-dark" to="/wishlist">
+                                <Link className="dropdown-item text-dark" to="/profile" onClick={()=>{dispatch({type:"WISHLIST-SETTING"});dispatch({type:"BACK_DESTINATION"})}}>
                                     Wishlist
                                 </Link>
                             </li>
                             <li className='d-flex align-items-center text-dark'>
-                                <Link className="dropdown-item text-dark" to="/destination">
+                                <Link className="dropdown-item text-dark" to="/destination" onClick={()=>dispatch({type:"BACK_DESTINATION"})}>
                                     Destination
                                 </Link>
                             </li>
                             <li className='d-flex align-items-center'>
-                                <Link className="dropdown-item text-dark" to="/profile" onClick={()=>dispatch({type:"HISTORY"})}>
+                                <Link className="dropdown-item text-dark" to="/profile" onClick={()=>{dispatch({type:"HISTORY"});dispatch({type:"BACK_DESTINATION"})}}>
                                     History
                                 </Link>
                             </li>
