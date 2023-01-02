@@ -12,7 +12,6 @@ import ResetPassword from "./ResetPassword";
 import ForgotPassword from "./ForgotPassword";
 import NotificationsPage from "./Notification";
 import Destination from "./Destination";
-import Wishlist from "./Wishlist";
 // import DashboardAdmin from "./DasboardAdmin";
 
 export {
@@ -30,5 +29,4 @@ export {
     ForgotPassword,
     NotificationsPage,
     Destination,
-    Wishlist
 }

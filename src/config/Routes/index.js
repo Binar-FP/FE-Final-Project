@@ -19,7 +19,6 @@ import {
    NotificationsPage,
    ForgotPassword,
    Destination,
-   Wishlist,
 } from '../../pages'
 
 const index = () => {
@@ -41,7 +40,6 @@ const index = () => {
         <Route path="/forgot" element={<ForgotPassword/>} />
         <Route path="/notification" element={<NotificationsPage/>} />
         <Route path="/destination" element={<Destination/>} />
-        <Route path="/wishlist" element={<Wishlist/>} />
       </Routes>
     </BrowserRouter>
   )
