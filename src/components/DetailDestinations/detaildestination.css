@@ -3,10 +3,22 @@
     width: 60vw !important;
 }
 
-.card-destination{
-    /* width: 40vw !important; */
-}
 
 .wishlist-icon{
     cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+    .content-detailDestination{
+        overflow: scroll;
+        position: fixed;
+        margin-top: -0px !important;
+        top: 0;
+        left: 0;
+        padding: 0px !important;
+        padding-bottom: 10vh !important;
+        width: 100vw !important;
+        height: 100% !important;
+        background-color: white !important;
+    }
 }
