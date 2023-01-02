@@ -22,10 +22,10 @@ const RegisterComponent = () => {
             <form className="" onSubmit={handleSubmit(onSubmit)}>
             <h3 className="mb-5 text-center">Create Account</h3>
             <div className="row">
-                <div className="col-lg-6 col-sm-12">
+                <div className="col-lg-6 col-6">
                     <div className="form-group mb-3">
                         <label className="mb-2">First Name</label>
-                        <input className={errors.firstName?"form-control ps-4 border-danger":"form-control ps-4"} 
+                        <input className={errors.firstName?"form-control border-danger form-register":"form-control form-register"} 
                         type="text" placeholder="Enter your First Name" 
                         aria-label="" 
                         name='firstName'
@@ -40,7 +40,7 @@ const RegisterComponent = () => {
                     </div>
                     <div className="form-group mb-3">
                         <label className="mb-2">Email</label>
-                        <input className={errors.email?"form-control ps-4 border-danger":"form-control ps-4"} 
+                        <input className={errors.email?"form-control border-danger form-register":"form-control form-register"} 
                         type="text" 
                         placeholder="Enter your Email" 
                         aria-label="" 
@@ -56,7 +56,7 @@ const RegisterComponent = () => {
                     </div>
                     <div className="form-group mb-3">
                         <label className="mb-2">NIK</label>
-                        <input className={errors.NIK?"form-control ps-4 border-danger":"form-control ps-4"} 
+                        <input className={errors.NIK?"form-control border-danger form-register":"form-control form-register"} 
                         type="text" 
                         placeholder="Enter your NIK" 
                         aria-label="" 
@@ -72,7 +72,7 @@ const RegisterComponent = () => {
                     </div>
                     <div className="form-group mb-3">
                         <label className="mb-2">Password</label>
-                        <input className={errors.password?"form-control ps-4 border-danger":"form-control ps-4"}
+                        <input className={errors.password?"form-control border-danger form-register":"form-control form-register"}
                         type="password" 
                         placeholder="**************" 
                         aria-label=""
@@ -93,10 +93,10 @@ const RegisterComponent = () => {
                         {errors.password && <p className="text-danger">{errors.password.message}</p>}
                     </div>
                 </div>
-                <div className="col-md-6 col-sm-12">
+                <div className="col-md-6 col-6">
                     <div className="form-group mb-3">
                         <label className="mb-2">Last Name</label>
-                        <input className={errors.lastName?"form-control ps-4 border-danger":"form-control ps-4"} 
+                        <input className={errors.lastName?"form-control border-danger form-register":"form-control form-register"} 
                         type="text" 
                         placeholder="Enter Your Last Name" 
                         aria-label="" 
@@ -108,7 +108,7 @@ const RegisterComponent = () => {
                     </div>
                     <div className="form-group mb-3">
                         <label className="mb-2">Date of Birth</label>
-                        <input className={errors.dateOfBirth?"form-control ps-4 border-danger":"form-control ps-4"}
+                        <input className={errors.dateOfBirth?"form-control border-danger form-register":"form-control form-register"}
                         type="date" 
                         placeholder="mm/dd/yy" 
                         aria-label="" 
@@ -120,7 +120,7 @@ const RegisterComponent = () => {
                     </div>
                     <div className="form-group mb-3">
                         <label className="mb-2">Phone Number</label>
-                        <input className={errors.phoneNumber?"form-control ps-4 border-danger":"form-control ps-4"}
+                        <input className={errors.phoneNumber?"form-control border-danger form-register":"form-control form-register"}
                         type="number" 
                         placeholder="Enter Your Phone Number" 
                         aria-label="" 
@@ -140,7 +140,7 @@ const RegisterComponent = () => {
                     </div>
                     <div className="form-group mb-3">
                         <label className="mb-2">Confirm Password</label>
-                        <input className={errors.confirmPassword?"form-control ps-4 border-danger":"form-control ps-4"}
+                        <input className={errors.confirmPassword?"form-control border-danger form-register":"form-control form-register"}
                         type="password" 
                         placeholder="**************" 
                         aria-label="" 
@@ -162,7 +162,7 @@ const RegisterComponent = () => {
                 </div>
                 <div className="form-group mb-3">
                     <label className="mb-2">Address</label>
-                    <textarea className={errors.address?"form-control border-danger":"form-control"} 
+                    <textarea className={errors.address?"form-control border-danger form-register":"form-control form-register"} 
                     placeholder="Enter your address here" 
                     id="floatingTextarea2" 
                     name='address'
@@ -178,7 +178,7 @@ const RegisterComponent = () => {
                     <div className="form-group mb-3">
                     <button className={dirtyFields && isValid?'button form-control':'button form-control opacity-50'}  disabled={!dirtyFields}  onClick={handleSubmit}>Register</button>   
                     </div>
-                    <p className="text-center">Have account? <a href="/login" className="text-danger"> Sign In</a></p>
+                    <p className="text-center text-medium">Have account? <a href="/login" className="text-danger text-medium"> Sign In</a></p>
                 </div>
             </form>
         </div>
