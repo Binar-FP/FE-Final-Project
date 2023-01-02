@@ -6,3 +6,7 @@
 .card-destination{
     /* width: 40vw !important; */
 }
+
+.wishlist-icon{
+    cursor: pointer;
+}
