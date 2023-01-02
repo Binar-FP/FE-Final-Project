@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react'
 import './airportAdmin.css'
 import { PencilSquare, PlusCircle, Trash, } from 'react-bootstrap-icons'
 import { PutAirportActions, DeleteAirportActions, CreateAirportActions } from '../../config/redux/actions/airportActions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AirportService } from '../../services/airportService';
+import Loading from '../loading';
 
 const AirportAdmin = () => {
     const [update, setUpdate] = useState(false)
@@ -11,6 +12,7 @@ const AirportAdmin = () => {
     const [formValues, setFormValues] = useState([])
     const [formCreate, setFormCreate] = useState([])
     const dispatch = useDispatch();
+    const loader = useSelector(state => state.loading.loading)
 
     useEffect(() => {
       AirportService.getAirport().then((res) => {
@@ -20,21 +22,21 @@ const AirportAdmin = () => {
     
     console.log(formValues)
     const updatehandler = async () => {
+        dispatch({type: 'PROGRESS'})
         await dispatch(PutAirportActions(formValues.id,formValues));
         setUpdate(!update)
-        // window.location.reload(true);
     }
 
     const deleteHandler = async (id) => {
+        dispatch({type: 'PROGRESS'})
         await dispatch(DeleteAirportActions(id));
         setUpdate(!update)
-        // window.location.reload(false);
     }
 
     const createHandler = async () => {
+        dispatch({type: 'PROGRESS'})
         await dispatch(CreateAirportActions(formCreate));
         setUpdate(!update)
-        // window.location.reload(true);
     }
 
     const modalHandler = async (id) => {
@@ -45,6 +47,7 @@ const AirportAdmin = () => {
 
   return (
     <>
+      {loader === true ? <Loading/>: ''}
       <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 className="h2">Airport</h1>
@@ -77,11 +80,11 @@ const AirportAdmin = () => {
                 </tr>
               </thead>
               <tbody>
-                {airport.map((airport) => {
+                {airport.map((airport, index) => {
                 return (
                 <>
                     <tr>
-                    <td>{airport.id}</td>
+                    <td>{index+1}</td>
                     <td>{airport.name}</td>
                     <td>{airport.code}</td>
                     <td>{airport.location}</td>

@@ -3,7 +3,8 @@ import './destinationsAdmin.css'
 import { PencilSquare, PlusCircle, Trash, } from 'react-bootstrap-icons'
 import { PutDestinationsActions, DeleteDestinationsActions, CreateDestinationsActions } from '../../config/redux/actions/destinationsActions';
 import { DestinationsService } from '../../services/destinationsService';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import Loading from '../loading';
 
 
 const DestinationsAdmin = () => {
@@ -11,6 +12,7 @@ const DestinationsAdmin = () => {
     const [destinations, setDestinations] = useState([])
     const [formCreate, setFormCreate] = useState({userId: 1})
     const [formValues, setFormValues] = useState({})
+    const loader = useSelector(state => state.loading.loading)
     const dispatch = useDispatch();
     
     useEffect(() => {
@@ -21,18 +23,21 @@ const DestinationsAdmin = () => {
     
     console.log(formValues)
     const updatehandler = async () => {
+        dispatch({type: 'PROGRESS'})
         await dispatch(PutDestinationsActions(formValues.id,formValues));
         setUpdate(!update)
         // window.location.reload(true);
     }
 
     const deleteHandler = async (id) => {
+        dispatch({type: 'PROGRESS'})
         await dispatch(DeleteDestinationsActions(id));
         setUpdate(!update)
         // window.location.reload(false);
     }
 
     const createHandler = async () => {
+        dispatch({type: 'PROGRESS'})
         await dispatch(CreateDestinationsActions(formCreate));
         setUpdate(!update)
         // window.location.reload(true);
@@ -45,6 +50,7 @@ const DestinationsAdmin = () => {
 
   return (
     <>
+    {loader === true ? <Loading/>: ''}
       <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 className="h2">Destinations</h1>
@@ -70,18 +76,20 @@ const DestinationsAdmin = () => {
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Name Destination</th>
+                  <th scope="col">Description</th>
                   <th scope="col">Image</th>
                   <th scope="col">Edit</th>
                   <th scope="col">Delete</th>
                 </tr>
               </thead>
               <tbody>
-                {destinations.map((destinations) => {
+                {destinations.map((destinations, index) => {
                 return (
                 <>
                     <tr>
-                    <td>{destinations.id}</td>
+                    <td>{index+1}</td>
                     <td>{destinations.nameDestination}</td>
+                    <td>{destinations.description}</td>
                     <td><img className='img-destinations' alt='' src={destinations.imageDestination} /></td>
                     {/* MODAL */}
                         {/* <!-- Button trigger modal --> */}
@@ -114,13 +122,12 @@ const DestinationsAdmin = () => {
                       className="form-control" 
                       name='name' 
                       type="text"/>
-                      <label htmlFor="" className="mb-2">Description</label>
-                      <input 
-                      placeholder='Name destinations' 
-                      onChange={(e)=> setFormCreate({...formCreate,description: e.target.value, id :destinations.id})} 
-                      className="form-control" 
-                      name='name' 
-                      type="text"/>
+                      <div class="mb-3">
+                                <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                onChange={(e)=> setFormCreate({...formValues,description: e.target.value})}
+                                ></textarea>
+                              </div>
                       <label htmlFor="" className="mb-2">Code</label>
                       <input 
                       placeholder='Image destinations'
@@ -156,14 +163,12 @@ const DestinationsAdmin = () => {
                               name='namnameDestinatione' 
                               type="text"
                               value={formValues.nameDestination}/>
-                              <label htmlFor="" className="mb-2">Description</label>
-                              <input 
-                              defaultValue={destinations.nameDestination} 
-                              onChange={(e)=> setFormValues({...formValues,description: e.target.value})} 
-                              className="form-control" 
-                              name='namnameDestinatione' 
-                              type="text"
-                              value={formValues.nameDestination}/>
+                              <div class="mb-3">
+                                <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                onChange={(e)=> setFormValues({...formValues,description: e.target.value})}
+                                value={formValues.description} ></textarea>
+                              </div>
                               <label htmlFor="" className="mb-2">Image Destination</label>
                               {/* <img className='img-destinations' src={destinations.imageDestination} alt=""/> */}
                               <input 
