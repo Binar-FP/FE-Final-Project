@@ -56,3 +56,11 @@
         z-index: 1;
     }
 }
+
+@media screen and (max-width: 992px) {
+    .content-profile{
+        width: 100vw !important;
+        max-width: 100vw !important;
+    }
+}
+    

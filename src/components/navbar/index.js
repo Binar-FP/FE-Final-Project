@@ -1,7 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import './navbar.css'
 import { Logo } from '../../assets'
-import { House, PencilSquare, QuestionCircle, ArrowRightCircle, Bell, BoxArrowRight, BoxArrowDownRight, BellFill, PersonFillGear, ClockHistory } from 'react-bootstrap-icons';
+import { 
+    House,
+    PencilSquare,
+    QuestionCircle,
+    ArrowRightCircle,
+    Bell,
+    BoxArrowDownRight,
+    BellFill,
+    PersonFillGear,
+    ClockHistory,
+    SearchHeart,
+    BookmarkHeart,
+    ThreeDots, 
+    Person
+} from 'react-bootstrap-icons';
 import { useSelector, useDispatch } from 'react-redux';
 import { logoutActions } from '../../config/redux/actions/authActions';
 import { useNavigate } from 'react-router';
@@ -13,6 +27,7 @@ import { Link } from 'react-router-dom';
 const Navbar = () => {
     const [formValues, setFormValues] = useState({});
     const id = useSelector(state => state.auth.id)
+    const [navHidden, setNavHidden] = useState(false);
 
     useEffect(() => {
         UsersService.getUsersById(id).then((res) => {
@@ -86,6 +101,10 @@ const Navbar = () => {
                             <a className="nav-link" href="/help">Help</a>
                         </li>
                         <li className="nav-item">
+                        <SearchHeart className='icon' color="white" size={25} />
+                        <a className="nav-link" href="/destination">Destination</a>
+                        </li>
+                        <li className="nav-item">
                             <ArrowRightCircle className='icon' color="white" size={25} />
                             <a className="nav-link" href="/login">Login</a>
                         </li>
@@ -152,6 +171,10 @@ const Navbar = () => {
                     
                     </li>
                     <li className="nav-item mobile-item">
+                        <SearchHeart className='icon' color="white" size={25} />
+                        <a className="nav-link" href="/destination">Destination</a>
+                    </li>
+                    <li className="nav-item mobile-item">
                     { lengthNotification === 0 ?'':
                         <span class="position-absolute top-0 translate-middle badge rounded-pill bg-danger table-none">
                                 {lengthNotification}
@@ -161,19 +184,8 @@ const Navbar = () => {
                         <Link className="nav-link" to="/notification" onClick={()=>dispatch({type:"NOTIFICATION"})}>Notif</Link>
                     </li>
                     <li className="nav-item mobile-item">
-                        <PersonFillGear className='icon' color="white" size={25} />
-                            <a className="nav-link" href="/profile" onClick={()=>dispatch({type:"PERSONAL_DETAIL"})}>Profile</a>
-                    </li>
-                    <li className="nav-item mobile-item">
-                        <ClockHistory className='icon' color="white" size={25} />
-                        <Link className="nav-link" to="/profile" onClick={()=>dispatch({type:"HISTORY"})}>History</Link>
-                    </li>
-                    
-                    
-                    
-                    <li className="nav-item mobile-item">
-                        <BoxArrowRight className='icon' color="white" size={25}/>
-                        <a className="nav-link" href="/register" onClick={logoutHandle}>Logout</a>
+                        <ThreeDots className='icon' color="white" size={25} />
+                        <Link className="nav-link" onClick={()=>setNavHidden(!navHidden)}>Menu</Link>
                     </li>
 
                     <li className="dropdown destop-item">
@@ -183,22 +195,23 @@ const Navbar = () => {
                         <ul className="dropdown-menu dropdown-menu-end m-2" aria-labelledby="navbarDropdown">
                             <li className='d-flex align-items-center text-dark'>
                                 <Link className="dropdown-item text-dark" to="/profile" onClick={()=>{dispatch({type:"PERSONAL_DETAIL"});dispatch({type:"BACK_DESTINATION"})}}>
-                                    Profile
+                                    <Person className="ms-2" /> Profile
                                 </Link>
                             </li>
                             <li className='d-flex align-items-center text-dark'>
                                 <Link className="dropdown-item text-dark" to="/profile" onClick={()=>{dispatch({type:"WISHLIST-SETTING"});dispatch({type:"BACK_DESTINATION"})}}>
-                                    Wishlist
+                                    <BookmarkHeart className="ms-2" /> Wishlist
                                 </Link>
                             </li>
-                            <li className='d-flex align-items-center text-dark'>
-                                <Link className="dropdown-item text-dark" to="/destination" onClick={()=>dispatch({type:"BACK_DESTINATION"})}>
-                                    Destination
-                                </Link>
-                            </li>
+                            
                             <li className='d-flex align-items-center'>
                                 <Link className="dropdown-item text-dark" to="/profile" onClick={()=>{dispatch({type:"HISTORY"});dispatch({type:"BACK_DESTINATION"})}}>
-                                    History
+                                    <ClockHistory className="ms-2" /> History
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="dropdown-item text-dark" to="/destination">
+                                    <SearchHeart className="ms-2" /> Destination
                                 </Link>
                             </li>
                             <li><hr className="dropdown-divider"/></li>
@@ -210,6 +223,20 @@ const Navbar = () => {
                     </ul>
                 </div>
                 </div>
+                {navHidden === true ?<div className="navbar-item-box">
+                        <ul className="box-navbar">
+                            <li className="">
+                                <Link className="" to="/profile" onClick={()=>dispatch({type:"HISTORY"})}><ClockHistory className="ms-2"/> History</Link>
+                            </li>
+                            <li>
+                                <Link className="" to="/profile" onClick={()=>dispatch({type:"WISHLIST-SETTING"})}><BookmarkHeart className="ms-2"/> Wishlist</Link>
+                            </li>
+                            <li>
+                                <a className="nav-link" href="/profile" onClick={()=>dispatch({type:"PERSONAL_DETAIL"})}><PersonFillGear className="ms-2"/> Profile</a>
+                            </li>
+                            <li><a className="dropdown-item" href="#/" onClick={logoutHandle}><BoxArrowDownRight className="ms-2" /> Logout</a></li>
+                        </ul>
+                    </div>:''}
             </nav>
         </div>
         {/* <!-- end navbar  --> */}
