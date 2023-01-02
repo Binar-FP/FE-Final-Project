@@ -33,9 +33,13 @@ input{
     font-weight: 200;
 }
 
+.form-register{
+    padding-left: 20px !important;
+}
+
 @media screen and (max-width: 768px) {
     .content{
-        width: 80vw;
+        width: 90vw;
     }
     .left{
         width: 100vw;
@@ -43,6 +47,25 @@ input{
     .right{
         display: none;
     }
+    
+    .form-register{
+        padding: 5px !important;
+        padding-left: 10px !important;
+        margin: 0px !important;
+        border-radius: 8px !important;
+        font-size: small !important;
+    }
 
+    .form-group label{
+        font-size: small !important;
+    }
+
+    form h3{
+        font-size: medium !important;
+    }
+
+    .text-medium{
+        font-size: medium !important;
+    }
   
 }
