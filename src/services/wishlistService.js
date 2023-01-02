@@ -22,4 +22,10 @@ export const WishlistService = {
         return response;
     },
 
+    searhFlightWishlist : async (data) => {
+        const response = await API.post('whislist/searchFlight', data);
+        return response;
+    }
+
+
 }

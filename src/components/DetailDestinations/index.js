@@ -2,15 +2,36 @@ import React, { useEffect, useState } from 'react'
 import { Heart, HeartFill } from 'react-bootstrap-icons'
 import { useDispatch, useSelector } from 'react-redux'
 import { WishlistService } from '../../services/wishlistService';
+import { Arrow } from '../../assets'
 import './detaildestination.css'
+import { useNavigate } from 'react-router-dom';
 
 const DetailDestination = () => {
+
+  // Generate Date Now 
+  const today = new Date();
+  const yyyy = today.getFullYear();
+  let mm = today.getMonth() + 1; // Months start at 0!
+  let dd = today.getDate();
+
+  if (dd < 10) dd = '0' + dd;
+  if (mm < 10) mm = '0' + mm;
+
+  const formattedToday = yyyy + '-' + mm + '-' + dd;
+
   const [active, setActive] = useState(true)
   const [messege, setMessege] = useState('')
+  const [data, setData] = useState([])
+  const [button, setButton] = useState('')
+  const [depatureDate, setDepartureDate] = useState(formattedToday)
+  const [formValues, setFormValues] = useState([])
+  const [checkTrue, setCheckTrue] = useState(false)
+  const history = useNavigate()
   const dispatch = useDispatch()
   const dataDestinations = useSelector(state => state.destinations)
   const userId = useSelector(state => state.auth.id)
   const dataWishlist = useSelector(state => state.wishlist)
+
 
   useEffect(() => {
     WishlistService.getWishlistUser({userId: userId}).then((res) => {
@@ -48,6 +69,29 @@ const DetailDestination = () => {
       })
   }
 
+  
+
+  useEffect(() => {
+    dispatch({type: 'PROGRESS'})
+    const searchFlight = {
+      destinationId: dataDestinations.id,
+      depatureDate: depatureDate
+    }
+
+    WishlistService.searhFlightWishlist(searchFlight).then((res) => {
+        console.log(res)
+        setData(res.data.data);
+        dispatch({type: 'END'})  
+    }).catch((err) => {
+        dispatch({type: 'END'})  
+        console.log(err)
+    });
+  }, [dispatch, dataDestinations.id, depatureDate])
+
+  const handleConfirm = () => {
+    dispatch({type: 'CONFIRM_FLIGHT', payload: formValues});
+    history('/booking');
+  }
   return (
     <>
       <div className="container content-detailDestination">
@@ -87,12 +131,58 @@ const DetailDestination = () => {
                     <div className='col-lg-6 col-sm-12'>
                         <label>Filter Penerbangan</label>
                       <div class="input-group mb-3">
-                        <input type="date" class="form-control rounded" placeholder='Search Date'/>
+                        <input type="date" class="form-control rounded" placeholder='Search Date' value={depatureDate} onChange={(e)=>setDepartureDate(e.target.value)}/>
                       </div>
                     </div>
                 </div>
             </div>
         </div>
+        {/* SEARCH FLIGHT */}
+        {data.map((flights) => {
+                        return (
+                            <>
+                            <div 
+                            class={button ===flights.id?'card mb-4 bg-card mt-4':'card mb-4 mt-4'} 
+                            onClick={(event)=>{setButton(flights.id);setFormValues({
+                                id:flights.id,
+                                airLine:flights.airLine,
+                                depatureDate:flights.depatureDate,
+                                depatureTime:flights.depatureTime,
+                                from:flights.from,
+                                arrivalDate:flights.arrivalDate,
+                                arrivalTime:flights.arrivalTime,
+                                to:flights.to,
+                                typeOfClass:flights.typeOfClass,
+                                ClassPrice:flights.ClassPrice,
+                                })}}>
+                                <div className="card-body">
+                                    <div className='row  p-3'>
+                                        <div className='col-lg-3 col-sm-12'>
+                                            <p>{flights.airLine}</p>
+                                            <p>{flights.depatureDate}</p>
+                                            <p>{flights.depatureTime}</p>
+                                            <p>{flights.from}</p>
+                                        </div>
+                                        <div className='col-lg-3 col-sm-12 d-flex align-items-center '>
+                                            <img className='img-arrow' src={Arrow} alt='' />
+                                        </div>
+                                        <div className='col-lg-3 col-sm-12'>
+                                            <p>{flights.airLine}</p>
+                                            <p>{flights.arrivalDate}</p>
+                                            <p>{flights.arrivalTime}</p>
+                                            <p>{flights.to}</p>
+                                        </div>
+                                        <div className='col-lg-3 col-sm-12'>
+                                            <p>{flights.typeOfClass}</p>
+                                            <p>{flights.ClassPrice}</p>
+                                        </div>
+                                        {button ===flights.id?<button className='btn button btn-block text-light mt-3' onClick={()=>{handleConfirm()}} >Confirm</button>:''}
+                                    </div>
+                                        
+                                </div>
+                            </div>
+                            </>
+                        )})}
       </div>
     </>
   )
