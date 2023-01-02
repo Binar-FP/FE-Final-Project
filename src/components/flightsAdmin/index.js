@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { PencilSquare, PlusCircle, Trash, } from 'react-bootstrap-icons'
-import { PutFlightsActions, DeleteFlightsActions, CreateFlightsActions } from '../../config/redux/actions/flightsActions';
+import { PencilSquare, PlusCircle } from 'react-bootstrap-icons'
+import { PutFlightsActions, CreateFlightsActions } from '../../config/redux/actions/flightsActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { FlightsService } from '../../services/flightsService';
 import { AirportService } from '../../services/airportService';
@@ -38,11 +38,11 @@ const FlightsAdmin = () => {
         setUpdate(!update)
     }
 
-    const deleteHandler = async (id) => {
-        dispatch({type: 'PROGRESS'})
-        await dispatch(DeleteFlightsActions(id));
-        setUpdate(!update)
-    }
+    // const deleteHandler = async (id) => {
+    //     dispatch({type: 'PROGRESS'})
+    //     await dispatch(DeleteFlightsActions(id));
+    //     setUpdate(!update)
+    // }
 
     const createHandler = async () => {
         dispatch({type: 'PROGRESS'})
