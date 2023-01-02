@@ -27,3 +27,24 @@
     background-color: #59C1BD !important;
     color: #F5F8FF !important;
 }
+
+@media screen and (max-width: 768px) {
+    .content-destination{
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-bottom: 10vh !important;
+    }
+    .searchDestination{
+        margin-top: -30vh;
+    }
+    .search-input{
+        background-color: transparent !important;
+        color: #59C1BD !important;
+        border: 2px solid #59C1BD !important;
+        border-radius: 0px !important;
+    }
+    .search:hover{
+        background-color: #59C1BD !important;
+        color: #F5F8FF !important;
+    }
+}

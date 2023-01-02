@@ -28,6 +28,10 @@
     display: none;
 }
 
+.box-image{
+    min-height: 10vh;
+}
+
 @media screen and (max-width: 768px) {
     .body-wishlist{
         margin-top: 10vh;
@@ -52,3 +56,11 @@
         z-index: 1;
     }
 }
+
+@media screen and (max-width: 992px) {
+    .content-profile{
+        width: 100vw !important;
+        max-width: 100vw !important;
+    }
+}
+    

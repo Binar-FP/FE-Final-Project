@@ -25,12 +25,12 @@ const DetailDestination = () => {
   const [button, setButton] = useState('')
   const [depatureDate, setDepartureDate] = useState(formattedToday)
   const [formValues, setFormValues] = useState([])
-  const [checkTrue, setCheckTrue] = useState(false)
   const history = useNavigate()
   const dispatch = useDispatch()
   const dataDestinations = useSelector(state => state.destinations)
   const userId = useSelector(state => state.auth.id)
   const dataWishlist = useSelector(state => state.wishlist)
+  const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
 
 
   useEffect(() => {
@@ -95,7 +95,7 @@ const DetailDestination = () => {
   return (
     <>
       <div className="container content-detailDestination">
-        <div class="card card-destination">
+        <div class="card">
             <div class="card-body">
                 {active === false && messege === true ? setTimeout(() => {setMessege(false)}, 2000)&&<div class="alert alert-primary" role="alert">
                   Add To Whislist
@@ -111,7 +111,7 @@ const DetailDestination = () => {
                       <p>{dataDestinations.nameDestination}</p>
                       <p>{dataDestinations.description}</p>
                     </div>
-                    <div className='col-lg-1 col-sm-12'>
+                    {isLoggedIn && <div className='col-lg-1 col-sm-12 wishlist-icon'>
                     {active === true ?<Heart size={50} color="pink"
                       onClick={()=>{setActive(!active);handleAddWishlist()
                         setTimeout(() => {setMessege(true)}, 1000);
@@ -122,7 +122,7 @@ const DetailDestination = () => {
                         setTimeout(() => {setMessege(true)}, 1000)
                       }}
                       />:''}
-                    </div>
+                    </div>}
                 </div>
                 <div className='row'>
                     <div className='col-lg-6 col-sm-12'>

@@ -47,8 +47,7 @@ const DestinationComponent = () => {
     <>
     <div className='searchDestination'>
         <div className="d-flex justify-content-center">
-            <div className="col-6">
-                {/* <h1 className='text-center text-light fw-bold'>Welcome!</h1> */}
+            <div className="col-lg-6 col-md-8 col-9 offset-lg-0">
                 <h3 className='text-center text-light fw-bold'>Find your next destination</h3>
                 <div className="input-group mb-3">
                     <div className="input-group-prepend">
@@ -71,7 +70,7 @@ const DestinationComponent = () => {
         {destinations.map((item, index) => {
           console.log(item)
               return (
-                <div className="col-lg-4 col-sm-12 card-destination">
+                <div className="col-lg-4 offset-md-0 col-md-6 offset-lg-0 offset-1 col-10 card-destination">
                   <div className='item mt-4 m-2'
                       onClick={()=>
                         {dispatch({type: 'DETAIL_DESTINATION', payload: item});
