@@ -106,15 +106,15 @@ const FlightsAdmin = () => {
                   <th scope="col">Type Class</th>
                   <th scope="col">Class Price</th>
                   <th scope="col">Update</th>
-                  <th scope="col">Delete</th>
+                  {/* <th scope="col">Delete</th> */}
                 </tr>
               </thead>
               <tbody>
-                {flights.map((flights) => {
+                {flights.map((flights, index) => {
                 return (
                 <>
                     <tr>
-                    <td>{flights.id}</td>
+                    <td>{index + 1}</td>
                     <td>{flights.airPortId}</td>
                     <td>{flights.destinationId}</td>
                     <td>{flights.flightNumber}</td>
@@ -137,7 +137,7 @@ const FlightsAdmin = () => {
                           data-bs-target='#editModal' 
                           size={20}/>
                         </td>
-                        <td><Trash onClick={()=>deleteHandler(flights.id)} size={20}  /></td>
+                        {/* <td><Trash onClick={()=>deleteHandler(flights.id)} size={20}  /></td> */}
                     </tr>
                 </>
               )
