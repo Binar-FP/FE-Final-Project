@@ -19,7 +19,6 @@ import NavbarAdmin from "./NavbarAdmin";
 import AirportAdmin from "./airportAdmin";
 import DestinationsAdmin from "./destinationsAdmin";
 import FlightsAdmin from "./flightsAdmin";
-import SchedulesAdmin from "./schedulesAdmin";
 import UsersManagement from "./UsersManagement";
 import SearchFlights from "./searchFlights";
 import BookingPassenger from "./bookingPassenger";
@@ -57,7 +56,6 @@ export {
     AirportAdmin,
     DestinationsAdmin,
     FlightsAdmin,
-    SchedulesAdmin,
     UsersManagement,
     SearchFlights,
     BookingPassenger,
