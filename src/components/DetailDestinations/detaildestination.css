@@ -8,6 +8,11 @@
     cursor: pointer;
 }
 
+.button-color{
+    background-color: #59C1BD !important;
+    color: white !important;
+}
+
 @media screen and (max-width: 768px) {
     .content-detailDestination{
         overflow: scroll;
@@ -20,5 +25,27 @@
         width: 100vw !important;
         height: 100% !important;
         background-color: white !important;
+    }
+
+    .button-color{ 
+        border: none !important;
+        border-radius: 5px !important;
+        padding: 5px 10px !important;
+        font-size: 12px !important;
+        font-weight: 600 !important;
+        margin-top: 10px !important;
+        margin-bottom: 10px !important;
+    }
+
+    .wishlist-icon{
+        text-align: end !important;
+        margin: 0px !important;
+        position: absolute;
+        right: 2vw;
+    }
+
+    .icon-heart{
+        font-size: 10px !important;
+        width: 10vw;
     }
 }
