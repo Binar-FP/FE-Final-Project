@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Heart, HeartFill } from 'react-bootstrap-icons'
+import { ArrowLeft, Heart, HeartFill } from 'react-bootstrap-icons'
 import { useDispatch, useSelector } from 'react-redux'
 import { WishlistService } from '../../services/wishlistService';
 import { Arrow } from '../../assets'
@@ -113,11 +113,13 @@ const DetailDestination = () => {
                     </div>
                     {isLoggedIn && <div className='col-lg-1 col-sm-12 wishlist-icon'>
                     {active === true ?<Heart size={50} color="pink"
+                      className='icon-heart'
                       onClick={()=>{setActive(!active);handleAddWishlist()
                         setTimeout(() => {setMessege(true)}, 1000);
                       }}
                       />:''}
                       {active === false ?<HeartFill size={50} color="pink"
+                      className='icon-heart'
                       onClick={()=>{setActive(!active);handleRemoveWishlist()
                         setTimeout(() => {setMessege(true)}, 1000)
                       }}
@@ -125,8 +127,8 @@ const DetailDestination = () => {
                     </div>}
                 </div>
                 <div className='row'>
-                    <div className='col-lg-6 col-sm-12'>
-                      
+                    <div className='col-lg-6 col-sm-12 mt-4'>
+                      <button type="button" class="btn button-color" onClick={()=>dispatch({type:'BACK_DESTINATION'})}><ArrowLeft/> Back Destination</button>
                     </div>
                     <div className='col-lg-6 col-sm-12'>
                         <label>Filter Penerbangan</label>
