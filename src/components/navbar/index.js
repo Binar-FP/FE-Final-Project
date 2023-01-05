@@ -1,7 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import './navbar.css'
 import { Logo } from '../../assets'
-import { House, PencilSquare, QuestionCircle, ArrowRightCircle, Bell, BoxArrowRight, BoxArrowDownRight, BellFill, PersonFillGear, ClockHistory } from 'react-bootstrap-icons';
+import { 
+    House,
+    PencilSquare,
+    QuestionCircle,
+    ArrowRightCircle,
+    Bell,
+    BoxArrowDownRight,
+    BellFill,
+    PersonFillGear,
+    ClockHistory,
+    SearchHeart,
+    BookmarkHeart,
+    ThreeDots, 
+    Person
+} from 'react-bootstrap-icons';
 import { useSelector, useDispatch } from 'react-redux';
 import { logoutActions } from '../../config/redux/actions/authActions';
 import { useNavigate } from 'react-router';
@@ -13,6 +27,8 @@ import { Link } from 'react-router-dom';
 const Navbar = () => {
     const [formValues, setFormValues] = useState({});
     const id = useSelector(state => state.auth.id)
+    const [navHidden, setNavHidden] = useState(false);
+    const pagesActive = useSelector(state => state.navbar.pages);
 
     useEffect(() => {
         UsersService.getUsersById(id).then((res) => {
@@ -71,27 +87,43 @@ const Navbar = () => {
                     {/* jika tidak Login  */}
                     {checkLogin === true ?
                     <li className="nav-item mobile-item">
-                        <House className='icon' color="white" size={25}/>
-                        <a className="nav-link active" aria-current="page" href="/">Home</a>
+                        <House className='icon' color={pagesActive === "home" ? "salmon": "white"} size={25}/>
+                        <Link className={pagesActive === "home" ? "nav-link active": "nav-link"} to="/" onClick={()=>dispatch({type:"HOME"})}>
+                            Home
+                        </Link>
                     </li>
                     :<li className="nav-item">
-                        <House className='icon' color="white" size={25}/>
-                        <a className="nav-link active" aria-current="page" href="/">Home</a>
+                        <House className='icon' color={pagesActive === "home" ? "salmon": "white"} size={25}/>
+                        <Link className={pagesActive === "home" ? "nav-link active": "nav-link"} to="/" onClick={()=>dispatch({type:"HOME"})}>
+                            Home
+                        </Link>
                     </li>}
 
                     {checkLogin === false &&
                     <>
                         <li className="nav-item">
-                            <QuestionCircle className='icon' color="white" size={25}/>
-                            <a className="nav-link" href="/help">Help</a>
+                            <QuestionCircle className='icon' color={pagesActive === "help" ? "salmon": "white"} size={25}/>
+                            <Link className={pagesActive === "help" ? "nav-link active": "nav-link"} to="/help" onClick={()=>dispatch({type:"HELP"})}>
+                                Help
+                            </Link>
                         </li>
                         <li className="nav-item">
-                            <ArrowRightCircle className='icon' color="white" size={25} />
-                            <a className="nav-link" href="/login">Login</a>
+                        <SearchHeart className='icon' color={pagesActive === "destination" ? "salmon": "white"} size={25} />
+                            <Link className={pagesActive === "destination" ? "nav-link active": "nav-link"} to="/destination" onClick={()=>dispatch({type:"DESTINATION"})}>
+                                Destination
+                            </Link>
                         </li>
                         <li className="nav-item">
-                            <PencilSquare className='icon' color="white" size={25}/>
-                            <a className="nav-link" href="/register">Register</a>
+                            <ArrowRightCircle className='icon' color={pagesActive === "loginku" ? "salmon": "white"} size={25} />
+                            <Link className={pagesActive === "loginku" ? "nav-link active": "nav-link"} to="/login" onClick={()=>dispatch({type:"LOGIN_NAV"})}>
+                                Login
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <PencilSquare className='icon' color={pagesActive === "register" ? "salmon": "white"} size={25}/>
+                            <Link className={pagesActive === "register" ? "nav-link active": "nav-link"} to="/register" onClick={()=>dispatch({type:"REGISTER_NAV"})}>
+                                Register
+                            </Link>
                         </li>
                     </>
                     }
@@ -152,28 +184,26 @@ const Navbar = () => {
                     
                     </li>
                     <li className="nav-item mobile-item">
+                        <SearchHeart className='icon' color={pagesActive === "destination" ? "salmon": "white"} size={25} />
+                        <Link className={pagesActive === "destination" ? "nav-link active": "nav-link"} to="/destination" onClick={()=>dispatch({type:"DESTINATION"})}>
+                                Destination
+                        </Link>
+                    </li>
+                    <li className="nav-item mobile-item">
                     { lengthNotification === 0 ?'':
                         <span class="position-absolute top-0 translate-middle badge rounded-pill bg-danger table-none">
                                 {lengthNotification}
                         <span class="visually-hidden">unread messages</span>
                             </span>}
-                        <Bell className='icon' color="white" size={25} />
-                        <Link className="nav-link" to="/notification" onClick={()=>dispatch({type:"NOTIFICATION"})}>Notif</Link>
+                        <Bell className='icon' color={pagesActive === "notification" ? "salmon": "white"} size={25} />
+                        <Link className={pagesActive === "notification" ? "nav-link active": "nav-link"} 
+                        to="/notification" onClick={()=>{dispatch({type:"NOTIF"});dispatch({type:"NOTIFICATION"})}}>
+                            Notif
+                        </Link>
                     </li>
                     <li className="nav-item mobile-item">
-                        <PersonFillGear className='icon' color="white" size={25} />
-                            <a className="nav-link" href="/profile" onClick={()=>dispatch({type:"PERSONAL_DETAIL"})}>Profile</a>
-                    </li>
-                    <li className="nav-item mobile-item">
-                        <ClockHistory className='icon' color="white" size={25} />
-                        <Link className="nav-link" to="/profile" onClick={()=>dispatch({type:"HISTORY"})}>History</Link>
-                    </li>
-                    
-                    
-                    
-                    <li className="nav-item mobile-item">
-                        <BoxArrowRight className='icon' color="white" size={25}/>
-                        <a className="nav-link" href="/register" onClick={logoutHandle}>Logout</a>
+                        <ThreeDots className='icon' color="white" size={25} />
+                        <Link className="nav-link" onClick={()=>setNavHidden(!navHidden)}>Menu</Link>
                     </li>
 
                     <li className="dropdown destop-item">
@@ -182,13 +212,24 @@ const Navbar = () => {
                         </a>
                         <ul className="dropdown-menu dropdown-menu-end m-2" aria-labelledby="navbarDropdown">
                             <li className='d-flex align-items-center text-dark'>
-                                <Link className="dropdown-item text-dark" to="/profile" onClick={()=>dispatch({type:"PERSONAL_DETAIL"})}>
-                                    Profile
+                                <Link className="dropdown-item text-dark" to="/profile" onClick={()=>{dispatch({type:"PERSONAL_DETAIL"});dispatch({type:"BACK_DESTINATION"})}}>
+                                    <Person className="ms-2" /> Profile
                                 </Link>
                             </li>
+                            <li className='d-flex align-items-center text-dark'>
+                                <Link className="dropdown-item text-dark" to="/profile" onClick={()=>{dispatch({type:"WISHLIST-SETTING"});dispatch({type:"BACK_DESTINATION"})}}>
+                                    <BookmarkHeart className="ms-2" /> Wishlist
+                                </Link>
+                            </li>
+                            
                             <li className='d-flex align-items-center'>
-                                <Link className="dropdown-item text-dark" to="/profile" onClick={()=>dispatch({type:"HISTORY"})}>
-                                    History
+                                <Link className="dropdown-item text-dark" to="/profile" onClick={()=>{dispatch({type:"HISTORY"});dispatch({type:"BACK_DESTINATION"})}}>
+                                    <ClockHistory className="ms-2" /> History
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="dropdown-item text-dark" to="/destination">
+                                    <SearchHeart className="ms-2" /> Destination
                                 </Link>
                             </li>
                             <li><hr className="dropdown-divider"/></li>
@@ -200,6 +241,20 @@ const Navbar = () => {
                     </ul>
                 </div>
                 </div>
+                {navHidden === true ?<div className="navbar-item-box">
+                        <ul className="box-navbar">
+                            <li className="">
+                                <Link className="" to="/profile" onClick={()=>dispatch({type:"HISTORY"})}><ClockHistory className="ms-2"/> History</Link>
+                            </li>
+                            <li>
+                                <Link className="" to="/profile" onClick={()=>dispatch({type:"WISHLIST-SETTING"})}><BookmarkHeart className="ms-2"/> Wishlist</Link>
+                            </li>
+                            <li>
+                                <a className="nav-link" href="/profile" onClick={()=>dispatch({type:"PERSONAL_DETAIL"})}><PersonFillGear className="ms-2"/> Profile</a>
+                            </li>
+                            <li><a className="dropdown-item" href="#/" onClick={logoutHandle}><BoxArrowDownRight className="ms-2" /> Logout</a></li>
+                        </ul>
+                    </div>:''}
             </nav>
         </div>
         {/* <!-- end navbar  --> */}

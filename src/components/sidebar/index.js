@@ -1,6 +1,6 @@
 import React from 'react'
 import './sidebar.css'
-import { Airplane, Calendar2Check, ClockHistory, CloudFog2, Globe, PersonCircle} from 'react-bootstrap-icons';
+import { Airplane, ClockHistory, CloudFog2, Globe, PersonCircle} from 'react-bootstrap-icons';
 
 const Sidebar = ({page}) => {
   return (
@@ -36,12 +36,6 @@ const Sidebar = ({page}) => {
             <button className="nav-link btn" onClick={(e)=>page('destinations')}>
             <Globe color="black" className='me-2' />
               Destinations
-            </button>
-          </li>
-          <li className="nav-item">
-            <button className="nav-link btn" onClick={(e)=>page('schedules')}>
-            <Calendar2Check color="black" className='me-2' />
-              Schedules
             </button>
           </li>
           <li className="nav-item">
