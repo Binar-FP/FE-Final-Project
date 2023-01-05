@@ -56,21 +56,24 @@ const SearchFlights = (props) => {
     }, [props.data,dispatch])
 
     useEffect(() => {
-        if (isLoggedIn === false) {
-            history('/login');
-        }else{
-
             if (checkTrue === true && checkTrueRound === true) {
+                if (isLoggedIn === false) {
+                    history('/login');
+                }else{
                 dispatch({type: 'CONFIRM_FLIGHT', payload: formValues});
                 dispatch({type: 'CONFIRM_FLIGHT_ROUND', payload: formValuesRound});
                 history('/booking');
+                }
             }else if (checkTrue === true && props.data.typeOfFlight === 'One Way') {
+                if (isLoggedIn === false) {
+                    history('/login');
+                }else{
                 dispatch({type: 'CONFIRM_FLIGHT', payload: formValues});
                 history('/booking');
+                }
             }
-        }
         
-    }, [checkTrue, checkTrueRound, history, dispatch, formValues, formValuesRound,props.data,isLoggedIn])
+    }, [checkTrue, checkTrueRound, history, dispatch, formValues, formValuesRound,props.data, isLoggedIn])
 
     function formatDate(string){
         var options = { year: 'numeric', month: 'long', day: 'numeric' };
