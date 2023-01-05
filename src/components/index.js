@@ -19,7 +19,6 @@ import NavbarAdmin from "./NavbarAdmin";
 import AirportAdmin from "./airportAdmin";
 import DestinationsAdmin from "./destinationsAdmin";
 import FlightsAdmin from "./flightsAdmin";
-import SchedulesAdmin from "./schedulesAdmin";
 import UsersManagement from "./UsersManagement";
 import SearchFlights from "./searchFlights";
 import BookingPassenger from "./bookingPassenger";
@@ -31,6 +30,9 @@ import ResetPasswordSend from "./resetPasswordSend";
 import History from "./History";
 import Notification from "./notification";
 import HistoryAdmin from "./historyAdmin";
+import DestinationComponent from "./DestinationComponent";
+import DetailDestination from "./DetailDestinations";
+import WishlistComponent from "./WishlistComponent";
 
 export { 
     Navbar,
@@ -54,7 +56,6 @@ export {
     AirportAdmin,
     DestinationsAdmin,
     FlightsAdmin,
-    SchedulesAdmin,
     UsersManagement,
     SearchFlights,
     BookingPassenger,
@@ -66,4 +67,7 @@ export {
     History,
     Notification,
     HistoryAdmin,
+    DestinationComponent,
+    DetailDestination,
+    WishlistComponent,
  };

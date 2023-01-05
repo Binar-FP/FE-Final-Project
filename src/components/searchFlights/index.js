@@ -96,8 +96,8 @@ const SearchFlights = (props) => {
                         return (
                             <>
                             <div 
-                            class={button ===flights.airLine?'card mb-4 bg-card':'card mb-4'} 
-                            onClick={(event)=>{setButton(flights.airLine);setFormValues({
+                            class={button ===flights.id?'card mb-4 bg-card':'card mb-4'} 
+                            onClick={(event)=>{setButton(flights.id);setFormValues({
                                 id:flights.id,
                                 airLine:flights.airLine,
                                 depatureDate:flights.depatureDate,
@@ -130,7 +130,7 @@ const SearchFlights = (props) => {
                                             <p>{flights.typeOfClass}</p>
                                             <p>{flights.ClassPrice}</p>
                                         </div>
-                                        {button ===flights.airLine?<button className='btn button btn-block text-light mt-3' onClick={()=>{setCheckTrue(true)}} >Confirm</button>:''}
+                                        {button ===flights.id?<button className='btn button btn-block text-light mt-3' onClick={()=>{setCheckTrue(true)}} >Confirm</button>:''}
                                     </div>
                                         
                                 </div>

@@ -100,7 +100,7 @@ const History = () => {
               </div>
               <div className="card-body body-history">
                 <ul className="list-group list-group-flush">
-                {status && history.lenght > 0 ? history.map((item) => {
+                {status && history.map((item) => {
                   return (
                         <li className="list-group-item">
                           <div className="row">
@@ -110,21 +110,25 @@ const History = () => {
                             </div>
                             <div className="col-sm-12 col-md-4 col-lg-9">
                                 <div className='row'>
-                                    <div className="col-sm-12 col-md-6 col-lg-3 d-flex justify-content-between flex-column">
-                                      <p>From {item.Flight.from}</p>
+                                    {/* <div className="col-sm-12 col-md-6 col-lg-3 d-flex justify-content-between flex-column"> */}
+                                      {/* <p>From {item.Flight.from}</p>
                                       <p>{item.Flight.depatureDate}</p>
-                                      <p>{item.Flight.flightNumber}</p>
-                                    </div>
-                                    <div className="col-sm-12 col-md-6 col-lg-3 d-flex justify-content-between flex-column">
-                                      <p>To {item.Flight.to}</p>
+                                      <p>{item.Flight.flightNumber}</p> */}
+                                    {/* </div> */}
+                                    {/* <div className="col-sm-12 col-md-6 col-lg-3 d-flex justify-content-between flex-column"> */}
+                                      {/* <p>To {item.Flight.to}</p>
                                       <p>{item.Flight.arrivalDate}</p>
-                                      <p>{item.Flight.flightNumber}</p>
-                                    </div>
-                                    <div className="col-sm-12 col-md-6 col-lg-3 d-flex align-items-end">
-                                      <button className='btn mb-2 border-0 text-color' data-bs-toggle="modal" data-bs-target="#showDetail" onClick={()=>handleDetail(item)}>More Detail</button>
+                                      <p>{item.Flight.flightNumber}</p> */}
+                                    {/* </div> */}
+                                    <div className="col-sm-12 col-md-6 col-lg-4 d-flex align-items-end">
+                                      <button className='btn mb-2 border-0 text-color' 
+                                      data-bs-toggle="modal" 
+                                      data-bs-target="#showDetail" 
+                                      onClick={()=>handleDetail(item)}>
+                                        More Detail</button>
                                     </div>
                                     {item.Booking.status === true?
-                                    <div className="col-sm-12 col-md-6 col-lg-3 d-flex align-items-end">
+                                    <div className="col-sm-12 col-md-6 col-lg-4 d-flex align-items-end">
                                       <button className='btn mb-2 border-0 text-color' 
                                         onClick={()=>handleBoardingPass({
                                           name :item.Booking.Passengers[0].name,
@@ -140,7 +144,7 @@ const History = () => {
                                     </div>
                                     :''}
                                     {item.Booking.status === false?
-                                    <div className="col-sm-12 col-md-6 col-lg-3 d-flex align-items-end"
+                                    <div className="col-sm-12 col-md-6 col-lg-4 d-flex align-items-end"
                                     >
                                       <StripeCheckout
                                         name='FlyWithMe'
@@ -177,7 +181,7 @@ const History = () => {
                         </li>
                       )
                       }
-                      ):<h5 className='text-center text-danger'>No History</h5>}
+                      )}
                 </ul>
               </div>
             </div>

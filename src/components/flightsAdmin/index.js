@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { PencilSquare, PlusCircle, Trash, } from 'react-bootstrap-icons'
-import { PutFlightsActions, DeleteFlightsActions, CreateFlightsActions } from '../../config/redux/actions/flightsActions';
+import { PencilSquare, PlusCircle } from 'react-bootstrap-icons'
+import { PutFlightsActions, CreateFlightsActions } from '../../config/redux/actions/flightsActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { FlightsService } from '../../services/flightsService';
 import { AirportService } from '../../services/airportService';
@@ -38,11 +38,11 @@ const FlightsAdmin = () => {
         setUpdate(!update)
     }
 
-    const deleteHandler = async (id) => {
-        dispatch({type: 'PROGRESS'})
-        await dispatch(DeleteFlightsActions(id));
-        setUpdate(!update)
-    }
+    // const deleteHandler = async (id) => {
+    //     dispatch({type: 'PROGRESS'})
+    //     await dispatch(DeleteFlightsActions(id));
+    //     setUpdate(!update)
+    // }
 
     const createHandler = async () => {
         dispatch({type: 'PROGRESS'})
@@ -106,15 +106,15 @@ const FlightsAdmin = () => {
                   <th scope="col">Type Class</th>
                   <th scope="col">Class Price</th>
                   <th scope="col">Update</th>
-                  <th scope="col">Delete</th>
+                  {/* <th scope="col">Delete</th> */}
                 </tr>
               </thead>
               <tbody>
-                {flights.map((flights) => {
+                {flights.map((flights, index) => {
                 return (
                 <>
                     <tr>
-                    <td>{flights.id}</td>
+                    <td>{index + 1}</td>
                     <td>{flights.airPortId}</td>
                     <td>{flights.destinationId}</td>
                     <td>{flights.flightNumber}</td>
@@ -137,7 +137,7 @@ const FlightsAdmin = () => {
                           data-bs-target='#editModal' 
                           size={20}/>
                         </td>
-                        <td><Trash onClick={()=>deleteHandler(flights.id)} size={20}  /></td>
+                        {/* <td><Trash onClick={()=>deleteHandler(flights.id)} size={20}  /></td> */}
                     </tr>
                 </>
               )
