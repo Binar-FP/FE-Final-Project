@@ -1,22 +1,22 @@
-import axios from 'axios';
+import axios from "axios";
 
 const API = axios.create({
-  baseURL: 'https://www.flywithme-api.me/api',
+  baseURL: "https://web-production-ae4bc.up.railway.app/api",
   headers: {
-    'Accept': 'application/json',
-    'Authorization': `Bearer ${localStorage.getItem('token') || ''}`,
-  }
-})
+    Accept: "application/json",
+    Authorization: `Bearer ${localStorage.getItem("token") || ""}`,
+  },
+});
 
 API.interceptors.response.use(
-  res => {
-    return res
+  (res) => {
+    return res;
   },
-  err => {
+  (err) => {
     if (err.response.status !== 401) {
-      throw err
+      throw err;
     }
-    throw err
+    throw err;
     // console.log(err.response)
     // if (typeof err.response.data.error.name !== 'undefined') {
     //   if ( err.response.data.error.name === 'TokenExpiredError') {
@@ -25,6 +25,6 @@ API.interceptors.response.use(
     //   }
     // }
   }
-)
+);
 
 export default API;
