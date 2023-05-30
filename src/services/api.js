@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://web-production-ae4bc.up.railway.app/api",
+  baseURL: "http://64.226.82.173:3000",
   headers: {
     Accept: "application/json",
     Authorization: `Bearer ${localStorage.getItem("token") || ""}`,
